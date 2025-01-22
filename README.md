@@ -59,6 +59,7 @@ project-name/
 
 ## Contributors
 - **Hyelim Kim** - BCIT CST Student with a passion for creating user-friendly applications. Fun fact: Loves baking bread.
+- **Ryan** - BCIT CST Student, lives in surrey :(
 
 ---
 

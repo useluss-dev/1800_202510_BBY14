@@ -1,7 +1,7 @@
-
 # Project Name
 
 ## Overview
+
 Summarize your project's purpose, problem solved, key features, user benefits, development context, and main technologies used.
 
 Example:
@@ -15,25 +15,28 @@ Developed for the [Course Name] course, applying User-Centred Design practices, 
 ## Features
 
 Example:
-- Real-time weather updates for any city.
-- Responsive design for desktop and mobile.
-- Displays temperature, humidity, and weather conditions.
+
+-   Real-time weather updates for any city.
+-   Responsive design for desktop and mobile.
+-   Displays temperature, humidity, and weather conditions.
 
 ---
 
 ## Technologies Used
 
 Example:
-- **Frontend**: HTML, CSS, JavaScript
-- **Backend**: Firebase for hosting
-- **Database**: Firestore
-- **API**: OpenWeatherMap API
+
+-   **Frontend**: HTML, CSS, JavaScript
+-   **Backend**: Firebase for hosting
+-   **Database**: Firestore
+-   **API**: OpenWeatherMap API
 
 ---
 
 ## Usage
 
 Example:
+
 1. Open your browser and visit `http://localhost:3000`.
 2. Enter the name of the city in the search bar and press enter.
 3. View the weather information displayed on the screen.
@@ -43,6 +46,7 @@ Example:
 ## Project Structure
 
 Example:
+
 ```
 project-name/
 ├── src/
@@ -58,34 +62,40 @@ project-name/
 ---
 
 ## Contributors
-- **Samuel** - BCIT CST Student, from Whistler. Loves programming & graphic design. 
+
+-   **Ryan** - BCIT CST Student, lives in surrey :(
+-   **Samuel** - BCIT CST Student, from Whistler. Loves programming & graphic design.
 
 ---
 
 ## Acknowledgments
 
 Example:
-- Weather data sourced from [OpenWeatherMap](https://openweathermap.org/).
-- Code snippets for ___ algoirthm were adapted from resources such as [Stack Overflow](https://stackoverflow.com/) and [MDN Web Docs](https://developer.mozilla.org/).
-- Icons sourced from [FontAwesome](https://fontawesome.com/) and images from [Unsplash](https://unsplash.com/).
+
+-   Weather data sourced from [OpenWeatherMap](https://openweathermap.org/).
+-   Code snippets for \_\_\_ algoirthm were adapted from resources such as [Stack Overflow](https://stackoverflow.com/) and [MDN Web Docs](https://developer.mozilla.org/).
+-   Icons sourced from [FontAwesome](https://fontawesome.com/) and images from [Unsplash](https://unsplash.com/).
 
 ---
 
 ## Limitations and Future Work
+
 ### Limitations
 
 Example:
-- Currently, the app only supports city-based weather searches.
-- Limited to basic weather parameters like temperature, humidity, and conditions.
-- The user interface can be further enhanced for accessibility.
+
+-   Currently, the app only supports city-based weather searches.
+-   Limited to basic weather parameters like temperature, humidity, and conditions.
+-   The user interface can be further enhanced for accessibility.
 
 ### Future Work
 
-Example: 
-- Add support for location-based weather detection using GPS.
-- Implement additional weather parameters like wind speed and UV index.
-- Create a dark mode for better usability in low-light conditions.
-- Integrate user accounts for saving favorite locations.
+Example:
+
+-   Add support for location-based weather detection using GPS.
+-   Implement additional weather parameters like wind speed and UV index.
+-   Create a dark mode for better usability in low-light conditions.
+-   Integrate user accounts for saving favorite locations.
 
 ---
 

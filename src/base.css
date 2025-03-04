@@ -1,2 +1,25 @@
 @import "tailwindcss";
 
+article,
+div,
+footer,
+main,
+section {
+    @apply min-w-0 min-h-0 relative;
+}
+
+img {
+    @apply size-full object-contain;
+}
+
+h1 {
+    @apply text-4xl font-bold;
+}
+
+h2 {
+    @apply text-2xl font-bold;
+}
+
+h3 {
+    @apply text-xl font-bold;
+}

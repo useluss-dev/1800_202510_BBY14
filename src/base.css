@@ -1,2 +1,63 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: "Space Grotesk";
+    src: url("../assets/fonts/SpaceGrotesk.ttf");
+}
+
+@font-face {
+    font-family: "Space Mono";
+    src: url("../assets/fonts/SpaceMono-Bold.ttf");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Space Mono";
+    src: url("../assets/fonts/SpaceMono-BoldItalic.ttf");
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Space Mono";
+    src: url("../assets/fonts/SpaceMono-Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Space Mono";
+    src: url("../assets/fonts/SpaceMono-Italic.ttf");
+    font-weight: normal;
+    font-style: italic;
+}
+
+@theme {
+    --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "Space Mono", ui-monospace;
+}
+
+article,
+div,
+footer,
+main,
+section {
+    @apply min-w-0 min-h-0 relative;
+}
+
+h1 {
+    @apply text-4xl font-bold font-sans;
+}
+
+h2 {
+    @apply text-2xl font-bold font-sans;
+}
+
+h3 {
+    @apply text-xl font-bold font-sans;
+}
+
+p {
+    @apply font-sans;
+}

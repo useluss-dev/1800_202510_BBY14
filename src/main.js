@@ -1,5 +1,3 @@
-import "./base.css";
-
 import page from "page";
 
 // Helper function to load HTML partials

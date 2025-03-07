@@ -8,22 +8,47 @@
     </head>
 
     <body>
-        <main class="w-full flex flex-col items-center pb-32"></main>
+        <div class="relative">
+            <!-- Navbar Top -->
+            <div
+                class="sticky top-0 size-nav px-main hidden md:flex justify-between border-b-2 bg-white"
+            >
+                <img src="assets/ratemylandlord-icon.svg" alt="" class="size-10 my-auto" />
+                <nav class="w-svw max-w-48 my-auto flex justify-between">
+                    <a href="/search">
+                        <img class="size-8" src="./assets/search.png" />
+                    </a>
+                    <a href="/review">
+                        <img class="size-8" src="./assets/edit.png" />
+                    </a>
+                    <a href="/login">
+                        <img class="size-8" src="./assets/user.png" />
+                    </a>
+                </nav>
+            </div>
 
-        <nav class="fixed w-full py-4 bottom-0 flex justify-evenly border-t-2 bg-white">
-            <a href="/" class="text-white py-2 px-4">
-                <img class="w-6 h-6" src="./assets/home.png" />
-            </a>
-            <a href="/search" class="text-white py-2 px-4">
-                <img class="w-6 h-6" src="./assets/search.png" />
-            </a>
-            <a href="/review" class="text-white py-2 px-4">
-                <img class="w-6 h-6" src="./assets/edit.png" />
-            </a>
-            <a href="/login" class="text-white py-2 px-4">
-                <img class="w-6 h-6" src="./assets/user.png" />
-            </a>
-        </nav>
+            <main class="w-full flex flex-col items-center mb-nav"></main>
+
+            <!-- TODO: Put a footer here showing company info and contacts, and other links -->
+
+            <!-- Navbar Bottom -->
+            <div class="sticky bottom-0 size-nav flex md:hidden justify-center border-t-2 bg-white">
+                <nav class="w-svw max-w-xl my-auto flex justify-evenly">
+                    <a href="/">
+                        <img class="size-8" src="./assets/home.png" />
+                    </a>
+                    <a href="/search">
+                        <img class="size-8" src="./assets/search.png" />
+                    </a>
+                    <a href="/review">
+                        <img class="size-8" src="./assets/edit.png" />
+                    </a>
+                    <a href="/login">
+                        <img class="size-8" src="./assets/user.png" />
+                    </a>
+                </nav>
+            </div>
+        </div>
 
         <script type="module" src="/src/main.js"></script>
     </body>

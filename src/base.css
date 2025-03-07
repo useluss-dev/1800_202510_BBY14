@@ -43,7 +43,7 @@ div,
 footer,
 main,
 section {
-    @apply min-w-0 min-h-0 relative;
+    @apply min-w-0 min-h-0;
 }
 
 h1 {
@@ -58,6 +58,40 @@ h3 {
     @apply text-xl font-bold font-sans;
 }
 
+/* ------------ Spacing ------------ */
+
 p {
     @apply font-sans;
+}
+
+.px-main {
+    @apply px-6 md:px-8;
+}
+
+.mx-main {
+    @apply mx-6 md:mx-8;
+}
+
+.size-nav {
+    @apply w-svw h-16 lg:h-20;
+}
+
+.mb-nav {
+    @apply mb-16 lg:mb-20;
+}
+
+.mt-nav {
+    @apply mt-16 lg:mt-20;
+}
+
+.pb-nav {
+    @apply pb-16 lg:pb-20;
+}
+
+.pt-nav {
+    @apply pt-16 lg:pt-20;
+}
+
+.py-nav {
+    @apply py-16 lg:py-20;
 }

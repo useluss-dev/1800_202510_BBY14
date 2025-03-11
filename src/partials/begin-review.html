@@ -1,0 +1,147 @@
+<section class="w-full max-w-xl md:h-full mt-16 px-main flex flex-col gap-16">
+    <h1>Begin Review</h1>
+
+    <!-- -------------------------------- Method 1 -------------------------------- -->
+    <section class="w-full flex flex-col gap-6">
+        <div class="size-full flex flex-col gap-1">
+            <h3>Method 1</h3>
+            <p>Copy & paste the link of your landlord’s Facebook Marketplace listing.</p>
+        </div>
+
+        <form action="" method="get" class="flex gap-2">
+            <!-- I was thinking of an input box that submits automatically if the input was copy-pasted in. -->
+            <!-- That might be too much effort though. -->
+            <input
+                type="text"
+                name="method2-facebook-link"
+                id=""
+                placeholder="Copy & paste link"
+                class="w-full p-2 border-2 focus:outline-0"
+            />
+            <button type="submit" class="p-2 border-2 focus:outline-4 focus:outline-blue-500">
+                Submit
+            </button>
+        </form>
+    </section>
+
+    <!-- -------------------------------- Method 2 -------------------------------- -->
+    <form action="" method="post" class="w-full flex flex-col gap-4">
+        <div class="size-full flex flex-col gap-1">
+            <h3>Method 2</h3>
+            <p>
+                Fill out your landlord's basic information, such as their name, and contact
+                information. RateMyLandlord will warn you for duplicates if they exist.
+            </p>
+        </div>
+
+        <!-- ------------------------ LANDLORD ------------------------ -->
+
+        <h4 class="underline">Landlord's Information</h4>
+
+        <!-- NAME -->
+        <div class="w-full flex flex-col gap-1">
+            <p>Name</p>
+            <div class="w-full flex flex-col border-2 divide-y-2">
+                <input
+                    type="text"
+                    name="method2-fname"
+                    id=""
+                    placeholder="First name"
+                    class="w-full p-2 focus:outline-0"
+                />
+                <input
+                    type="text"
+                    name="method2-lname"
+                    id=""
+                    placeholder="Last name"
+                    class="w-full p-2 focus:outline-0"
+                />
+            </div>
+        </div>
+
+        <!-- EMAIL ADDRESSES -->
+        <div class="w-full flex flex-col gap-1">
+            <p>Email Address(es)</p>
+            <div class="flex flex-col">
+                <input
+                    type="text"
+                    name="method2-email-1"
+                    id=""
+                    placeholder="Email address"
+                    class="w-full p-2 border-2 focus:outline-0"
+                />
+                <button
+                    name="method2-email-add"
+                    id=""
+                    class="w-full p-2 border-b-2 border-x-2 border-gray-500 border-dashed flex items-center justify-center"
+                >
+                    <p class="text-gray-500">+</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- SOCIAL LINKS -->
+        <div class="w-full flex flex-col gap-1">
+            <p>Social Link(s)</p>
+            <div class="flex flex-col">
+                <input
+                    type="text"
+                    name="method2-social-1"
+                    id=""
+                    placeholder="Link"
+                    class="w-full p-2 border-2 focus:outline-0"
+                />
+                <button
+                    name="method2-social-add"
+                    id=""
+                    class="w-full p-2 border-b-2 border-x-2 border-gray-500 border-dashed flex items-center justify-center"
+                >
+                    <p class="text-gray-500">+</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- ------------------------ LISTING ------------------------ -->
+        <h4 class="underline">Listing Information</h4>
+
+        <div class="w-full flex flex-col gap-1">
+            <p>Listing Address</p>
+            <div class="w-full flex flex-col border-2 divide-y-2">
+                <input
+                    type="text"
+                    name="method2-postal"
+                    id=""
+                    placeholder="Postal code"
+                    class="w-full p-2 focus:outline-0"
+                />
+                <input
+                    type="text"
+                    name="method2-address"
+                    id=""
+                    placeholder="Street Address"
+                    class="w-full p-2 focus:outline-0"
+                />
+            </div>
+        </div>
+
+        <div class="w-full flex flex-col gap-1">
+            <p></p>
+            <div class="w-full flex flex-col border-2 divide-y-2">
+                <input
+                    type="text"
+                    name="method2-postal"
+                    id=""
+                    placeholder="Postal code"
+                    class="w-full p-2 focus:outline-0"
+                />
+                <input
+                    type="text"
+                    name="method2-address"
+                    id=""
+                    placeholder="Street Address"
+                    class="w-full p-2 focus:outline-0"
+                />
+            </div>
+        </div>
+    </form>
+</section>

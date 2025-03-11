@@ -43,25 +43,32 @@ div,
 footer,
 main,
 section {
+    /* WHATEVER YOU DO, DO NOT MODIFY THIS AT ALL */
+    /* There's weird flexbox mechanics that happen when the line below isn't included. */
     @apply min-w-0 min-h-0;
 }
 
 h1 {
-    @apply text-4xl font-bold font-sans;
+    @apply text-6xl font-bold font-sans;
 }
 
 h2 {
-    @apply text-2xl font-bold font-sans;
+    @apply text-3xl font-bold font-sans;
 }
 
 h3 {
-    @apply text-xl font-bold font-sans;
+    @apply text-2xl font-bold font-sans;
+}
+
+h4 {
+    @apply font-bold font-sans;
 }
 
 /* ------------ Spacing ------------ */
 
 .spacing-main {
-    @apply size-full min-h-[calc(100svh-(--spacing(16)))] md:min-h-0;
+    /* @apply size-full min-h-[calc(100svh-(--spacing(16)))] md:min-h-0; */
+    @apply size-full mb-32 md:mb-14;
 }
 
 p {
@@ -72,30 +79,6 @@ p {
     @apply px-6 md:px-8;
 }
 
-.mx-main {
-    @apply mx-6 md:mx-8;
-}
-
 .size-nav {
     @apply w-full h-16 md:h-14;
-}
-
-.mb-nav {
-    @apply mb-16 md:mb-14;
-}
-
-.mt-nav {
-    @apply mt-16 md:mt-14;
-}
-
-.pb-nav {
-    @apply pb-16 md:pb-14;
-}
-
-.pt-nav {
-    @apply pt-16 md:pt-14;
-}
-
-.py-nav {
-    @apply py-16 md:py-14;
 }

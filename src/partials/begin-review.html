@@ -8,9 +8,8 @@
             <p>Copy & paste the link of your landlord’s Facebook Marketplace listing.</p>
         </div>
 
+        <!-- Copy & pasting a Facebook Marketplace link -->
         <form action="" method="get" class="flex gap-2">
-            <!-- I was thinking of an input box that submits automatically if the input was copy-pasted in. -->
-            <!-- That might be too much effort though. -->
             <input
                 type="text"
                 name="method2-facebook-link"
@@ -35,7 +34,6 @@
         </div>
 
         <!-- ------------------------ LANDLORD ------------------------ -->
-
         <h4 class="underline">Landlord's Information</h4>
 
         <!-- NAME -->
@@ -104,6 +102,7 @@
         <!-- ------------------------ LISTING ------------------------ -->
         <h4 class="underline">Listing Information</h4>
 
+        <!-- LISTING ADDRESS -->
         <div class="w-full flex flex-col gap-1">
             <p>Listing Address</p>
             <div class="w-full flex flex-col border-2 divide-y-2">
@@ -118,30 +117,45 @@
                     type="text"
                     name="method2-address"
                     id=""
-                    placeholder="Street Address"
+                    placeholder="Street address (optional)"
+                    class="w-full p-2 focus:outline-0"
+                />
+                <input
+                    type="text"
+                    name="method2-city"
+                    id=""
+                    placeholder="City"
                     class="w-full p-2 focus:outline-0"
                 />
             </div>
         </div>
 
-        <div class="w-full flex flex-col gap-1">
-            <p></p>
-            <div class="w-full flex flex-col border-2 divide-y-2">
-                <input
-                    type="text"
-                    name="method2-postal"
-                    id=""
-                    placeholder="Postal code"
-                    class="w-full p-2 focus:outline-0"
-                />
-                <input
-                    type="text"
-                    name="method2-address"
-                    id=""
-                    placeholder="Street Address"
-                    class="w-full p-2 focus:outline-0"
-                />
-            </div>
+        <!--  -->
+        <div class="w-full flex items-center justify-evenly border-2 divide-x-2">
+            <p class="w-full p-2">Number of Bedrooms</p>
+            <input
+                type="number"
+                name="method2-bedrooms"
+                min="1"
+                id=""
+                class="p-2 w-full max-w-24"
+            />
         </div>
+        <div class="w-full flex items-center justify-evenly border-2 divide-x-2">
+            <p class="w-full p-2">Number of Bathrooms</p>
+            <input
+                type="number"
+                name="method2-bedrooms"
+                min="0"
+                id=""
+                class="p-2 w-full max-w-24"
+            />
+        </div>
+
+        <input
+            type="submit"
+            value="Begin Review"
+            class="p-2 border-2 focus:outline-4 focus:outline-blue-500"
+        />
     </form>
 </section>

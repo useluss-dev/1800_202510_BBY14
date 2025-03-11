@@ -1,3 +1,34 @@
-<section>
-    <h1>Search</h1>
+<!-- Fixed search bar at the top -->
+<section class="fixed bg-white z-50">
+    <div class="w-full max-w-xl p-4">
+        <form action="/search" method="GET" class="flex">
+            <input
+                type="text"
+                name="query"
+                autocomplete="off"
+                placeholder="Search..."
+                class="flex-1 p-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button type="submit" class="p-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600">
+                Search
+            </button>
+        </form>
+    </div>
+</section>
+
+<section class="pt-24">
+    <div class="flex flex-col">
+        <div
+            class="flex flex-col sm:flex-row border border-gray-700 py-1 px-1 w-full max-w-2xl mx-auto text-center sm:text-left"
+        >
+            <div class="flex-shrink-0 m-4 w-16 h-16 rounded-full bg-gray-400 self-center"></div>
+            <div class="flex flex-col py-2 pr-2">
+                <h4 class="text-lg font-light">Hello World</h4>
+                <p class="text-sm font-hairline">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed porro, mollitia
+                    soluta, dignissimos labore ab magni temporibus sequi maiores.
+                </p>
+            </div>
+        </div>
+    </div>
 </section>

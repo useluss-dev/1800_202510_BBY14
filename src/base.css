@@ -60,6 +60,10 @@ h3 {
 
 /* ------------ Spacing ------------ */
 
+.spacing-main {
+    @apply size-full min-h-[calc(100svh-(--spacing(16)))] md:min-h-0;
+}
+
 p {
     @apply font-sans;
 }
@@ -77,21 +81,21 @@ p {
 }
 
 .mb-nav {
-    @apply mb-16 lg:mb-20;
+    @apply mb-16 md:mb-14;
 }
 
 .mt-nav {
-    @apply mt-16 lg:mt-20;
+    @apply mt-16 md:mt-14;
 }
 
 .pb-nav {
-    @apply pb-16 lg:pb-20;
+    @apply pb-16 md:pb-14;
 }
 
 .pt-nav {
-    @apply pt-16 lg:pt-20;
+    @apply pt-16 md:pt-14;
 }
 
 .py-nav {
-    @apply py-16 lg:py-20;
+    @apply py-16 md:py-14;
 }

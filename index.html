@@ -8,19 +8,55 @@
     </head>
 
     <body>
-        <main class=""></main>
+        <div class="relative">
+            <!-- TODO: Consider redesigning the icons (for Sam) -->
+            <!-- Navbar Top -->
+            <div
+                class="sticky top-0 size-nav px-main hidden md:flex justify-between border-b-2 bg-white"
+            >
+                <a href="/" class="my-auto">
+                    <img class="h-8" src="assets/rml-ico-outline.svg" />
+                </a>
+                <nav class="my-auto flex gap-6">
+                    <a href="/review">
+                        <img class="h-8" src="assets/rml-review.svg" />
+                    </a>
+                    <a href="/login">
+                        <div class="size-8 border-2 rounded-full overflow-hidden">
+                            <!-- This should be an auto-generated profile picture. -->
+                            <img class="h-6 mx-auto mt-2" src="assets/user.png" />
+                            <!-- <img class="size-full object-cover" src="assets/profile.jpg" /> -->
+                        </div>
+                    </a>
+                </nav>
+            </div>
 
-        <nav class="fixed bottom-0 flex py-4 justify-evenly border-t-2 w-full bg-white">
-            <a href="/" class="text-white py-2 px-4"
-                ><img class="w-6 h-6" src="./assets/home.png"
-            /></a>
-            <a href="/review" class="text-white py-2 px-4"
-                ><img class="w-6 h-6" src="./assets/edit.png"
-            /></a>
-            <a href="/login" class="text-white py-2 px-4"
-                ><img class="w-6 h-6" src="./assets/user.png"
-            /></a>
-        </nav>
+            <main class="spacing-main flex flex-col items-center"></main>
+
+            <!-- TODO: Put a footer here showing company info and contacts, and other links -->
+
+            <!-- Navbar Bottom -->
+            <div class="sticky bottom-0 size-nav flex md:hidden justify-center border-t-2 bg-white">
+                <nav class="w-svw max-w-xl my-auto flex justify-evenly">
+                    <a href="/">
+                        <img class="h-8" src="assets/rml-ico-outline.svg" />
+                    </a>
+                    <a href="/search">
+                        <img class="h-8" src="assets/rml-search.svg" />
+                    </a>
+                    <a href="/review">
+                        <img class="h-8" src="assets/rml-review.svg" />
+                    </a>
+                    <a href="/login">
+                        <div class="size-8 border-2 rounded-full overflow-hidden">
+                            <!-- This should be an auto-generated profile picture. -->
+                            <img class="h-6 mx-auto mt-2" src="assets/user.png" />
+                            <!-- <img class="size-full object-cover" src="assets/profile.jpg" /> -->
+                        </div>
+                    </a>
+                </nav>
+            </div>
+        </div>
 
         <script type="module" src="/src/main.js"></script>
     </body>

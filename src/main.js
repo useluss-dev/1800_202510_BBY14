@@ -8,6 +8,7 @@ function loadContent(filePath, callback) {
             return response.text();
         })
         .then((html) => {
+            // Find main container in index.html
             const mainContainer = document.querySelector("main");
             // Inject the HTML into your main container
             mainContainer.innerHTML = html;
@@ -23,20 +24,24 @@ function loadContent(filePath, callback) {
 }
 
 function executeScripts(container) {
+    // Get all the scripts from given container (injected file).
     const scripts = container.querySelectorAll("script");
+
     scripts.forEach((oldScript) => {
-        const newScript = document.createElement("script");
+        const newScript = document.createElement("script"); // Create a new script
         if (oldScript.type) {
+            // Give the new script the same type
             newScript.type = oldScript.type;
         }
 
         if (oldScript.src) {
+            // Give the new script the same src
             newScript.src = oldScript.src;
         } else {
-            newScript.textContent = oldScript.textContent;
+            newScript.textContent = oldScript.textContent; // Give the new script the same text content
         }
 
-        document.body.appendChild(newScript);
+        document.body.appendChild(newScript); // Append script to the index.html
     });
 }
 

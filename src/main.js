@@ -10,7 +10,13 @@ page("/search", () =>
     })
 );
 page("/review", () => loadContent("/src/partials/review.html"));
-page("/begin-review", () => loadContent("/src/partials/begin-review.html"));
+page("/begin-review", () =>
+    loadContent("/src/partials/begin-review.html", (container) => {
+        loadComponent("/src/components/varFields.html", "#email-fields", executeScripts);
+        loadComponent("/src/components/varFields.html", "#phone-fields", executeScripts);
+        loadComponent("/src/components/varFields.html", "#social-fields", executeScripts);
+    })
+);
 
 // Start the router
 page();

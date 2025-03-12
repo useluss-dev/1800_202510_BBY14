@@ -1,0 +1,34 @@
+<div class="w-full">
+    <p id="title"></p>
+    <div id="fields" class="flex flex-col border-2 divide-y-2">
+        <div class="flex">
+            <input
+                type="text"
+                name="text-1"
+                id="text-1"
+                class="w-full p-2 focus:outline-0"
+                required
+            />
+            <button
+                type="button"
+                name="text-1-del"
+                id="text-1-del"
+                class="p-2 aspect-square border-l-2 border-dashed border-gray-500"
+            >
+                <p class="text-gray-500">-</p>
+            </button>
+        </div>
+    </div>
+
+    <!-- Dynamically remove the border-t-2 style when there is at least one input field -->
+    <button
+        type="button"
+        name="add"
+        id="add"
+        class="h-10 w-full mx-auto border-b-2 border-x-2 border-dashed border-gray-500"
+    >
+        <p class="text-gray-500">+</p>
+    </button>
+</div>
+
+<script type="module" src="/src/components/varFields.js"></script>

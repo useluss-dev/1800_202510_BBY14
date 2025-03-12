@@ -10,7 +10,7 @@ page("/search", () =>
     })
 );
 page("/review", () => loadContent("/src/partials/review.html"));
-page("/begin-review", () => loadContent("/src/partials/begin-review.html"));
+page("/begin-review", () => loadContent("/src/partials/begin-review.html", executeScripts));
 
 // Start the router
 page();

@@ -1,37 +1,38 @@
-// Initialize the FirebaseUI Widget using Firebase.
-var ui = new firebaseui.auth.AuthUI(firebase.auth());
+import { getAuth, EmailAuthProvider } from "firebase/auth";
+import * as firebaseui from "firebaseui";
+import { app } from "./firebaseAPI_BBY14.js";
 
-var uiConfig = {
+console.log("test");
+
+// Get the Auth instance from the initialized app
+const auth = getAuth(app);
+
+// Initialize the FirebaseUI Widget using Firebase v9 modular syntax
+const ui = new firebaseui.auth.AuthUI(auth);
+console.log(ui);
+
+const uiConfig = {
     callbacks: {
-      signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-        // User successfully signed in.
-        // Return type determines whether we continue the redirect automatically
-        // or whether we leave that to developer to handle.
-        return true;
-      },
-      uiShown: function() {
-        // The widget is rendered.
-        // Hide the loader.
-        document.getElementById('loader').style.display = 'none';
-      }
+        signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+            // User successfully signed in.
+            // Return true to redirect to signInSuccessUrl.
+            return true;
+        },
+        uiShown: function () {
+            // The widget is rendered; hide the loader.
+            document.getElementById("loader").style.display = "none";
+        },
     },
-    // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-    signInFlow: 'popup',
-    signInSuccessUrl: '/src/partials/home.html',
-    signInOptions: [
-      // Leave the lines as is for the providers you want to offer your users.
-      //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      //firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-      //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-      //firebase.auth.GithubAuthProvider.PROVIDER_ID,
-      firebase.auth.EmailAuthProvider.PROVIDER_ID,
-      //firebase.auth.PhoneAuthProvider.PROVIDER_ID
-    ],
-    // Terms of service url.
-    tosUrl: '<your-tos-url>',
-    // Privacy policy url.
-    privacyPolicyUrl: '<your-privacy-policy-url>'
-  };
+    // Use popup for sign-in flow.
+    signInFlow: "popup",
+    // URL to redirect to after a successful sign-in.
+    signInSuccessUrl: "/",
+    // Sign-in options; here we use the email/password provider.
+    signInOptions: [EmailAuthProvider.PROVIDER_ID],
+    // Terms of service URL.
+    tosUrl: "<your-tos-url>",
+    // Privacy policy URL.
+    privacyPolicyUrl: "<your-privacy-policy-url>",
+};
 
-  console.log("ggg");
-  ui.start('#firebaseui-auth-container', uiConfig);
+ui.start("#firebaseui-auth-container", uiConfig);

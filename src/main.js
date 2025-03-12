@@ -1,8 +1,8 @@
 import page from "page";
 
 // Helper function to load HTML partials
-function loadContent(filePath, callback) {
-    fetch(filePath)
+function loadContent(partialPath, callback) {
+    fetch(partialPath)
         .then((response) => {
             if (!response.ok) throw new Error("Network response was not ok");
             return response.text();
@@ -23,8 +23,8 @@ function loadContent(filePath, callback) {
         });
 }
 
-function loadComponent(filePath, containerSelector, callback) {
-    fetch(filePath)
+function loadComponent(componentPath, containerSelector, callback) {
+    fetch(componentPath)
         .then((response) => {
             if (!response.ok) throw new Error("Network response was not ok");
             return response.text();
@@ -76,7 +76,7 @@ page("/search", () =>
     })
 );
 page("/review", () => loadContent("/src/partials/review.html"));
-page("/begin-review", () => loadContent("/src/partials/begin-review.html", executeScripts));
+page("/begin-review", () => loadContent("/src/partials/begin-review.html"));
 
 // Start the router
 page();

@@ -1,22 +1,22 @@
 {
-	"name": "vite-rate-my-landlord",
-	"private": true,
-	"version": "0.0.0",
-	"type": "module",
-	"scripts": {
-		"dev": "vite",
-		"build": "tsc && vite build",
-		"preview": "vite preview"
-	},
-	"devDependencies": {
-		"typescript": "~5.7.2",
-		"vite": "^6.2.0"
-	},
-	"dependencies": {
-		"@tailwindcss/vite": "^4.0.7",
-		"firebase": "^10.4.0",
-		"firebaseui": "^6.1.0",
-		"page": "^1.11.6",
-		"tailwindcss": "^4.0.7"
-	}
+    "name": "vite-rate-my-landlord",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "preview": "vite preview"
+    },
+    "devDependencies": {
+        "typescript": "~5.7.2",
+        "vite": "^6.2.0"
+    },
+    "dependencies": {
+        "@tailwindcss/vite": "^4.0.7",
+        "firebase": "^8.10.1",
+        "firebaseui": "^4.8.0",
+        "page": "^1.11.6",
+        "tailwindcss": "^4.0.7"
+    }
 }

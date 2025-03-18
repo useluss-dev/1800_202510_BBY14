@@ -2,5 +2,5 @@
 *.logs
 node_modules/
 .vscode/
-firebaseAPI_BBY14.js
 package-lock.json
+.env

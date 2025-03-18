@@ -8,7 +8,7 @@
         RateMyLandlord will warn you for duplicates if they exist.
     </p>
 
-    <form action="/verify-landlord" method="get" class="w-full flex flex-col gap-6">
+    <form name="begin" action="/verify-landlord" method="get" class="w-full flex flex-col gap-6">
         <!-- ------------ NAME ------------ -->
         <div class="w-full">
             <p>Name</p>
@@ -92,14 +92,10 @@
         </div>
 
         <!-- SUBMIT -->
-        <button
-            type="submit"
-            id="method2-submit"
-            class="p-2 border-2 focus:outline-4 focus:outline-blue-500"
-        >
+        <button type="submit" class="p-2 border-2 focus:outline-4 focus:outline-blue-500">
             Add Landlord
         </button>
     </form>
 </section>
 
-<script type="module" src="/src/review.js"></script>
+<script type="module" src="/src/begin-review.js"></script>

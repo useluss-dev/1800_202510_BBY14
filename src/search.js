@@ -1,4 +1,4 @@
-export function createCard({ name, rating, numListings, tags, avatarURL }) {
+export function createLandlordCard({ properties, name, rating, tags }) {
     const card = document.createElement("div");
     card.className = "max-w-3xl mx-auto mb-4 p-4 border-2 border-black";
     card.innerHTML = `
@@ -28,7 +28,7 @@ export function createCard({ name, rating, numListings, tags, avatarURL }) {
             </div>
         </div>
         <div class="text-center">
-            <p class="text-xl font-semibold">${numListings}</p>
+            <p class="text-xl font-semibold">${properties.length}</p>
             <p class="text-xs text-gray-500 tracking-wide">LISTINGS</p>
         </div>
     </div>
@@ -46,17 +46,18 @@ export function createCard({ name, rating, numListings, tags, avatarURL }) {
     return card;
 }
 
-export function sortCards(cards) {
+export function sortLandlords(landlords) {
     // Sort array based on rating (in descending order)
-    cards.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
+    landlords.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
 }
 
-export function searchCards(cards) {
+export function searchLandlords(landlords) {
     // Retrieve the search query from the URL (e.g., /search?query=John)
     const params = new URLSearchParams(window.location.search);
     const query = params.get("query") ? params.get("query").toLowerCase() : "";
 
     if (query) {
-        return cards.filter((card) => card.name.toLowerCase().includes(query));
+        landlords = landlords.filter((landlord) => landlord.name.toLowerCase().includes(query));
     }
+    return landlords;
 }

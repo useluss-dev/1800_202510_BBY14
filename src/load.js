@@ -1,3 +1,6 @@
+import { createLandlordCard, searchLandlords, sortLandlords } from "./search";
+import { db } from "./firebaseAPI_BBY14";
+
 // Helper function to load HTML partials
 export function loadContent(partialPath, callback) {
     fetch(partialPath)
@@ -41,6 +44,30 @@ export function loadComponent(componentPath, containerSelector, callback) {
         })
         .catch((err) => {
             console.error("Error loading component:", err);
+        });
+}
+
+export function loadLandlordCards() {
+    db.collection("landlords")
+        .get()
+        .then((response) => {
+            const landlords = response.docs.map((doc) => doc.data());
+            console.log(landlords);
+
+            const filtered = searchLandlords(landlords);
+            sortLandlords(filtered);
+
+            const container = document.querySelector("#card-container");
+            if (filtered.length > 0) {
+                container.innerHTML = ""; // Clears the landlord not found message
+            }
+            filtered.forEach((landlord) => {
+                const cardElement = createLandlordCard(landlord);
+                container.appendChild(cardElement);
+            });
+        })
+        .catch((error) => {
+            console.error("Error fetching data from Firestore: ", error);
         });
 }
 

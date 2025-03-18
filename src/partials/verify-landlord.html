@@ -1,11 +1,35 @@
 <section
-    class="w-full max-w-xl h-[calc(100svh-(--spacing(16)))] md:h-full mt-16 px-main flex flex-col gap-16"
+    class="w-full max-w-xl h-[calc(100svh-(--spacing(16)))] md:h-full mt-16 px-main flex flex-col gap-4"
 >
     <h1>Verify <span id="fname">FName</span> <span id="lname">LName</span></h1>
+
+    <hr class="border-t-2" />
+
+    <p class="text-lg" id="facebook-link"></p>
+
+    <hr class="border-t-2" />
 
     <div class="w-full" id="contacts">
         <!-- verify-landlord.js places HTML to show Landlord's information. -->
     </div>
+
+    <button
+        type="button"
+        id="edit-landlord"
+        class="p-2 border-2 focus:outline-4 focus:outline-blue-500"
+    >
+        Edit Landlord
+    </button>
+
+    <button
+        type="button"
+        id="review-landlord"
+        class="p-2 border-2 focus:outline-4 focus:outline-blue-500"
+    >
+        Review Landlord
+    </button>
+
+    <!-- ADDITIONALLY, this is where we show potential landlord duplicates here. -->
 </section>
 
 <script type="module" src="/src/verify-landlord.js"></script>

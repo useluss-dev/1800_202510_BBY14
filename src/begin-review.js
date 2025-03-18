@@ -78,16 +78,18 @@ function setRemoveFieldListener(purpose, index) {
 }
 
 function findFields(purpose, regex) {
-    let i = 0;
+    let i = 1;
     let fieldInputs = [];
 
-    regex = new RegExp(regex);
+    if (typeof regex == "string") {
+        regex = new RegExp(regex);
+    }
 
     while (true) {
         /** @type {HTMLInputElement} */
         let fieldInput = document.getElementById(`${purpose}-${i}`);
 
-        if (fieldInput.value == "") {
+        if (fieldInput == null) {
             break;
         }
 
@@ -96,6 +98,7 @@ function findFields(purpose, regex) {
         }
 
         fieldInputs.push(fieldInput);
+        i++;
     }
 
     return fieldInputs;
@@ -125,4 +128,23 @@ beginForm.addEventListener("submit", (event) => {
     let fname = document.getElementById("fname");
     let lname = document.getElementById("lname");
     let facebookLink = document.getElementById("facebook-link");
+    let emailAddresses = findFields("email", /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/);
+    let phoneNumbers = findFields("phone", /^\d+$/);
+    let socialLinks = findFields(
+        "social",
+        /^(https?:\/\/)?(www\.)?[\w\-]+(\.[\w\-]+)+([\/\w\-?.=&#]*)?$/
+    );
+
+    if (facebookLink.value == "") {
+        if (emailAddresses.length == 0) {
+            alert(
+                "Email address is not provided once, or is invalid.\n" +
+                    "Please try again, or provide a facebook link."
+            );
+        } else {
+            beginForm.submit();
+        }
+    } else {
+        beginForm.submit();
+    }
 });

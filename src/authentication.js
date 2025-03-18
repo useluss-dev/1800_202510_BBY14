@@ -4,7 +4,7 @@ import * as firebaseui from "firebaseui";
 import { db, auth } from "./firebaseAPI_BBY14.js";
 
 
-// auth.signOut(); //temporaray
+//auth.signOut(); //temporaray
 async function setAuthPersistence() {
   try {
     await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
@@ -65,7 +65,6 @@ var uiConfig = {
 };
 
 
-ui.start('#firebaseui-auth-container', uiConfig);
 
 
 async function handleUserAuthentication(user) {
@@ -89,6 +88,7 @@ async function handleUserAuthentication(user) {
       console.error("Firestore error:", error);
     }
   } else {
+    ui.start('#firebaseui-auth-container', uiConfig);
     console.log("No user is signed in.");
   }
 }

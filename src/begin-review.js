@@ -45,38 +45,6 @@ function modifyFieldStyle(purpose) {
     }
 }
 
-/*
-    The functions below exists incase we need to add event listeners for other
-    input events.
-*/
-/**
- *
- * @param {string} purpose
- * @param {string} placeholder
- * @param {boolean} required
- */
-function setFieldEventListeners(purpose, placeholder, required = true) {
-    const addButton = document.getElementById(`${purpose}-add`);
-    const addButtonFunc = () => {
-        addField(purpose, placeholder, required);
-        modifyFieldStyle(purpose);
-    };
-    addButton.addEventListener("click", addButtonFunc);
-}
-
-/**
- * @param {HTMLButtonElement} fieldDelButton
- * @param {string} purpose
- */
-function setRemoveFieldListener(purpose, index) {
-    const delButton = document.getElementById(`${purpose}-${index}-del`);
-    const delButtonFunc = () => {
-        field.remove();
-        modifyFieldStyle(purpose);
-    };
-    delButton.addEventListener("click", delButtonFunc);
-}
-
 function findFields(purpose, regex) {
     let i = 1;
     let fieldInputs = [];
@@ -104,9 +72,77 @@ function findFields(purpose, regex) {
     return fieldInputs;
 }
 
+// If the user goes back from verify-landlord.html to
+// double check their landlord's information.
+function applyValuesFromQuery() {
+    for (const [key, value] of new URLSearchParams(document.location.search)) {
+        if (key == "fname") {
+            document.getElementById("fname").value = value;
+        } else if (key == "lname") {
+            document.getElementById("lname").value = value;
+        } else if (key == "facebook-link") {
+            document.getElementById("facebook-link").value = value;
+        } else {
+            // my favorite JS syntax sugar
+            const [purpose, index] = key.split("-");
+
+            switch (purpose) {
+                case "email":
+                    addField(purpose, "Email address");
+                    break;
+                case "phone":
+                    addField(purpose, "Phone number");
+                    break;
+                case "social":
+                    addField(purpose, "Link");
+                    break;
+            }
+
+            document.getElementById(`${purpose}-${index}`).value = value;
+            modifyFieldStyle(purpose);
+        }
+    }
+}
+
+/*
+    These functions below exist for cases where we need to
+    add event listeners for other input events, especially
+    involving mobile devices.
+*/
+/**
+ *
+ * @param {string} purpose
+ * @param {string} placeholder
+ * @param {boolean} required
+ */
+function setFieldEventListeners(purpose, placeholder, required = true) {
+    const addButton = document.getElementById(`${purpose}-add`);
+    const addButtonFunc = () => {
+        addField(purpose, placeholder, required);
+        modifyFieldStyle(purpose);
+    };
+    addButton.addEventListener("click", addButtonFunc);
+}
+
+// This one adds the remove buttons for each field.
+/**
+ * @param {HTMLButtonElement} fieldDelButton
+ * @param {string} purpose
+ */
+function setRemoveFieldListener(purpose, index) {
+    const delButton = document.getElementById(`${purpose}-${index}-del`);
+    const delButtonFunc = () => {
+        field.remove();
+        modifyFieldStyle(purpose);
+    };
+    delButton.addEventListener("click", delButtonFunc);
+}
+
 setFieldEventListeners("email", "Email address");
 setFieldEventListeners("phone", "Phone number");
 setFieldEventListeners("social", "Link");
+
+applyValuesFromQuery();
 
 /*
     Warning for everyone:
@@ -137,6 +173,11 @@ beginForm.addEventListener("submit", (event) => {
 
     if (facebookLink.value == "") {
         if (emailAddresses.length == 0) {
+            /*
+                Sam (or anyone else) - put this shit in the HTML.
+                Use Tailwind's 'hidden' class to hide the error
+                in first input.
+            */
             alert(
                 "Email address is not provided once, or is invalid.\n" +
                     "Please try again, or provide a facebook link."

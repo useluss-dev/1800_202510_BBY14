@@ -1,3 +1,5 @@
+import { createCard, searchCards, sortCards } from "./card";
+
 // Helper function to load HTML partials
 export function loadContent(partialPath, callback) {
     fetch(partialPath)
@@ -41,6 +43,32 @@ export function loadComponent(componentPath, containerSelector, callback) {
         })
         .catch((err) => {
             console.error("Error loading component:", err);
+        });
+}
+
+export function loadCards() {
+    fetch("/src/test.json")
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("failed to get json");
+            }
+            return response.json();
+        })
+        .then((cards) => {
+            const filteredCards = searchCards(cards);
+            sortCards(filteredCards);
+
+            const container = document.querySelector("#card-container");
+            if (filteredCards.length > 0) {
+                container.innerHTML = ""; // Clears the landlord not found message
+            }
+            filteredCards.forEach((card) => {
+                const cardElement = createCard(card);
+                container.appendChild(cardElement);
+            });
+        })
+        .catch((error) => {
+            console.error("Error fetching json file: ", error);
         });
 }
 

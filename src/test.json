@@ -1,0 +1,44 @@
+[
+    {
+        "name": "Burt Goodman",
+        "rating": "4.2",
+        "numListings": 2,
+        "tags": ["No Contract", "Pet Friendly", "Nice"],
+        "avatarUrl": ""
+    },
+    {
+        "name": "Mark Scout",
+        "rating": "4.8",
+        "numListings": 6,
+        "tags": ["Modern", "Spacious", "City View"],
+        "avatarUrl": "/images/jane.jpg"
+    },
+    {
+        "name": "Helena Eagen",
+        "rating": "3.2",
+        "numListings": 5,
+        "tags": ["Clean"],
+        "avatarUrl": ""
+    },
+    {
+        "name": "Burt Goodman",
+        "rating": "4.2",
+        "numListings": 2,
+        "tags": ["No Contract", "Pet Friendly", "Nice"],
+        "avatarUrl": ""
+    },
+    {
+        "name": "Mark Scout",
+        "rating": "4.8",
+        "numListings": 6,
+        "tags": ["Modern", "Spacious", "City View"],
+        "avatarUrl": "/images/jane.jpg"
+    },
+    {
+        "name": "Helena Eagen",
+        "rating": "3.2",
+        "numListings": 5,
+        "tags": ["Clean"],
+        "avatarUrl": ""
+    }
+]

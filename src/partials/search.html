@@ -1,19 +1,22 @@
 <!-- Fixed search bar at the top -->
-<div class="fixed bg-white z-50">
+<div class="bg-white">
     <div class="p-4">
-        <form action="/search" method="GET" class="flex">
+        <form action="/search" method="GET" class="flex gap-2">
             <input
                 type="text"
                 name="query"
                 autocomplete="off"
-                placeholder="Search..."
-                class="flex-1 p-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Landlord name"
+                class="w-full p-2 border-2 focus:outline-0"
             />
-            <button type="submit" class="p-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600">
+            <button
+                type="submit"
+                class="p-2 border-2 hover:bg-black hover:text-white hover:border-black focus:outline-2 focus:outline-black transition-colors duration-200"
+            >
                 Search
             </button>
         </form>
     </div>
 </div>
 
-<div id="card-container" class="pt-24 w-full"></div>
+<div id="card-container" class="pt-24 w-full text-center px-4">No landlords found...</div>

@@ -1,13 +1,12 @@
-<div class="max-w-md mx-auto p-4 border border-black rounded-md">
-    <!-- Top row: avatar, name + rating, # of listings -->
+export function createLandlordCard({ properties, name, rating, tags }) {
+    const card = document.createElement("div");
+    card.className = "max-w-3xl mx-auto mb-4 p-4 border-2 border-black";
+    card.innerHTML = `
     <div class="flex items-center justify-between">
-        <!-- Left side: avatar + name/rating -->
         <div class="flex items-center space-x-3">
-            <!-- Avatar placeholder -->
             <div class="w-12 h-12 rounded-full bg-gray-400"></div>
-            <!-- Name + rating -->
             <div>
-                <p class="text-base font-semibold">John Doe</p>
+                <p class="text-base font-semibold">${name}</p>
                 <div class="flex items-center text-sm text-gray-700">
                     <!-- Example star icon (Heroicons/Font Awesome/etc.) -->
                     <svg
@@ -24,13 +23,12 @@
                 a1 1 0 00.951-.69l1.176-3.617z"
                         />
                     </svg>
-                    <span>4.2</span>
+                    <span>${rating}</span>
                 </div>
             </div>
         </div>
-        <!-- Right side: number of listings -->
         <div class="text-center">
-            <p class="text-xl font-semibold">2</p>
+            <p class="text-xl font-semibold">${properties.length}</p>
             <p class="text-xs text-gray-500 tracking-wide">LISTINGS</p>
         </div>
     </div>
@@ -44,3 +42,22 @@
         <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full"> Test </span>
     </div>
 </div>
+    `;
+    return card;
+}
+
+export function sortLandlords(landlords) {
+    // Sort array based on rating (in descending order)
+    landlords.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
+}
+
+export function searchLandlords(landlords) {
+    // Retrieve the search query from the URL (e.g., /search?query=John)
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get("query") ? params.get("query").toLowerCase() : "";
+
+    if (query) {
+        landlords = landlords.filter((landlord) => landlord.name.toLowerCase().includes(query));
+    }
+    return landlords;
+}

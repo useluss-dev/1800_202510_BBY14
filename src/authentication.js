@@ -62,7 +62,6 @@ var uiConfig = {
   tosUrl: '<your-tos-url>',
   // Privacy policy url.
   privacyPolicyUrl: '<your-privacy-policy-url>'
-
 };
 
 

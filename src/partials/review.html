@@ -1,24 +1,87 @@
-<section class="w-full max-w-xl px-main mt-16 mx-auto flex flex-col gap-12">
+<section id="landlord-exists" class="w-full max-w-xl px-main mt-16 mx-auto flex flex-col gap-12">
     <h1>Review <span id="landlord-name">Landlord</span></h1>
 
-    <form action="/review-submitted" class="flex flex-col gap-8" method="get">
+    <form name="review" action="/submitted" class="flex flex-col gap-8" method="get">
+        <!-- LISTING INFORMATION -->
+
         <!-- OVERALL RATING -->
-        <section id="rating-overall"></section>
+        <section id="overall"></section>
 
-        <!-- BEHAVIOR RATING -->
-        <section id="rating-behavior"></section>
+        <!-- ---------------- LANDLORD ---------------- -->
+        <div class="flex flex-col gap-4 mb-4">
+            <h5 class="w-full pb-1 mb-1 border-b-2 text-gray-500">Landlord</h5>
+            <!-- BEHAVIOR RATING -->
+            <section id="behavior"></section>
+            <!-- HOUSE RULES -->
+            <section id="rules"></section>
+        </div>
 
-        <!-- HOUSE RULES -->
-        <section id="rating-rules"></section>
+        <!-- ---------------- LISTING ---------------- -->
+        <div class="flex flex-col gap-4 mb-4">
+            <h5 class="w-full pb-1 mb-1 border-b-2 text-gray-500">Listing</h5>
+            <!-- QUALITY -->
+            <section id="quality"></section>
+            <!-- RENT -->
+            <section id="rent"></section>
+            <!-- AMENITIES -->
+            <section id="amenities"></section>
 
-        <!-- RENT -->
-        <section id="rating-rent"></section>
+            <!-- LISTING LOCATION -->
+            <div>
+                <h5 class="uppercase text-gray-500">
+                    Listing postal code <span class="text-red-500">*</span>
+                </h5>
+                <input
+                    type="text"
+                    name="listing-postal"
+                    id="listing-postal"
+                    class="p-2 border-2 w-full"
+                    placeholder="Postal code"
+                />
+            </div>
 
-        <!-- AMENITIES -->
-        <section id="rating-amenities"></section>
+            <div>
+                <h5 class="uppercase text-gray-500">Listing address</h5>
+                <input
+                    type="text"
+                    name="listing-address"
+                    id="listing-address"
+                    class="p-2 border-2 w-full"
+                    placeholder="Street address (if provided in listing)"
+                />
+            </div>
+
+            <div class="flex items-center justify-between">
+                <h5 class="uppercase text-gray-500">
+                    Number of bedrooms <span class="text-red-500">*</span>
+                </h5>
+                <input
+                    class="p-2 border-2 max-w-24"
+                    type="number"
+                    name="listing-bedrooms"
+                    id="listing-bedrooms"
+                    min="1"
+                    value="1"
+                />
+            </div>
+
+            <div class="flex items-center justify-between">
+                <h5 class="uppercase text-gray-500">
+                    Number of bathrooms <span class="text-red-500">*</span>
+                </h5>
+                <input
+                    class="p-2 border-2 max-w-24"
+                    type="number"
+                    name="listing-bathrooms"
+                    id="listing-bathrooms"
+                    min="0"
+                    value="1"
+                />
+            </div>
+        </div>
 
         <section id="title">
-            <h5 class="text-gray-500 uppercase mb-2">Title</h5>
+            <h3 class="text-gray-500 uppercase mb-2">Title <span class="text-red-500">*</span></h3>
             <input
                 type="text"
                 name="title-text"
@@ -28,7 +91,9 @@
             />
         </section>
         <section id="written">
-            <h5 class="text-gray-500 uppercase mb-2">Written review</h5>
+            <h3 class="text-gray-500 uppercase mb-2">
+                Written review <span class="text-red-500">*</span>
+            </h3>
             <textarea
                 name="written-text"
                 id="written-text"
@@ -39,6 +104,11 @@
 
         <button class="p-2 border-2" type="submit">Submit Review</button>
     </form>
+</section>
+
+<section id="landlord-null" class="w-full max-w-xl px-main mt-16 mx-auto flex flex-col gap-12">
+    <h1>Landlord does not exist</h1>
+    <!-- Buttons to ask user to add new landlord, or continue searching. -->
 </section>
 
 <script type="module" src="/src/review.js"></script>

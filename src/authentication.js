@@ -1,8 +1,6 @@
 import firebase from "firebase/app";
-//import "firebase/auth";
 import * as firebaseui from "firebaseui";
 import { db, auth } from "./firebaseAPI_BBY14.js";
-
 
 //auth.signOut(); //temporaray
 async function setAuthPersistence() {
@@ -30,10 +28,11 @@ var uiConfig = {
       // If the user is a "brand new" user, then create a new "user" in your own database.
       // Assign this user with the name and email provided.
       // Before this works, you must enable "Firestore" from the firebase console.
-      // The Firestore rules must allow the user to write. 
+      // The Firestore rules must allow the user to write.
       //------------------------------------------------------------------------------------------
-      var user = authResult.user;                            // get the user object from the Firebase authentication database
-      if (authResult.additionalUserInfo.isNewUser) {         //if new user
+      var user = authResult.user; // get the user object from the Firebase authentication database
+      if (authResult.additionalUserInfo.isNewUser) {
+        //if new user
         console.log("new user");
       } else {
         console.log("old user");
@@ -43,12 +42,12 @@ var uiConfig = {
     uiShown: function () {
       // The widget is rendered.
       // Hide the loader.
-      document.getElementById('loader').style.display = 'none';
-    }
+      document.getElementById("loader").style.display = "none";
+    },
   },
   // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-  signInFlow: 'popup',
-  signInSuccessUrl: 'main.html',
+  signInFlow: "popup",
+  signInSuccessUrl: "/profile",
   signInOptions: [
     // Leave the lines as is for the providers you want to offer your users.
     //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -59,17 +58,18 @@ var uiConfig = {
     //firebase.auth.PhoneAuthProvider.PROVIDER_ID
   ],
   // Terms of service url.
-  tosUrl: '<your-tos-url>',
+  tosUrl: "<your-tos-url>",
   // Privacy policy url.
-  privacyPolicyUrl: '<your-privacy-policy-url>'
+  privacyPolicyUrl: "<your-privacy-policy-url>",
 };
 
 
 
+ui.start("#firebaseui-auth-container", uiConfig);
 
 async function handleUserAuthentication(user) {
   if (user) {
-    console.log("User authenticated:", user.uid);
+    console.log("User authenticated uid:", user.uid, "email: ", user.email);
 
     try {
       const doc = await db.collection("users").doc(user.uid).get();
@@ -77,18 +77,17 @@ async function handleUserAuthentication(user) {
         console.log("Firestore does not contain user data. Adding new record...");
         await db.collection("users").doc(user.uid).set({
           email: user.email,
-          reviews: []
+          reviews: [],
         });
         console.log("Firestore test write successful");
       } else {
         console.log("User data already exists in Firestore.");
       }
-      window.location.assign("main.html");
+      window.location.assign("/profile");
     } catch (error) {
       console.error("Firestore error:", error);
     }
   } else {
-    ui.start('#firebaseui-auth-container', uiConfig);
     console.log("No user is signed in.");
   }
 }

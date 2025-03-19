@@ -1,61 +1,32 @@
-<section class="w-full max-w-xl md:h-full mt-16 px-main flex flex-col gap-16">
+<section class="w-full max-w-xl mt-16 px-main flex flex-col gap-12">
+    <!-- TODO: Component-ize Method 1 and Method 2 sections of this page -->
+
     <h1>Begin Review</h1>
 
-    <!-- -------------------------------- Method 1 -------------------------------- -->
-    <section class="w-full flex flex-col gap-6">
-        <div class="size-full flex flex-col gap-1">
-            <h3>Method 1</h3>
-            <p>Copy & paste the link of your landlord’s Facebook Marketplace listing.</p>
-        </div>
+    <p class="w-full">
+        Fill out your landlord's basic information, such as their name, and contact information.
+        RateMyLandlord will warn you for duplicates if they exist.
+    </p>
 
-        <!-- Copy & pasting a Facebook Marketplace link -->
-        <form action="" method="get" class="flex gap-2">
-            <input
-                type="text"
-                name="method2-facebook-link"
-                id=""
-                placeholder="Copy & paste link"
-                class="w-full p-2 border-2 focus:outline-0"
-                required
-            />
-            <button
-                type="submit"
-                class="p-2 border-2 hover:bg-black hover:text-white hover:border-black focus:outline-2 focus:outline-black transition-colors duration-200"
-            >
-                Submit
-            </button>
-        </form>
-    </section>
-
-    <!-- -------------------------------- Method 2 -------------------------------- -->
-    <form action="" class="w-full flex flex-col gap-4">
-        <div class="size-full flex flex-col gap-1">
-            <h3>Method 2</h3>
-            <p>
-                Fill out your landlord's basic information, such as their name, and contact
-                information. RateMyLandlord will warn you for duplicates if they exist.
-            </p>
-        </div>
-
-        <!-- ------------------------ LANDLORD ------------------------ -->
-        <h4 class="underline">Landlord's Information</h4>
-
-        <!-- NAME -->
-        <div class="w-full flex flex-col gap-1">
+    <form name="begin" action="/verify-landlord" method="get" class="w-full flex flex-col gap-6">
+        <!-- ------------ NAME ------------ -->
+        <div class="w-full">
             <p>Name</p>
-            <div class="w-full flex flex-col border-2 divide-y-2">
+            <div
+                class="w-full flex flex-col md:flex-row border-2 divide-y-2 md:divide-y-0 md:divide-x-2"
+            >
                 <input
                     type="text"
-                    name="method2-fname"
-                    id="method2-fname"
+                    name="fname"
+                    id="fname"
                     placeholder="First name*"
                     class="w-full p-2 focus:outline-0"
                     required
                 />
                 <input
                     type="text"
-                    name="method2-lname"
-                    id="method2-lname"
+                    name="lname"
+                    id="lname"
                     placeholder="Last name*"
                     class="w-full p-2 focus:outline-0"
                     required
@@ -63,137 +34,71 @@
             </div>
         </div>
 
-        <!-- EMAIL ADDRESSES -->
-        <div class="w-full flex flex-col gap-1">
+        <!-- ------------ FACEBOOK PROFILE (OPTIONAL) ------------ -->
+        <div class="w-full">
+            <p>Facebook Profile (Optional)</p>
+            <input
+                type="text"
+                name="facebook-link"
+                id="facebook-link"
+                placeholder="Copy & paste link"
+                class="w-full p-2 border-2 focus:outline-0"
+            />
+        </div>
+
+        <!-- ------------ EMAIL ADDRESSES ------------ -->
+        <div>
             <p>Email Address(es)</p>
-            <div class="flex flex-col">
-                <input
-                    type="text"
-                    name="method2-email-1"
-                    id="method2-email-1"
-                    placeholder="Email address*"
-                    class="w-full p-2 border-2 focus:outline-0"
-                    required
-                />
-                <button
-                    name="method2-email-add"
-                    id=""
-                    class="w-full p-2 border-b-2 border-x-2 border-gray-500 border-dashed flex items-center justify-center"
-                >
-                    <p class="text-gray-500">+</p>
-                </button>
-            </div>
+            <div id="email-fields" class="flex flex-col divide-y-2"></div>
+
+            <button
+                type="button"
+                name="email-add"
+                id="email-add"
+                class="h-10 w-full mx-auto border-b-2 border-t-2 border-x-2 border-dashed border-gray-500"
+            >
+                <p class="text-gray-500">+</p>
+            </button>
         </div>
 
-        <!-- SOCIAL LINKS -->
-        <div class="w-full flex flex-col gap-1">
+        <!-- ------------ PHONE NUMBERS ------------ -->
+        <div>
+            <p>Phone Number(s)</p>
+            <div id="phone-fields" class="flex flex-col divide-y-2"></div>
+
+            <button
+                type="button"
+                name="phone-add"
+                id="phone-add"
+                class="h-10 w-full mx-auto border-b-2 border-t-2 border-x-2 border-dashed border-gray-500"
+            >
+                <p class="text-gray-500">+</p>
+            </button>
+        </div>
+
+        <!-- ------------ SOCIAL LINKS ------------ -->
+        <div>
             <p>Social Link(s)</p>
-            <div class="flex flex-col">
-                <input
-                    type="text"
-                    name="method2-social-1"
-                    id="method2-social-1"
-                    placeholder="Link*"
-                    class="w-full p-2 border-2 focus:outline-0"
-                    required
-                />
-                <button
-                    name="method2-social-add"
-                    id=""
-                    class="w-full p-2 border-b-2 border-x-2 border-gray-500 border-dashed flex items-center justify-center"
-                >
-                    <p class="text-gray-500">+</p>
-                </button>
-            </div>
+            <div id="social-fields" class="flex flex-col divide-y-2"></div>
+
+            <button
+                type="button"
+                name="social-add"
+                id="social-add"
+                class="h-10 w-full mx-auto border-b-2 border-t-2 border-x-2 border-dashed border-gray-500"
+            >
+                <p class="text-gray-500">+</p>
+            </button>
         </div>
 
-        <!-- ------------------------ LISTING ------------------------ -->
-        <h4 class="underline">Listing Information</h4>
-
-        <!-- LISTING ADDRESS -->
-
-        <div class="w-full flex flex-col gap-2">
-            <div class="w-full flex flex-col gap-1">
-                <p>Postal Code*</p>
-                <input
-                    type="text"
-                    name="method2-postal"
-                    id="method2-postal"
-                    placeholder="ex. A1B 2C3"
-                    class="w-full p-2 border-2 focus:outline-0"
-                    required
-                />
-            </div>
-
-            <div class="w-full flex flex-col gap-1">
-                <p>City*</p>
-                <input
-                    type="text"
-                    name="method2-city"
-                    id="method2-city"
-                    placeholder="ex. Burnaby"
-                    class="w-full p-2 border-2 focus:outline-0"
-                    required
-                />
-            </div>
-
-            <div class="w-full flex flex-col gap-1">
-                <p>Province*</p>
-                <input
-                    type="text"
-                    name="method2-province"
-                    id="method2-province"
-                    placeholder="ex. BC"
-                    class="w-full p-2 border-2 focus:outline-0"
-                    required
-                />
-            </div>
-
-            <div class="w-full flex flex-col gap-1">
-                <p>Home address (optional)</p>
-                <input
-                    type="text"
-                    name="method2-address"
-                    id="method2-address"
-                    value=""
-                    placeholder="ex. 1234 Main St"
-                    class="w-full p-2 border-2 focus:outline-0"
-                />
-            </div>
-        </div>
-
-        <!--  -->
-        <div class="w-full flex items-center justify-evenly border-2 divide-x-2">
-            <p class="w-full p-2">Number of Bedrooms*</p>
-            <input
-                type="number"
-                name="method2-bedrooms"
-                min="1"
-                id="method2-bedrooms"
-                class="p-2 w-full max-w-24"
-                required
-            />
-        </div>
-        <div class="w-full flex items-center justify-evenly border-2 divide-x-2">
-            <p class="w-full p-2">Number of Bathrooms*</p>
-            <input
-                type="number"
-                name="method2-bathrooms"
-                min="0"
-                id="method2-bathrooms"
-                class="p-2 w-full max-w-24"
-                required
-            />
-        </div>
-
+        <!-- SUBMIT -->
         <button
-            type="button"
-            id="method2-submit"
+            type="submit"
             class="p-2 border-2 hover:bg-black hover:text-white hover:border-black focus:outline-2 focus:outline-black transition-colors duration-200"
         >
-            Begin Review
+            Search
         </button>
     </form>
 </section>
 
-<script type="module" src="/src/review.js"></script>
+<script type="module" src="/src/begin-review.js"></script>

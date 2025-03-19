@@ -45,10 +45,37 @@ function showQuery() {
 showQuery();
 
 document.getElementById("edit-landlord").addEventListener("click", (event) => {
-    const currentParams = new URLSearchParams(window.location.search);
-    window.location.replace(`/begin-review?${currentParams.toString()}`);
+    const landlordParams = new URLSearchParams(window.location.search);
+    window.location.replace(`/begin-review?${landlordParams.toString()}`);
 });
 
 document.getElementById("review-landlord").addEventListener("click", (event) => {
-    //
+    const landlordCollection = db.collection("landlords");
+
+    let landlordDocData = {
+        fname: "",
+        lname: "",
+        "facebook-link": "",
+        email: [],
+        phone: [],
+        social: [],
+        properties: [],
+        rating: 1,
+        reviews: [],
+        tags: [],
+    };
+
+    new URLSearchParams(window.location.search).forEach((value, key) => {
+        if (["fname", "lname", "facebook-link"].includes(key)) {
+            landlordDocData[key] = value;
+        } else {
+            const purpose = key.split("-")[0];
+            console.log(purpose);
+            landlordDocData[purpose].push(value);
+        }
+    });
+
+    landlordCollection.add(landlordDocData).then((value) => {
+        window.location.replace(`/review?landlord-id=${value.id}`);
+    });
 });

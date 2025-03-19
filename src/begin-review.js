@@ -76,12 +76,8 @@ function findFields(purpose, regex) {
 // double check their landlord's information.
 function applyValuesFromQuery() {
     for (const [key, value] of new URLSearchParams(document.location.search)) {
-        if (key == "fname") {
-            document.getElementById("fname").value = value;
-        } else if (key == "lname") {
-            document.getElementById("lname").value = value;
-        } else if (key == "facebook-link") {
-            document.getElementById("facebook-link").value = value;
+        if (["fname", "lname", "facebook-link"].includes(key)) {
+            document.getElementById(key).value = value;
         } else {
             // my favorite JS syntax sugar
             const [purpose, index] = key.split("-");

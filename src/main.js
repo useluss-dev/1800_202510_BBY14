@@ -10,7 +10,7 @@ page("/search", () =>
         loadLandlordCards();
     })
 );
-page("/review", () => loadContent("/src/partials/review.html"));
+page("/review*", () => loadContent("/src/partials/review.html", executeScripts));
 page("/begin-review*", () => loadContent("/src/partials/begin-review.html", executeScripts));
 page("/verify-landlord*", () => loadContent("/src/partials/verify-landlord.html", executeScripts));
 page("/profile", () =>

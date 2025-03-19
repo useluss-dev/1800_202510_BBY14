@@ -65,7 +65,6 @@ var uiConfig = {
 
 
 
-ui.start("#firebaseui-auth-container", uiConfig);
 
 async function handleUserAuthentication(user) {
   if (user) {
@@ -89,6 +88,7 @@ async function handleUserAuthentication(user) {
     }
   } else {
     console.log("No user is signed in.");
+    ui.start("#firebaseui-auth-container", uiConfig);
   }
 }
 

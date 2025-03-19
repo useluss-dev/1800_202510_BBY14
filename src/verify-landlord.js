@@ -53,8 +53,7 @@ document.getElementById("review-landlord").addEventListener("click", (event) => 
     const landlordCollection = db.collection("landlords");
 
     let landlordDocData = {
-        fname: "",
-        lname: "",
+        name: "",
         "facebook-link": "",
         email: [],
         phone: [],
@@ -66,7 +65,11 @@ document.getElementById("review-landlord").addEventListener("click", (event) => 
     };
 
     new URLSearchParams(window.location.search).forEach((value, key) => {
-        if (["fname", "lname", "facebook-link"].includes(key)) {
+        if (key == "fname") {
+            landlordDocData.name = value + landlordDocData.name;
+        } else if (key == "lname") {
+            landlordDocData.name += " " + value;
+        } else if (key == "facebook-link") {
             landlordDocData[key] = value;
         } else {
             const purpose = key.split("-")[0];

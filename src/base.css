@@ -61,7 +61,11 @@ h3 {
 }
 
 h4 {
-    @apply font-bold font-sans;
+    @apply text-xl font-bold font-sans;
+}
+
+h5 {
+    @apply text-lg font-bold font-sans;
 }
 
 /* ------------ Spacing ------------ */

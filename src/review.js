@@ -16,27 +16,30 @@ function getLandlordDocSnapshot() {
     return landlordCollection.doc(landlordID).get();
 }
 
+/**
+ * @param {number} purpose
+ * @param {number} index
+ * @param {boolean} active
+ */
+function modifyStarInputStyle(purpose, index, active = false) {
+    const label = document.querySelector(`label[for=${purpose}-${index}]`);
+    label.childNodes[0].src = active ? "/assets/StarIconActive.svg" : "/assets/StarIcon.svg";
+}
+
 function applyStarInputs(purpose) {
+    /** @type {NodeListOf<HTMLInputElement>} */
     const radioButtons = document.querySelectorAll(`input[name='${purpose}']`);
     radioButtons.forEach((radio) => {
         radio.addEventListener("change", () => {
-            const [purpose, index] = radio.id.split("-");
-
             for (let i = 1; i <= radioButtons.length; i++) {
-                let label = document.querySelector(`label[for='${purpose}-${i}']`);
-                label.childNodes[0].src = "/assets/StarIcon.svg";
-            }
-
-            for (let i = 1; i <= radio.value; i++) {
-                let label = document.querySelector(`label[for='${purpose}-${i}']`);
-                label.childNodes[0].src = "/assets/StarIconActive.svg";
+                modifyStarInputStyle(purpose, i, i <= radio.value);
             }
         });
     });
 }
 
 function setupStarInputs(purpose) {
-    let sectionField = document.getElementById(purpose);
+    let sectionField = document.getElementById("star__" + purpose);
     let heading =
         purpose == "overall" ? document.createElement("h3") : document.createElement("h5");
     let starDiv = document.createElement("div");
@@ -61,7 +64,9 @@ function setupStarInputs(purpose) {
         star.name = `${purpose}`;
         star.value = i;
         star.className = "hidden";
-        starImg.src = "/assets/StarIcon.svg";
+        star.checked = i == 1;
+
+        starImg.src = star.checked ? "/assets/StarIconActive.svg" : "/assets/StarIcon.svg";
         starImg.className = (purpose == "overall" ? "h-12" : "h-8") + " object-contain";
         starLabel.htmlFor = star.id;
     }
@@ -76,16 +81,41 @@ getLandlordDocSnapshot()
     .then((docSnapshot) => {
         const data = docSnapshot.data();
 
-        document.getElementById("landlord-null").className = "hidden";
+        /** @type {HTMLFormElement} */
+        const form = document.forms["review"];
+
+        const starPurposes = ["overall", "behavior", "rules", "quality", "rent", "amenities"];
+
+        document.getElementById("landlord-null").classList.add("hidden");
         document.getElementById("landlord-name").textContent = data.name;
 
-        setupStarInputs("overall");
-        setupStarInputs("behavior");
-        setupStarInputs("rules");
-        setupStarInputs("quality");
-        setupStarInputs("rent");
-        setupStarInputs("amenities");
+        for (const starPurpose of starPurposes) {
+            setupStarInputs(starPurpose);
+        }
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const reviewCollection = db.collection("reviews");
+            const reviewFormData = new FormData(form);
+            const urlParameters = new URLSearchParams(window.location.search);
+            // Normally, this is also where the user's id should be placed.
+
+            let reviewData = {
+                landlordId: urlParameters.get("landlord-id"),
+            };
+
+            reviewFormData.forEach((value, key) => {
+                reviewData[key] = value;
+            });
+
+            reviewCollection.add(reviewData).then((value) => {
+                window.location.replace(`/submitted?review-id=${value.id}`);
+            });
+        });
     })
     .catch((error) => {
-        document.getElementById("landlord-exists").className = "hidden";
+        console.log(error);
+        document.getElementById("landlord-null").classList.remove("hidden");
+        document.getElementById("landlord-exists").classList.add("hidden");
     });

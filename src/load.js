@@ -34,7 +34,7 @@ export function loadComponent(componentPath, containerSelector, callback) {
         .then((html) => {
             const container = document.querySelector(containerSelector);
             if (container) {
-                container.innerHTML = html;
+                container.insertAdjacentHTML("beforeend", html);
                 if (callback && typeof callback === "function") {
                     callback(container);
                 }

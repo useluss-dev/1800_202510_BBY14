@@ -13,6 +13,7 @@ async function setAuthPersistence() {
 }
 setAuthPersistence();
 
+
 // Initialize the FirebaseUI Widget using Firebase.
 var ui = new firebaseui.auth.AuthUI(auth);
 

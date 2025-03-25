@@ -1,75 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="/src/base.css" />
-        <title>RateMyLandlord</title>
 
-        <!-- Firebase Auth -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <!--  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/base.css" />
+    <title>RateMyLandlord</title>
+
+    <!-- Firebase Auth -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script> -->
-        <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
-        <link
-            type="text/css"
-            rel="stylesheet"
-            href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css"
-        />
-    </head>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+</head>
 
-    <body>
-        <div class="relative">
-            <!-- TODO: Consider redesigning the icons (for Sam) -->
-            <!-- Navbar Top -->
-            <div
-                class="sticky top-0 size-nav px-main hidden md:flex justify-between border-b-2 bg-white"
-            >
-                <a href="/" class="my-auto">
-                    <img class="h-8" src="assets/rml-ico-outline.svg" />
+<body>
+    <div class="relative">
+        <!-- TODO: Consider redesigning the icons (for Sam) -->
+        <!-- Navbar Top -->
+        <div class="sticky top-0 size-nav px-main hidden md:flex justify-between border-b-2 bg-white">
+            <a href="/" class="my-auto">
+                <img alt="home" class="h-8" src="assets/rml-ico-outline.svg">
+            </a>
+            <nav class="my-auto flex gap-6">
+                <a href="/begin-review">
+                    <img alt="review" class="h-8" src="assets/rml-review.svg">
                 </a>
-                <nav class="my-auto flex gap-6">
-                    <a href="/begin-review">
-                        <img class="h-8" src="assets/rml-review.svg" />
-                    </a>
-                    <a href="/login">
-                        <div class="size-8 border-2 rounded-full overflow-hidden">
-                            <!-- This should be an auto-generated profile picture. -->
-                            <img class="h-6 mx-auto mt-2" src="assets/user.png" />
-                            <!-- <img class="size-full object-cover" src="assets/profile.jpg" /> -->
-                        </div>
-                    </a>
-                </nav>
-            </div>
-
-            <main class="spacing-main flex flex-col"></main>
-
-            <!-- TODO: Put a footer here showing company info and contacts, and other links -->
-
-            <!-- Navbar Bottom -->
-            <div class="fixed bottom-0 size-nav flex md:hidden justify-center border-t-2 bg-white">
-                <nav class="w-svw max-w-xl my-auto flex justify-evenly">
-                    <a href="/">
-                        <img class="h-8" src="assets/rml-ico-outline.svg" />
-                    </a>
-                    <a href="/search">
-                        <img class="h-8" src="assets/rml-search.svg" />
-                    </a>
-                    <a href="/begin-review">
-                        <img class="h-8" src="assets/rml-review.svg" />
-                    </a>
-                    <a href="/login">
-                        <div class="size-8 border-2 rounded-full overflow-hidden">
-                            <!-- This should be an auto-generated profile picture. -->
-                            <img class="h-6 mx-auto mt-2" src="assets/user.png" />
-                            <!-- <img class="size-full object-cover" src="assets/profile.jpg" /> -->
-                        </div>
-                    </a>
-                </nav>
-            </div>
+                <a href="/login">
+                    <div class="size-8 border-2 rounded-full overflow-hidden">
+                        <!-- This should be an auto-generated profile picture. -->
+                        <img alt="profile" class="h-6 mx-auto mt-2" src="assets/user.png">
+                        <!-- <img class="size-full object-cover" src="assets/profile.jpg" /> -->
+                    </div>
+                </a>
+                <!-- <a href="#" id="navLogout" onclick="logout()">
+                    <img alt="logout" class="h-8 mx-auto" src="assets/logout.png">
+                </a> -->
+            </nav>
         </div>
 
-        <script type="module" src="/src/main.js"></script>
-    </body>
+        <main class="spacing-main flex flex-col"></main>
+
+        <!-- TODO: Put a footer here showing company info and contacts, and other links -->
+
+        <!-- Navbar Bottom -->
+        <div class="fixed bottom-0 size-nav flex md:hidden justify-center border-t-2 bg-white">
+            <nav class="w-svw max-w-xl my-auto flex justify-evenly">
+                <a href="/">
+                    <img class="h-8" src="assets/rml-ico-outline.svg" />
+                </a>
+                <a href="/search">
+                    <img class="h-8" src="assets/rml-search.svg" />
+                </a>
+                <a href="/begin-review">
+                    <img class="h-8" src="assets/rml-review.svg" />
+                </a>
+                <a href="/login">
+                    <div class="size-8 border-2 rounded-full overflow-hidden">
+                        <!-- This should be an auto-generated profile picture. -->
+                        <img class="h-6 mx-auto mt-2" src="assets/user.png" />
+                        <!-- <img class="size-full object-cover" src="assets/profile.jpg" /> -->
+                    </div>
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/logout.js"></script>
+</body>
+
 </html>

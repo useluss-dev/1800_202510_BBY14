@@ -59,7 +59,9 @@ export function loadLandlordCards() {
 
             const container = document.querySelector("#card-container");
             if (filtered.length > 0) {
-                container.innerHTML = ""; // Clears the landlord not found message
+                container.innerHTML = ""; // Clears the loading message
+            } else {
+                container.innerHTML = "No Landlords Found."; // Replaces loading message with no landlords message
             }
             filtered.forEach((landlord) => {
                 const cardElement = createLandlordCard(landlord);

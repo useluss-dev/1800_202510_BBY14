@@ -13,6 +13,7 @@ page("/search", () =>
 page("/review*", () => loadContent("/src/partials/review.html", executeScripts));
 page("/begin-review*", () => loadContent("/src/partials/begin-review.html", executeScripts));
 page("/verify-landlord*", () => loadContent("/src/partials/verify-landlord.html", executeScripts));
+page("/landlord*", () => loadContent("/src/partials/landlord.html", executeScripts));
 page("/profile", () =>
     loadContent("/src/partials/profile.html", async (container) => {
         auth.onAuthStateChanged((user) => {

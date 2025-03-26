@@ -7,7 +7,7 @@
     </p>
 
     <form name="addLandlord" action="/verify-landlord" method="get">
-        <fieldset class="not-last:mb-4">
+        <fieldset class="mb-4">
             <legend>Name <span class="text-red-500">*</span></legend>
             <div class="border-2 divide-x-2 flex">
                 <input
@@ -23,33 +23,40 @@
                     class="w-full p-2 focus:outline-0"
                 />
             </div>
+            <p class="hidden text-red-500" id="invalidName">
+                Invalid name! Allowed characters: A-Z, a-z, (-)
+            </p>
         </fieldset>
 
-        <fieldset class="not-last:mb-4">
-            <legend>Facebook Profile Link</legend>
+        <fieldset class="mb-4">
+            <legend>Facebook Profile Link <span class="text-red-500">**</span></legend>
             <input
                 type="text"
                 name="facebookLink"
                 placeholder="Copy & paste here"
                 class="w-full p-2 border-2 focus:outline-0"
             />
+            <p class="hidden text-red-500" id="invalidFacebook">Invalid Facebook Link!</p>
         </fieldset>
 
-        <fieldset class="not-last:mb-4">
+        <fieldset class="mb-4">
             <legend>Email Address(es) <span class="text-red-500">**</span></legend>
             <div id="emailFieldsExtensible">
                 <input
                     type="text"
                     name="emailField0"
-                    placeholder="Email address**"
+                    placeholder="Email address"
                     class="w-full p-2 focus:outline-0"
                 />
             </div>
             <button id="emailAdd" type="button">+</button>
+            <p class="hidden text-red-500" id="invalidEmail">
+                Invalid email address(es)! Format must be person@domain.com
+            </p>
         </fieldset>
 
-        <fieldset class="not-last:mb-4">
-            <legend>Phone Number(s)</legend>
+        <fieldset class="mb-4">
+            <legend>Phone Number(s) <span class="text-red-500">**</span></legend>
             <div id="phoneFieldsExtensible">
                 <input
                     type="text"
@@ -59,20 +66,14 @@
                 />
             </div>
             <button id="phoneAdd" type="button">+</button>
+            <p class="hidden text-red-500" id="invalidPhone">
+                Invalid phone number(s)! Must be a Canadian/US phone number
+            </p>
         </fieldset>
 
-        <fieldset class="not-last:mb-4">
-            <legend>Social Link(s)</legend>
-            <div id="socialFieldsExtensible">
-                <input
-                    type="text"
-                    name="socialField0"
-                    placeholder="Link"
-                    class="w-full p-2 focus:outline-0"
-                />
-            </div>
-            <button id="socialAdd" type="button">+</button>
-        </fieldset>
+        <p id="noIdentifierError" class="mb-4 text-gray-500 text-sm transition-all">
+            ** At least one of these fields must be filled out
+        </p>
 
         <button
             type="submit"

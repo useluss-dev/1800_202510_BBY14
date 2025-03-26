@@ -48,6 +48,8 @@ section {
     @apply min-w-0 min-h-0;
 }
 
+/* Text styles */
+
 h1 {
     @apply text-4xl md:text-5xl font-bold font-sans;
 }
@@ -72,15 +74,15 @@ h6 {
     @apply font-bold font-sans;
 }
 
+p {
+    @apply font-sans;
+}
+
 /* ------------ Spacing ------------ */
 
 .spacing-main {
     /* @apply size-full min-h-[calc(100svh-(--spacing(16)))] md:min-h-0; */
     @apply size-full mb-32 md:mb-14;
-}
-
-p {
-    @apply font-sans;
 }
 
 .px-main {

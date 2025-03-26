@@ -23,7 +23,6 @@ page("/search", () =>
         loadLandlordCards();
     })
 );
-
 page("/review*", () => loadContent("/src/partials/review.html", executeScripts));
 page("/add-landlord*", () => loadContent("/src/partials/addLandlord.html", executeScripts));
 page("/verify-landlord*", () => loadContent("/src/partials/verifyLandlord.html", executeScripts));

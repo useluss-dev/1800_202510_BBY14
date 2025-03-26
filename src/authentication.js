@@ -14,6 +14,26 @@ async function setAuthPersistence() {
 setAuthPersistence();
 
 
+const loginForm = document.getElementById("login-form");
+const errorMessage = document.getElementById("error-message");
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  errorMessage.textContent = "";
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  try {
+    const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
+    const user = userCredential.user;
+
+    await handleUserAuthentication(user);
+  } catch (error) {
+    errorMessage.textContent = "Login failed: " + error.message;
+  }
+});
+
+
 // Initialize the FirebaseUI Widget using Firebase.
 var ui = new firebaseui.auth.AuthUI(auth);
 
@@ -89,7 +109,7 @@ async function handleUserAuthentication(user) {
     }
   } else {
     console.log("No user is signed in.");
-    ui.start("#firebaseui-auth-container", uiConfig);
+    //ui.start("#firebaseui-auth-container", uiConfig);
   }
 }
 

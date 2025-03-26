@@ -67,7 +67,7 @@ export async function loadLandlordCards() {
     }
 }
 
-export function loadProfileReviewCards(user) {
+export async function loadProfileReviewCards(user) {
     db.collection("users")
         .doc(user.uid)
         .get()

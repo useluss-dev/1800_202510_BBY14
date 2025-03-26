@@ -1,3 +1,5 @@
+import { parseLandlordName } from "./helper";
+
 export function createLandlordCard({ firstName, lastName, rating, tags }) {
     const card = document.createElement("div");
     card.className = "max-w-3xl mx-auto mb-4 p-4 border-2 border-black";
@@ -55,15 +57,9 @@ export function searchLandlords(landlords) {
 
     if (query) {
         // Filter out names that don't include the query
-        landlords = landlords.filter((landlord) => parseLandlordName(landlord).includes(query));
-        console.log("landlords: ", landlords);
+        landlords = landlords.filter((landlord) =>
+            parseLandlordName(landlord).toLowerCase().includes(query)
+        );
     }
     return landlords;
-}
-
-function parseLandlordName(landlord) {
-    const firstName = landlord.firstName.toLowerCase();
-    const lastName = landlord.lastName.toLowerCase();
-    const name = firstName.concat(" ", lastName);
-    return name;
 }

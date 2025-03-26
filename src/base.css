@@ -68,6 +68,10 @@ h5 {
     @apply text-lg font-bold font-sans;
 }
 
+h6 {
+    @apply font-bold font-sans;
+}
+
 /* ------------ Spacing ------------ */
 
 .spacing-main {

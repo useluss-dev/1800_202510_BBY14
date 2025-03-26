@@ -1,0 +1,86 @@
+<section class="w-full max-w-xl mt-16 mx-auto px-main flex flex-col gap-12">
+    <h1>Add Landlord</h1>
+
+    <p>
+        Fill out your landlord's basic information, such as their name, and contact information.
+        RateMyLandlord will warn you for duplicates if they exist.
+    </p>
+
+    <form name="addLandlord" action="/verify-landlord" method="get">
+        <fieldset class="not-last:mb-4">
+            <legend>Name <span class="text-red-500">*</span></legend>
+            <div class="border-2 divide-x-2 flex">
+                <input
+                    type="text"
+                    name="firstName"
+                    placeholder="First name*"
+                    class="w-full p-2 focus:outline-0"
+                />
+                <input
+                    type="text"
+                    name="lastName"
+                    placeholder="Last name*"
+                    class="w-full p-2 focus:outline-0"
+                />
+            </div>
+        </fieldset>
+
+        <fieldset class="not-last:mb-4">
+            <legend>Facebook Profile Link</legend>
+            <input
+                type="text"
+                name="facebookLink"
+                placeholder="Copy & paste here"
+                class="w-full p-2 border-2 focus:outline-0"
+            />
+        </fieldset>
+
+        <fieldset class="not-last:mb-4">
+            <legend>Email Address(es) <span class="text-red-500">**</span></legend>
+            <div id="emailFieldsExtensible">
+                <input
+                    type="text"
+                    name="emailField0"
+                    placeholder="Email address**"
+                    class="w-full p-2 focus:outline-0"
+                />
+            </div>
+            <button id="emailAdd" type="button">+</button>
+        </fieldset>
+
+        <fieldset class="not-last:mb-4">
+            <legend>Phone Number(s)</legend>
+            <div id="phoneFieldsExtensible">
+                <input
+                    type="text"
+                    name="phoneField0"
+                    placeholder="Phone Number"
+                    class="w-full p-2 focus:outline-0"
+                />
+            </div>
+            <button id="phoneAdd" type="button">+</button>
+        </fieldset>
+
+        <fieldset class="not-last:mb-4">
+            <legend>Social Link(s)</legend>
+            <div id="socialFieldsExtensible">
+                <input
+                    type="text"
+                    name="socialField0"
+                    placeholder="Link"
+                    class="w-full p-2 focus:outline-0"
+                />
+            </div>
+            <button id="socialAdd" type="button">+</button>
+        </fieldset>
+
+        <button
+            type="submit"
+            class="w-full p-2 border-2 hover:bg-black hover:text-white hover:border-black transition-colors"
+        >
+            Add Landlord
+        </button>
+    </form>
+</section>
+
+<script type="module" src="/src/addLandlord.js"></script>

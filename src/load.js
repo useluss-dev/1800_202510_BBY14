@@ -1,5 +1,6 @@
 import { createLandlordCard, searchLandlords, sortLandlords } from "./search";
 import { db } from "./firebaseAPI_BBY14";
+import { getReviewData, createReviewCard } from "./profile";
 
 // Helper function to load HTML partials
 export function loadContent(partialPath, callback) {
@@ -34,7 +35,7 @@ export function loadComponent(componentPath, containerSelector, callback) {
         .then((html) => {
             const container = document.querySelector(containerSelector);
             if (container) {
-                container.innerHTML = html;
+                container.insertAdjacentHTML("beforeend", html);
                 if (callback && typeof callback === "function") {
                     callback(container);
                 }
@@ -59,7 +60,9 @@ export function loadLandlordCards() {
 
             const container = document.querySelector("#card-container");
             if (filtered.length > 0) {
-                container.innerHTML = ""; // Clears the landlord not found message
+                container.innerHTML = ""; // Clears the loading message
+            } else {
+                container.innerHTML = "No Landlords Found."; // Replaces loading message with no landlords message
             }
             filtered.forEach((landlord) => {
                 const cardElement = createLandlordCard(landlord);
@@ -68,6 +71,32 @@ export function loadLandlordCards() {
         })
         .catch((error) => {
             console.error("Error fetching data from Firestore: ", error);
+        });
+}
+
+export function loadProfileReviewCards(user) {
+    db.collection("users")
+        .doc(user.uid)
+        .get()
+        .then((userDoc) => {
+            if (userDoc.exists) {
+                const userData = userDoc.data();
+                // getReviewData(userData.reviews);
+                const container = document.querySelector("#card-container");
+                userData.reviews.forEach((id) => {
+                    getReviewData(id)
+                        .then((reviewInfo) => {
+                            const reviewCard = createReviewCard(reviewInfo);
+                            container.appendChild(reviewCard);
+                        })
+                        .catch((error) => {
+                            console.error("Error creating review card:", error);
+                        });
+                });
+            }
+        })
+        .catch((error) => {
+            console.error("Error getting the user document:", error);
         });
 }
 

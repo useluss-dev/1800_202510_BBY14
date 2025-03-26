@@ -26,7 +26,7 @@ export function loadContent(partialPath, callback) {
 }
 
 // Helper function to load HTML components
-export function loadComponent(componentPath, containerSelector, callback) {
+export function loadStaticComponent(componentPath, containerSelector, callback) {
     fetch(componentPath)
         .then((response) => {
             if (!response.ok) throw new Error("Network response was not ok");
@@ -61,7 +61,13 @@ export async function loadLandlordCards() {
         const container = document.querySelector("#card-container");
         container.innerHTML = filtered.length > 0 ? "" : "No landlords found.";
 
-        filtered.forEach((landlord) => container.appendChild(createLandlordCard(landlord)));
+        // filtered.forEach((landlord) => container.appendChild(createLandlordCard(landlord)));
+        filtered.forEach((landlord) => {
+            createLandlordCard(landlord).then((landlordElement) => {
+                container.appendChild(landlordElement);
+                console.log(container);
+            });
+        });
     } catch (error) {
         console.error("Error fetching data from firestore: ", error);
     }

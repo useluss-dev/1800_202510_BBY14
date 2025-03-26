@@ -1,5 +1,11 @@
 import page from "page";
-import { loadContent, loadComponent, executeScripts, loadLandlordCards } from "./load.js";
+import {
+    loadContent,
+    loadComponent,
+    executeScripts,
+    loadLandlordCards,
+    loadProfileReviewCards,
+} from "./load.js";
 import { auth } from "./firebaseAPI_BBY14.js";
 
 // Define routes
@@ -27,6 +33,7 @@ page("/profile", () =>
             if (user) {
                 const name = user.email;
                 container.querySelector("#profile-name").textContent = name;
+                loadProfileReviewCards(user);
             }
         });
     })

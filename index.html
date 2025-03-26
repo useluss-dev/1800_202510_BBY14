@@ -27,19 +27,22 @@
                 class="sticky top-0 size-nav px-main hidden md:flex justify-between border-b-2 bg-white"
             >
                 <a href="/" class="my-auto">
-                    <img class="h-8" src="assets/rml-ico-outline.svg" />
+                    <img alt="home" class="h-8" src="assets/rml-ico-outline.svg" />
                 </a>
                 <nav class="my-auto flex gap-6">
                     <a href="/add-landlord">
-                        <img class="h-8" src="assets/rml-review.svg" />
+                        <img alt="review" class="h-8" src="assets/rml-review.svg" />
                     </a>
                     <a href="/login">
                         <div class="size-8 border-2 rounded-full overflow-hidden">
                             <!-- This should be an auto-generated profile picture. -->
-                            <img class="h-6 mx-auto mt-2" src="assets/user.png" />
+                            <img alt="profile" class="h-6 mx-auto mt-2" src="assets/user.png" />
                             <!-- <img class="size-full object-cover" src="assets/profile.jpg" /> -->
                         </div>
                     </a>
+                    <!-- <a href="#" id="navLogout" onclick="logout()">
+                    <img alt="logout" class="h-8 mx-auto" src="assets/logout.png">
+                </a> -->
                 </nav>
             </div>
 
@@ -71,5 +74,6 @@
         </div>
 
         <script type="module" src="/src/main.js"></script>
+        <script type="module" src="/src/logout.js"></script>
     </body>
 </html>

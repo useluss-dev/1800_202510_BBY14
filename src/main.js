@@ -1,5 +1,11 @@
 import page from "page";
-import { loadContent, loadComponent, executeScripts, loadLandlordCards } from "./load.js";
+import {
+    loadContent,
+    loadComponent,
+    executeScripts,
+    loadLandlordCards,
+    loadProfileReviewCards,
+} from "./load.js";
 import { auth } from "./firebaseAPI_BBY14.js";
 
 // Define routes
@@ -28,6 +34,18 @@ page("/profile", () =>
             if (user) {
                 const name = user.email;
                 container.querySelector("#profile-name").textContent = name;
+                loadProfileReviewCards(user);
+
+                //Create Profile image
+                const avatarPlaceholder = document.getElementById("avatarPlaceholder");
+                const initial = name.trim().charAt(0).toUpperCase();
+
+                avatarPlaceholder.textContent = initial;
+                avatarPlaceholder.style.color = "white";
+                avatarPlaceholder.style.display = "flex";
+                avatarPlaceholder.style.alignItems = "center";
+                avatarPlaceholder.style.justifyContent = "center";
+                avatarPlaceholder.style.fontSize = "10em";
             }
         });
     })

@@ -1,4 +1,6 @@
-export function createLandlordCard({ properties, name, rating, tags }) {
+import { parseLandlordName } from "./helper";
+
+export function createLandlordCard({ firstName, lastName, rating, tags }) {
     const card = document.createElement("div");
     card.className = "max-w-3xl mx-auto mb-4 p-4 border-2 border-black";
     card.innerHTML = `
@@ -6,7 +8,7 @@ export function createLandlordCard({ properties, name, rating, tags }) {
         <div class="flex items-center space-x-3">
             <div class="w-12 h-12 rounded-full bg-gray-400"></div>
             <div>
-                <p class="text-base font-semibold">${name}</p>
+                <p class="text-base font-semibold">${firstName} ${lastName}</p>
                 <div class="flex items-center text-sm text-gray-700">
                     <!-- Example star icon (Heroicons/Font Awesome/etc.) -->
                     <svg
@@ -23,17 +25,14 @@ export function createLandlordCard({ properties, name, rating, tags }) {
                 a1 1 0 00.951-.69l1.176-3.617z"
                         />
                     </svg>
-                    <span>${rating}</span>
+                    <span>${rating.overall}</span>
                 </div>
             </div>
-        </div>
-        <div class="text-center">
-            <p class="text-xl font-semibold">${properties.length}</p>
-            <p class="text-xs text-gray-500 tracking-wide">LISTINGS</p>
         </div>
     </div>
 
     <!-- Bottom row: tag-like pills -->
+    <!-- TODO: Add in dynamically -->
     <div class="flex flex-wrap gap-2 mt-4">
         <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full"> No Contract </span>
         <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full"> Pet Friendly </span>
@@ -57,7 +56,10 @@ export function searchLandlords(landlords) {
     const query = params.get("query") ? params.get("query").toLowerCase() : "";
 
     if (query) {
-        landlords = landlords.filter((landlord) => landlord.name.toLowerCase().includes(query));
+        // Filter out names that don't include the query
+        landlords = landlords.filter((landlord) =>
+            parseLandlordName(landlord).toLowerCase().includes(query)
+        );
     }
     return landlords;
 }

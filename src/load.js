@@ -48,56 +48,48 @@ export function loadComponent(componentPath, containerSelector, callback) {
         });
 }
 
-export function loadLandlordCards() {
-    db.collection("landlords")
-        .get()
-        .then((response) => {
-            const landlords = response.docs.map((doc) => doc.data());
-            console.log(landlords);
+export async function loadLandlordCards() {
+    try {
+        const response = await db.collection("landlords").get();
+        const landlords = response.docs.map((doc) => doc.data());
+        console.log("landlords original: ", landlords);
 
-            const filtered = searchLandlords(landlords);
-            sortLandlords(filtered);
+        const filtered = searchLandlords(landlords);
+        sortLandlords(filtered);
+        console.log("filtered: ", filtered);
 
-            const container = document.querySelector("#card-container");
-            if (filtered.length > 0) {
-                container.innerHTML = ""; // Clears the loading message
-            } else {
-                container.innerHTML = "No Landlords Found."; // Replaces loading message with no landlords message
-            }
-            filtered.forEach((landlord) => {
-                const cardElement = createLandlordCard(landlord);
-                container.appendChild(cardElement);
-            });
-        })
-        .catch((error) => {
-            console.error("Error fetching data from Firestore: ", error);
-        });
+        const container = document.querySelector("#card-container");
+        container.innerHTML = filtered.length > 0 ? "" : "No landlords found.";
+
+        filtered.forEach((landlord) => container.appendChild(createLandlordCard(landlord)));
+    } catch (error) {
+        console.error("Error fetching data from firestore: ", error);
+    }
 }
 
-export function loadProfileReviewCards(user) {
-    db.collection("users")
-        .doc(user.uid)
-        .get()
-        .then((userDoc) => {
-            if (userDoc.exists) {
-                const userData = userDoc.data();
-                // getReviewData(userData.reviews);
-                const container = document.querySelector("#card-container");
-                userData.reviews.forEach((id) => {
-                    getReviewData(id)
-                        .then((reviewInfo) => {
-                            const reviewCard = createReviewCard(reviewInfo);
-                            container.appendChild(reviewCard);
-                        })
-                        .catch((error) => {
-                            console.error("Error creating review card:", error);
-                        });
-                });
-            }
-        })
-        .catch((error) => {
-            console.error("Error getting the user document:", error);
-        });
+export async function loadProfileReviewCards(user) {
+    try {
+        const response = await db.collection("users").doc(user.uid).get();
+        if (!response.exists) return;
+
+        // Get the reviews from the response data
+        const { reviews } = response.data();
+        const container = document.querySelector("#card-container");
+
+        // Map all of the reviews at the same time and wait for them to all be done
+        await Promise.all(
+            reviews.map(async (id) => {
+                try {
+                    const reviewInfo = await getReviewData(id);
+                    container.appendChild(createReviewCard(reviewInfo));
+                } catch (error) {
+                    console.error("Error creating review card: ", error);
+                }
+            })
+        );
+    } catch (error) {
+        console.error("Error fetching the user document: ", error);
+    }
 }
 
 // Callback for `loadContent` and `loadComponent`

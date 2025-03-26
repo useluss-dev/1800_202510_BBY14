@@ -66,36 +66,3 @@ export async function getReviewData(id) {
         throw error;
     }
 }
-
-// db.collection("reviews")
-//     .doc(id)
-//     .get()
-//     .then((reviewDoc) => {
-//         if (reviewDoc.exists) {
-//             const review = reviewDoc.data();
-//             db.collection("landlords")
-//                 .doc(review.landlordId)
-//                 .get()
-//                 .then((landlordDoc) => {
-//                     if (landlordDoc.exists) {
-//                         const landlord = landlordDoc.data();
-//                         reviewInfo[0] = landlord.name;
-//                     }
-//                 });
-//             reviewInfo[1] = review.overall;
-//             reviewInfo[2] = review.title;
-//             reviewInfo[3] = review.content;
-
-//             const timestamp = reviewDoc.data().createdAt;
-//             const date = timestamp.toDate();
-
-//             const dateOptions = { month: "long", day: "numeric", year: "numeric" };
-//             const formattedDate = date.toLocaleDateString("en-US", dateOptions);
-
-//             reviewInfo[4] = formattedDate;
-
-//             console.log("review info: ", reviewInfo);
-//         }
-//     });
-
-// return reviewInfo;

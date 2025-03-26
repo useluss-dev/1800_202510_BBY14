@@ -68,29 +68,28 @@ export async function loadLandlordCards() {
 }
 
 export async function loadProfileReviewCards(user) {
-    db.collection("users")
-        .doc(user.uid)
-        .get()
-        .then((userDoc) => {
-            if (userDoc.exists) {
-                const userData = userDoc.data();
-                // getReviewData(userData.reviews);
-                const container = document.querySelector("#card-container");
-                userData.reviews.forEach((id) => {
-                    getReviewData(id)
-                        .then((reviewInfo) => {
-                            const reviewCard = createReviewCard(reviewInfo);
-                            container.appendChild(reviewCard);
-                        })
-                        .catch((error) => {
-                            console.error("Error creating review card:", error);
-                        });
-                });
-            }
-        })
-        .catch((error) => {
-            console.error("Error getting the user document:", error);
-        });
+    try {
+        const response = await db.collection("users").doc(user.uid).get();
+        if (!response.exists) return;
+
+        // Get the reviews from the response data
+        const { reviews } = response.data();
+        const container = document.querySelector("#card-container");
+
+        // Map all of the reviews at the same time and wait for them to all be done
+        await Promise.all(
+            reviews.map(async (id) => {
+                try {
+                    const reviewInfo = await getReviewData(id);
+                    container.appendChild(createReviewCard(reviewInfo));
+                } catch (error) {
+                    console.error("Error creating review card: ", error);
+                }
+            })
+        );
+    } catch (error) {
+        console.error("Error fetching the user document: ", error);
+    }
 }
 
 // Callback for `loadContent` and `loadComponent`

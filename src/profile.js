@@ -1,4 +1,5 @@
 import { db } from "./firebaseAPI_BBY14";
+import { parseLandlordName, formatTimestamp } from "./helper";
 
 export function createReviewCard({ name, rating, title, content, date }) {
     const card = document.createElement("div");
@@ -46,17 +47,14 @@ export async function getReviewData(id) {
 
         // Get the landlord document based on review.landlordId
         const landlordDoc = await db.collection("landlords").doc(review.landlordId).get();
-        const landlordName = landlordDoc.exists ? landlordDoc.data().name : "Unknown";
+        const landlordName = landlordDoc.exists ? parseLandlordName(landlordDoc.data()) : "Unknown";
 
-        // Format the date
-        const timestamp = review.createdAt;
-        const date = timestamp.toDate();
-        const dateOptions = { month: "long", day: "numeric", year: "numeric" };
-        const formattedDate = date.toLocaleDateString("en-US", dateOptions);
+        // Get the date
+        const formattedDate = formatTimestamp(review.createdAt);
 
         return {
             name: landlordName,
-            rating: review.overall,
+            rating: review.ratings.overall,
             title: review.title,
             content: review.content,
             date: formattedDate,

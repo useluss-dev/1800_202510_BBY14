@@ -53,10 +53,11 @@ export function loadLandlordCards() {
         .get()
         .then((response) => {
             const landlords = response.docs.map((doc) => doc.data());
-            console.log(landlords);
+            console.log("landlords original: ", landlords);
 
             const filtered = searchLandlords(landlords);
             sortLandlords(filtered);
+            console.log(filtered);
 
             const container = document.querySelector("#card-container");
             if (filtered.length > 0) {
@@ -64,6 +65,7 @@ export function loadLandlordCards() {
             } else {
                 container.innerHTML = "No Landlords Found."; // Replaces loading message with no landlords message
             }
+
             filtered.forEach((landlord) => {
                 const cardElement = createLandlordCard(landlord);
                 container.appendChild(cardElement);

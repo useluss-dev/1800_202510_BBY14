@@ -86,3 +86,11 @@ p {
 .size-nav {
     @apply w-full h-16 md:h-14;
 }
+
+*::-webkit-scrollbar {
+    display: none;
+}
+* {
+    -ms-overflow-style: none; /* IE 10+ */
+    scrollbar-width: none; /* Firefox */
+}

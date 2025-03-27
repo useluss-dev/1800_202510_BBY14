@@ -1,36 +1,15 @@
 import { parseLandlordName } from "./helper";
+import { loadComponent } from "./load";
 
 export function createLandlordCard({ firstName, lastName, rating, tags }) {
-    const card = document.createElement("div");
-    card.className = "w-full not-last:mb-6 p-4 border-2 border-black";
-    // This code makes me feel upset.
-    // I turned the svg part of the html into an existing star icon.
-    card.innerHTML = `
-    <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-3">
-            <div class="w-12 h-12 rounded-full bg-gray-400"></div>
-            <div>
-                <p class="text-base font-semibold">${firstName} ${lastName}</p>
-                <div class="flex items-center text-sm text-gray-700">
-                    <img src="/assets/StarIconYellow.svg" class="h-4 mr-1" />
-                    <span>${rating.overall}</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bottom row: tag-like pills -->
-    <!-- TODO: Add in dynamically -->
-    <div class="flex flex-wrap gap-2 mt-4">
-        <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full"> No Contract </span>
-        <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full"> Pet Friendly </span>
-        <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full"> Nice </span>
-        <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full"> Test </span>
-        <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full"> Test </span>
-    </div>
-</div>
-    `;
-    return card;
+    return loadComponent(
+        "/src/components/landlord-card.html",
+        "w-full not-last:mb-6 p-4 border-2 border-black",
+        (container) => {
+            container.querySelector("#name").textContent = firstName + " " + lastName;
+            container.querySelector("#rating").textContent = rating.overall;
+        }
+    );
 }
 
 export function sortLandlords(landlords) {

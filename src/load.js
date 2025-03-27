@@ -25,7 +25,7 @@ export function loadContent(partialPath, callback) {
         });
 }
 
-// Helper function to load HTML components
+// Helper function to load static HTML components
 export function loadStaticComponent(componentPath, containerSelector, callback) {
     fetch(componentPath)
         .then((response) => {
@@ -46,6 +46,21 @@ export function loadStaticComponent(componentPath, containerSelector, callback) 
         .catch((err) => {
             console.error("Error loading component:", err);
         });
+}
+
+// Helper function to load dynamic HTML components
+export async function loadComponent(componentPath, containerClass, updateCallback) {
+    const response = await fetch(componentPath);
+    const component = await response.text();
+
+    const container = document.createElement("div");
+    container.className = containerClass;
+    container.innerHTML = component;
+
+    // Invoke the callback to inject dynamic data
+    updateCallback(container);
+
+    return container;
 }
 
 export async function loadLandlordCards() {
@@ -85,7 +100,9 @@ export async function loadProfileReviewCards(user) {
             reviews.map(async (id) => {
                 try {
                     const reviewInfo = await getReviewData(id);
-                    container.appendChild(createReviewCard(reviewInfo));
+                    createReviewCard(reviewInfo).then((reviewElement) => {
+                        container.appendChild(reviewElement);
+                    });
                 } catch (error) {
                     console.error("Error creating review card: ", error);
                 }

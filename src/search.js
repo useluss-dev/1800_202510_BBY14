@@ -1,19 +1,15 @@
 import { parseLandlordName } from "./helper";
+import { loadComponent } from "./load";
 
 export function createLandlordCard({ firstName, lastName, rating, tags }) {
-    return fetch("/src/components/landlord-card.html")
-        .then((response) => response.text())
-        .then((component) => {
-            const container = document.createElement("div");
-            container.className = "max-w-3xl mx-auto mb-4 p-4 border-2 border-black";
-            container.innerHTML = component;
-
-            // Update component with dynamic data
+    return loadComponent(
+        "/src/components/landlord-card.html",
+        "max-w-3xl mx-auto mb-4 p-4 border-2 border-black",
+        (container) => {
             container.querySelector("#name").textContent = firstName + " " + lastName;
             container.querySelector("#rating").textContent = rating.overall;
-
-            return container;
-        });
+        }
+    );
 }
 
 export function sortLandlords(landlords) {

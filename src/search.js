@@ -2,7 +2,7 @@ import { parseLandlordName } from "./helper";
 
 export function createLandlordCard({ firstName, lastName, rating, tags }) {
     const card = document.createElement("div");
-    card.className = "max-w-3xl mx-auto mb-4 p-4 border-2 border-black";
+    card.className = "w-full not-last:mb-6 p-4 border-2 border-black";
     // This code makes me feel upset.
     // I turned the svg part of the html into an existing star icon.
     card.innerHTML = `
@@ -12,21 +12,7 @@ export function createLandlordCard({ firstName, lastName, rating, tags }) {
             <div>
                 <p class="text-base font-semibold">${firstName} ${lastName}</p>
                 <div class="flex items-center text-sm text-gray-700">
-                    <!-- Example star icon (Heroicons/Font Awesome/etc.) -->
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-4 w-4 text-yellow-500 mr-1"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                    >
-                        <path
-                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.175 3.617a1 1 0 00.95.69h3.801c.969 0 
-                1.371 1.24.588 1.81l-3.073 2.23a1 1 0 00-.364 1.118l1.175 3.617c.3.921-.755 
-                1.688-1.54 1.118l-3.073-2.23a1 1 0 00-1.176 0l-3.073 2.23c-.784.57-1.84-.197-1.54
-                -1.118l1.175-3.617a1 1 0 00-.364-1.118l-3.073-2.23c-.783-.57-.38-1.81.588-1.81h3.8
-                a1 1 0 00.951-.69l1.176-3.617z"
-                        />
-                    </svg>
+                    <img src="/assets/StarIconActive.svg" class="h-4 mr-1" />
                     <span>${rating.overall}</span>
                 </div>
             </div>

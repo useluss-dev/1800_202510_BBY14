@@ -11,15 +11,13 @@ import { auth } from "./firebaseAPI_BBY14.js";
 // Define routes
 page("/", () =>
     loadContent("/src/partials/home.html", () => {
-        loadComponent("/src/components/search-bar.html", "#logo");
+        loadComponent("/src/components/search-bar.html", "#searchBar");
     })
 );
-
 page("/login", () => loadContent("/src/partials/login.html", executeScripts));
-
 page("/search", () =>
     loadContent("/src/partials/search.html", () => {
-        loadComponent("/src/components/search-bar.html", "#search-bar");
+        loadComponent("/src/components/search-bar.html", "#searchBar");
         loadLandlordCards();
     })
 );

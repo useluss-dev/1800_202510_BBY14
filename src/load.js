@@ -25,8 +25,8 @@ export function loadContent(partialPath, callback) {
         });
 }
 
-// Helper function to load HTML components
-export function loadComponent(componentPath, containerSelector, callback) {
+// Helper function to load static HTML components
+export function loadStaticComponent(componentPath, containerSelector, callback) {
     fetch(componentPath)
         .then((response) => {
             if (!response.ok) throw new Error("Network response was not ok");
@@ -48,20 +48,39 @@ export function loadComponent(componentPath, containerSelector, callback) {
         });
 }
 
+// Helper function to load dynamic HTML components
+export async function loadComponent(componentPath, containerClass, updateCallback) {
+    const response = await fetch(componentPath);
+    const component = await response.text();
+
+    const container = document.createElement("div");
+    container.className = containerClass;
+    container.innerHTML = component;
+
+    // Invoke the callback to inject dynamic data
+    updateCallback(container);
+
+    return container;
+}
+
 export async function loadLandlordCards() {
     try {
         const response = await db.collection("landlords").get();
         const landlords = response.docs.map((doc) => doc.data());
-        console.log("landlords original: ", landlords);
+        console.log("landlords original: ", landlords); // TODO: Remove debug print
 
         const filtered = searchLandlords(landlords);
         sortLandlords(filtered);
-        console.log("filtered: ", filtered);
+        console.log("filtered: ", filtered); // TODO: Remove debug print
 
         const container = document.querySelector("#card-container");
         container.innerHTML = filtered.length > 0 ? "" : "No landlords found.";
 
-        filtered.forEach((landlord) => container.appendChild(createLandlordCard(landlord)));
+        filtered.forEach((landlord) => {
+            createLandlordCard(landlord).then((landlordElement) => {
+                container.appendChild(landlordElement);
+            });
+        });
     } catch (error) {
         console.error("Error fetching data from firestore: ", error);
     }
@@ -81,7 +100,9 @@ export async function loadProfileReviewCards(user) {
             reviews.map(async (id) => {
                 try {
                     const reviewInfo = await getReviewData(id);
-                    container.appendChild(createReviewCard(reviewInfo));
+                    createReviewCard(reviewInfo).then((reviewElement) => {
+                        container.appendChild(reviewElement);
+                    });
                 } catch (error) {
                     console.error("Error creating review card: ", error);
                 }

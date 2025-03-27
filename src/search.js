@@ -12,7 +12,7 @@ export function createLandlordCard({ firstName, lastName, rating, tags }) {
             <div>
                 <p class="text-base font-semibold">${firstName} ${lastName}</p>
                 <div class="flex items-center text-sm text-gray-700">
-                    <img src="/assets/StarIconActive.svg" class="h-4 mr-1" />
+                    <img src="/assets/StarIconYellow.svg" class="h-4 mr-1" />
                     <span>${rating.overall}</span>
                 </div>
             </div>

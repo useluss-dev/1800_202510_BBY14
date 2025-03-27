@@ -44,3 +44,14 @@ export async function getReviewData(id) {
         throw error;
     }
 }
+
+export function createAvatar(name, container) {
+    const avatarPlaceholder = container.querySelector("#avatar-placeholder");
+    const initial = name.trim().charAt(0).toUpperCase();
+
+    avatarPlaceholder.textContent = initial;
+    avatarPlaceholder.style.color = "white";
+    avatarPlaceholder.style.display = "flex";
+    avatarPlaceholder.style.alignItems = "center";
+    avatarPlaceholder.style.justifyContent = "center";
+}

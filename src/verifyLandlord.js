@@ -9,6 +9,19 @@ const defaultStyle = {
     a: "text-teal-500 underline line-clamp-1",
 };
 
+// /**
+//  * @typedef LandlordDocData
+//  * @property {string} firstName
+//  * @property {string} lastName
+//  * @property {string[]} emailAddresses
+//  * @property {string[]} phoneNumbers
+//  * @property {{ marketplace: string, profile: string }} facebookIds
+//  * @property {{ behavior: number, listingAmenities: number, listingQuality: number,
+//  *              listingRent: number, overall: number, rules: number }} rating
+//  * @property {string[]} reviews
+//  * @property {string[]} tags
+//  */
+
 /**
  * @param {URLSearchParams} urlParameters
  * @return {{ [key: string] : string | string[] }}
@@ -81,6 +94,19 @@ function displayLandlordData(landlordData) {
     });
 }
 
+/**
+ * @param {string} facebookLink
+ * @return {{marketplace: string, profile: string}}
+ */
+function getFacebookIdsFromLink(facebookLink) {
+    const facebookLinkUrl = new URL(facebookLink);
+    const facebookIds = { marketplace: "", profile: "" };
+
+    console.log(facebookLinkUrl.pathname);
+
+    return facebookIds;
+}
+
 // Event Listeners //
 
 document.getElementById("editLandlord").addEventListener("click", (event) => {
@@ -88,7 +114,28 @@ document.getElementById("editLandlord").addEventListener("click", (event) => {
 });
 
 document.getElementById("reviewLandlord").addEventListener("click", (event) => {
-    dbLandlord.add(landlordData).then((value) => {});
+    // createLandlordDocData(landlordData);
+    db.collection("landlords")
+        .add({
+            firstName: landlordData.firstName,
+            lastName: landlordData.lastName,
+            emailAddresses: landlordData.email,
+            phoneNumbers: landlordData.phone,
+            facebookIds: getFacebookIdsFromLink(landlordData.facebookLink),
+            rating: {
+                behavior: 1,
+                listingAmenities: 1,
+                listingQuality: 1,
+                listingRent: 1,
+                overall: 1,
+                rules: 1,
+            },
+            reviews: [],
+            tags: [],
+        })
+        .then((value) => {
+            window.location.replace("/review?landlord=" + value.id);
+        });
 });
 
 displayLandlordData(landlordData);

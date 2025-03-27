@@ -21,7 +21,7 @@ page("/search", () =>
         loadLandlordCards();
     })
 );
-page("/review*", () => loadContent("/src/partials/review.html", executeScripts));
+page("/review*", () => loadContent("/src/partials/reviewLandlord.html", executeScripts));
 page("/add-landlord*", () => loadContent("/src/partials/addLandlord.html", executeScripts));
 page("/verify-landlord*", () => loadContent("/src/partials/verifyLandlord.html", executeScripts));
 page("/landlord*", () => loadContent("/src/partials/landlord.html", executeScripts));

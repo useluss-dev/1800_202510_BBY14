@@ -25,27 +25,28 @@ page("/search", () =>
 page("/review*", () => loadContent("/src/partials/review.html", executeScripts));
 page("/begin-review*", () => loadContent("/src/partials/begin-review.html", executeScripts));
 page("/verify-landlord*", () => loadContent("/src/partials/verify-landlord.html", executeScripts));
-page("/profile", () =>
-    loadContent("/src/partials/profile.html", async (container) => {
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                const email = user.email;
-                container.querySelector("#profile-name").textContent = email;
-                loadProfileReviewCards(user);
-                createAvatar(email, container);
+page("/profile", () => loadContent("/src/partials/profile.html", async (container) => {
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            const email = user.email;
+            container.querySelector("#profile-name").textContent = email;
+            loadProfileReviewCards(user);
+            createAvatar(email, container);
 
-                // Create Profile image
-                const avatarPlaceholder = document.getElementById("avatarPlaceholder");
-                const initial = name.trim().charAt(0).toUpperCase();
-                avatarPlaceholder.textContent = initial;
+            // Create Profile image
+            // const avatarPlaceholder = document.getElementById("avatarPlaceholder");
+            // const initial = email.trim().charAt(0).toUpperCase();
+            // avatarPlaceholder.textContent = initial;
 
-                loadProfileReviewCards(user);
-            });
-    } else {
-        loadContent("/src/partials/login.html", executeScripts);
-    }
+            // loadProfileReviewCards(user);
+        } else {
+            loadContent("/src/partials/login.html", executeScripts);
+        }
     });
-});
+})
+);
+
+
 
 
 // Start the router

@@ -21,7 +21,6 @@ loginForm.addEventListener("submit", async (e) => {
 
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
-
   try {
     const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
     const user = userCredential.user;
@@ -34,6 +33,7 @@ loginForm.addEventListener("submit", async (e) => {
 
 
 async function handleUserAuthentication(user) {
+  console.log("authentication.js ");
   if (user) {
     console.log("User authenticated uid:", user.uid, "email: ", user.email);
 

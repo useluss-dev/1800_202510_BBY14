@@ -5,4 +5,3 @@ window.logout = function () {
         window.location.href = "/";
     });
 };
-

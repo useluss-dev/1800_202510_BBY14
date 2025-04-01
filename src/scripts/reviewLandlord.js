@@ -1,6 +1,5 @@
 import firebase from "firebase";
 import { app, db } from "./firebaseAPI_BBY14";
-import { createServerHotChannel } from "vite";
 
 const dbLandlord = db.collection("landlords");
 const urlParameters = new URLSearchParams(window.location.search);
@@ -181,23 +180,6 @@ function modifyStarFieldVisuals(purpose, chosenValue) {
                     ? defaultSrc.starImageActive
                     : defaultSrc.starImageNone;
         }
-    }
-}
-
-function setupReview() {
-    const landlordId = urlParameters.get("landlord");
-
-    if (landlordId) {
-        console.log("hello!");
-        dbLandlord
-            .doc(landlordId)
-            .get()
-            .then((value) => {
-                console.log(value.id);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
     }
 }
 

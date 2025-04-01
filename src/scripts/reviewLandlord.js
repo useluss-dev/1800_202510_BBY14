@@ -4,6 +4,9 @@ import { app, db } from "./firebaseAPI_BBY14";
 const dbLandlord = db.collection("landlords");
 const urlParameters = new URLSearchParams(window.location.search);
 
+const reviewSection = document.getElementById("landlordExists");
+const nullSection = document.getElementById("landlordNull");
+
 /** @type {HTMLFormElement} */
 const form = document.forms.review;
 
@@ -183,9 +186,32 @@ function modifyStarFieldVisuals(purpose, chosenValue) {
     }
 }
 
+function showReviewSection() {
+    reviewSection.classList.remove("hidden");
+    nullSection.classList.add("hidden");
+}
+
+function showNullSection() {
+    reviewSection.classList.add("hidden");
+    nullSection.classList.remove("hidden");
+}
+
+function setupReview() {
+    const landlordId = urlParameters.get("landlord");
+
+    if (landlordId) {
+        showReviewSection();
+        return;
+    }
+
+    showNullSection();
+}
+
 form.addEventListener("submit", (event) => {
     event.preventDefault();
 });
+
+setupReview();
 
 setupStarField("behavior", true);
 setupStarField("rules", true);

@@ -1,17 +1,12 @@
 import firebase from "firebase";
 import { app, db } from "./firebaseAPI_BBY14";
+import { createServerHotChannel } from "vite";
 
-// const defaultStyle = {
-//     starClearInput: "hidden",
-//     starClearLabel: "px-2 py-1 border-2 transition-all",
-//     starClearLabelHover: " hover:bg-black hover:text-white hover:border-black",
-//     starClearLabelInvisible: "px-2 py-1 border-2 transition-all opacity-0",
-//     starClearText: "select-none",
-//     starDiv: "flex",
-//     starField: "flex justify-between items-center",
-//     starImage: "h-10",
-//     starLabel: "not-last:pr-2",
-// };
+const dbLandlord = db.collection("landlords");
+const urlParameters = new URLSearchParams(window.location.search);
+
+/** @type {HTMLFormElement} */
+const form = document.forms.review;
 
 /**
  * @typedef Star
@@ -111,13 +106,14 @@ function setupStarField(purpose, optional, styles = {}) {
         fieldDiv: "flex justify-between items-center",
         starDiv: "flex",
 
-        clearLabel: "px-2 py-1 border-2",
-        clearInput: "",
+        clearLabel:
+            "px-2 py-1 border-2 hover:border-black hover:bg-black hover:text-white transition",
+        clearInput: "hidden",
         clearSpan: "",
 
-        starLabel: "",
-        starImage: "",
-        starInput: "",
+        starLabel: "not-last:pr-2",
+        starImage: "h-10",
+        starInput: "hidden",
     };
 
     /** @type {HTMLDivElement} */
@@ -145,14 +141,16 @@ function setupStarField(purpose, optional, styles = {}) {
     // Star Clear Input
     if (optional)
         setupStarClear(purpose, fieldDiv, ({ label, input, span }) => {
-            label.className = styles.clearLabel ? styles.clearLabel : defaultSrc.clearLabel;
-            input.className = styles.clearInput ? styles.clearInput : defaultSrc.clearInput;
-            span.className = styles.clearSpan ? styles.clearSpan : defaultSrc.clearSpan;
+            label.className = styles.clearLabel ? styles.clearLabel : defaultStyle.clearLabel;
+            input.className = styles.clearInput ? styles.clearInput : defaultStyle.clearInput;
+            span.className = styles.clearSpan ? styles.clearSpan : defaultStyle.clearSpan;
 
             input.addEventListener("change", (event) => {
                 modifyStarFieldVisuals(purpose, input.value);
             });
         });
+
+    modifyStarFieldVisuals(purpose, 0);
 }
 
 /**
@@ -165,12 +163,16 @@ function modifyStarFieldVisuals(purpose, chosenValue) {
 
     for (const inputElement of inputElements) {
         if (inputElement.value == 0) {
+            // Clear button //
+
             /** @type {HTMLLabelElement} */
             const label = document.getElementById(purpose + "ClearLabel");
 
             if (inputElement.value == chosenValue) label.classList.add("opacity-0");
             else label.classList.remove("opacity-0");
         } else {
+            // Star button //
+
             /** @type {HTMLImageElement} */
             const image = document.getElementById(purpose + "Image" + inputElement.value);
 
@@ -182,4 +184,28 @@ function modifyStarFieldVisuals(purpose, chosenValue) {
     }
 }
 
+function setupReview() {
+    const landlordId = urlParameters.get("landlord");
+
+    if (landlordId) {
+        console.log("hello!");
+        dbLandlord
+            .doc(landlordId)
+            .get()
+            .then((value) => {
+                console.log(value.id);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+}
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+});
+
 setupStarField("behavior", true);
+setupStarField("rules", true);
+setupStarField("quality", true);
+setupStarField("rent", true);

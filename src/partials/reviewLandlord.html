@@ -3,7 +3,85 @@
 </section>
 
 <section id="landlordExists" class="w-full max-w-xl px-main mt-16 mx-auto">
-    <h1>Review Landlord</h1>
+    <h1 class="mb-12">Review Landlord</h1>
+
+    <form name="review" action="/submitted" method="get">
+        <!-- Landlord Behavior -->
+        <fieldset class="mb-8">
+            <legend class="mb-1 text-lg text-gray-500 font-bold uppercase">
+                Landlord Behavior <span class="text-red-500">*</span>
+            </legend>
+            <p class="mb-2 text-sm text-gray-500">
+                If your landlord is nice and non-threatening, give them a higher rating.
+            </p>
+            <div id="behaviorField"></div>
+        </fieldset>
+
+        <!-- Landlord Strictness -->
+        <fieldset class="mb-8">
+            <legend class="mb-1 text-lg text-gray-500 font-bold uppercase">
+                Strictness <span class="text-red-500">*</span>
+            </legend>
+            <p class="mb-2 text-sm text-gray-500">
+                If your landlord is lenient, or flexible with your needs, give them a higher rating.
+            </p>
+            <div id="rulesField"></div>
+        </fieldset>
+
+        <!-- Listing Quality -->
+        <fieldset class="mb-8">
+            <legend class="mb-1 text-lg text-gray-500 font-bold uppercase">
+                Listing Quality <span class="text-red-500">*</span>
+            </legend>
+            <p class="mb-2 text-sm text-gray-500">
+                If the property is clean, has adequate utilities, and amenities that benefit you,
+                give it a higher rating.
+            </p>
+            <div id="qualityField"></div>
+        </fieldset>
+
+        <!-- Listing Rent -->
+        <fieldset class="mb-8">
+            <legend class="mb-1 text-lg text-gray-500 font-bold uppercase">
+                Rent Price <span class="text-red-500">*</span>
+            </legend>
+            <p class="mb-2 text-sm text-gray-500">
+                If the rent is cheap, or it makes sense, give it a higher rating.
+            </p>
+            <div id="rentField"></div>
+        </fieldset>
+
+        <fieldset class="mb-8">
+            <legend class="mb-1 text-lg text-gray-500 font-bold uppercase">
+                Title <span class="text-red-500">*</span>
+            </legend>
+            <input
+                type="text"
+                name="title"
+                class="p-2 w-full border-2"
+                placeholder="Give a short description of your review."
+            />
+        </fieldset>
+
+        <fieldset class="mb-8">
+            <legend class="mb-1 text-lg text-gray-500 font-bold uppercase">
+                Written Review <span class="text-red-500">*</span>
+            </legend>
+            <textarea
+                name="content"
+                id=""
+                class="p-2 border-2 w-full min-h-48 resize-y"
+                placeholder="Write your review here."
+            ></textarea>
+        </fieldset>
+
+        <button
+            class="w-full p-2 border-2 hover:border-black hover:bg-black hover:text-white transition"
+            type="submit"
+        >
+            Submit Review
+        </button>
+    </form>
 </section>
 
-<script type="module" src="/src/scripts/addLandlord.js"></script>
+<script type="module" src="/src/scripts/reviewLandlord.js"></script>

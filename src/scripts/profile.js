@@ -57,11 +57,17 @@ export function createAvatar(name, container, divName) {
         avatarPlaceholder = document.querySelector("#" + divName);
         console.log("avatarPlaceholder111 :", avatarPlaceholder);
         avatarPlaceholder.innerHTML = "";
-        avatarPlaceholder.innerHTML = "<div class=\"w-64 h-64 rounded-full bg-gray-400 flex items-center justify-center text-white text-[10em]\"></div>";
+        // avatarPlaceholder.innerHTML = "<div class=\"w-64 h-64 rounded-full bg-gray-400 flex items-center justify-center text-white text-[10em]\"></div>";
+        // avatarPlaceholder.replaceWith = "<div class=\"w-64 h-64 rounded-full bg-gray-400 flex items-center justify-center text-white text-[10em]\"></div>";
+        const newDiv = document.createElement("div");
+        newDiv.className = "w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center text-white text-[1em]";
+        avatarPlaceholder.replaceWith(newDiv);
+        newDiv.textContent = initial;
+        console.log("avatarPlaceholder222 :", avatarPlaceholder);
     }
 
     console.log("avatarPlaceholder : ", avatarPlaceholder);
-
+    console.log("initial :", initial);
     avatarPlaceholder.textContent = initial;
     // avatarPlaceholder.style.color = "white";
     // avatarPlaceholder.style.display = "flex";

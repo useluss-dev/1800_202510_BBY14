@@ -29,15 +29,15 @@
                     <img alt="review" class="h-8" src="assets/rml-review.svg">
                 </a>
                 <a href="/profile">
-                    <div class="size-8 border-2 rounded-full overflow-hidden">
+                    <div id="profileIcon1" class="size-8 border-2 rounded-full overflow-hidden">
                         <!-- This should be an auto-generated profile picture. -->
-                        <img alt="profile" class="h-6 mx-auto mt-2" src="assets/user.png">
+                        <img alt="profile" class="profileIcon h-6 mx-auto mt-2" src="assets/user.png">
                         <!-- <img class="size-full object-cover" src="assets/profile.jpg" /> -->
                     </div>
                 </a>
-                <!-- <a href="#" id="navLogout" onclick="logout()">
+                <a href="#" id="navLogout" onclick="logout()" style="">
                     <img alt="logout" class="h-8 mx-auto" src="assets/logout.png">
-                </a> -->
+                </a>
             </nav>
         </div>
 
@@ -58,7 +58,7 @@
                     <img class="h-8" src="assets/rml-review.svg" />
                 </a>
                 <a href="/profile">
-                    <div id="profileIcon" class="size-8 border-2 rounded-full overflow-hidden">
+                    <div id="profileIcon2" class="profileIcon size-8 border-2 rounded-full overflow-hidden">
                         <!-- This should be an auto-generated profile picture. -->
                         <img class="h-6 mx-auto mt-2" src="assets/user.png" />
                         <!-- <img class="size-full object-cover" src="assets/profile.jpg" /> -->
@@ -68,9 +68,9 @@
         </div>
     </div>
 
-    <script type="module" src="/src/firebaseInit.js"></script>
-    <script type="module" src="/src/main.js"></script>
-    <script type="module" src="/src/logout.js"></script>
+    <script type="module" src="/src/scripts/firebaseInit.js"></script>
+    <script type="module" src="/src/scripts/main.js"></script>
+    <script type="module" src="/src/scripts/logout.js"></script>
 </body>
 
 </html>

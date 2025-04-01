@@ -16,7 +16,7 @@ export function createLandlordCard({ firstName, lastName, rating, tags }) {
 
 export function sortLandlords(landlords) {
     // Sort array based on rating (in descending order)
-    landlords.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
+    landlords.sort((a, b) => parseFloat(b.rating.overall) - parseFloat(a.rating.overall));
 }
 
 export function searchLandlords(landlords) {

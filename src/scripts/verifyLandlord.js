@@ -9,19 +9,6 @@ const defaultStyle = {
     a: "text-teal-500 underline line-clamp-1",
 };
 
-// /**
-//  * @typedef LandlordDocData
-//  * @property {string} firstName
-//  * @property {string} lastName
-//  * @property {string[]} emailAddresses
-//  * @property {string[]} phoneNumbers
-//  * @property {{ marketplace: string, profile: string }} facebookIds
-//  * @property {{ behavior: number, listingAmenities: number, listingQuality: number,
-//  *              listingRent: number, overall: number, rules: number }} rating
-//  * @property {string[]} reviews
-//  * @property {string[]} tags
-//  */
-
 /**
  * @param {URLSearchParams} urlParameters
  * @return {{ [key: string] : string | string[] }}
@@ -99,10 +86,8 @@ function displayLandlordData(landlordData) {
  * @return {{marketplace: string, profile: string}}
  */
 function getFacebookIdsFromLink(facebookLink) {
-    const facebookLinkUrl = new URL(facebookLink);
+    const facebookLinkUrl = facebookLink ? new URL(facebookLink) : null;
     const facebookIds = { marketplace: "", profile: "" };
-
-    console.log(facebookLinkUrl.pathname);
 
     return facebookIds;
 }
@@ -114,7 +99,6 @@ document.getElementById("editLandlord").addEventListener("click", (event) => {
 });
 
 document.getElementById("reviewLandlord").addEventListener("click", (event) => {
-    // createLandlordDocData(landlordData);
     db.collection("landlords")
         .add({
             firstName: landlordData.firstName,
@@ -139,4 +123,3 @@ document.getElementById("reviewLandlord").addEventListener("click", (event) => {
 });
 
 displayLandlordData(landlordData);
-console.log(landlordData);

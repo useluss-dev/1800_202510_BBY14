@@ -76,11 +76,12 @@ export async function loadLandlordCards() {
         const container = document.querySelector("#card-container");
         container.innerHTML = filtered.length > 0 ? "" : "No landlords found.";
 
-        filtered.forEach((landlord) => {
-            createLandlordCard(landlord).then((landlordElement) => {
-                container.appendChild(landlordElement);
-            });
-        });
+        Promise.all(filtered.map((landlord) => createLandlordCard(landlord))).then(
+            (landlordCards) => {
+                console.log(landlordCards);
+                landlordCards.forEach((card) => container.appendChild(card));
+            }
+        );
     } catch (error) {
         console.error("Error fetching data from firestore: ", error);
     }

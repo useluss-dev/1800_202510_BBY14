@@ -42,8 +42,6 @@ loginForm.addEventListener("submit", async (e) => {
             errorMessage.textContent = "Login failed: " + error.message;
         }
     }
-
-    await setTimeout();
 });
 
 // Initialize the FirebaseUI Widget using Firebase.

@@ -33,17 +33,6 @@ page("/profile", () =>
                 container.querySelector("#profile-name").textContent = email;
                 loadProfileReviewCards(user);
                 createAvatar(email, container);
-
-                //Create Profile image
-                // const avatarPlaceholder = document.getElementById("avatarPlaceholder");
-                // const initial = name.trim().charAt(0).toUpperCase();
-
-                // avatarPlaceholder.textContent = initial;
-                // avatarPlaceholder.style.color = "white";
-                // avatarPlaceholder.style.display = "flex";
-                // avatarPlaceholder.style.alignItems = "center";
-                // avatarPlaceholder.style.justifyContent = "center";
-                // avatarPlaceholder.style.fontSize = "10em";
             }
         });
     })

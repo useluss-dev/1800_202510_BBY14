@@ -45,9 +45,22 @@ export async function getReviewData(id) {
     }
 }
 
-export function createAvatar(name, container) {
-    const avatarPlaceholder = container.querySelector("#avatarPlaceholder");
+export function createAvatar(name, container, divName) {
+    let avatarPlaceholder;
     const initial = name.trim().charAt(0).toUpperCase();
+    console.log("divName:", divName);
+    if (!divName) {
+        console.log("g1");
+        avatarPlaceholder = container.querySelector("#avatar-placeholder");
+    } else {
+        console.log("divName ///", divName);
+        avatarPlaceholder = document.querySelector("#" + divName);
+        console.log("avatarPlaceholder111 :", avatarPlaceholder);
+        avatarPlaceholder.innerHTML = "";
+        avatarPlaceholder.innerHTML = "<div class=\"w-64 h-64 rounded-full bg-gray-400 flex items-center justify-center text-white text-[10em]\"></div>";
+    }
+
+    console.log("avatarPlaceholder : ", avatarPlaceholder);
 
     avatarPlaceholder.textContent = initial;
     // avatarPlaceholder.style.color = "white";

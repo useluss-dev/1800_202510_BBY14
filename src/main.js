@@ -27,8 +27,10 @@ page("/begin-review*", () => loadContent("/src/partials/begin-review.html", exec
 page("/verify-landlord*", () => loadContent("/src/partials/verify-landlord.html", executeScripts));
 page("/profile", () => loadContent("/src/partials/profile.html", async (container) => {
     auth.onAuthStateChanged((user) => {
+        console.log("user ::", user);
         if (user) {
             const email = user.email;
+            console.log("container :", container);
             container.querySelector("#profile-name").textContent = email;
             loadProfileReviewCards(user);
             createAvatar(email, container);

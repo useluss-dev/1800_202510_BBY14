@@ -7,9 +7,20 @@ export function createLandlordCard({ firstName, lastName, rating, tags }) {
         "/src/components/landlord-card.html",
         "max-w-3xl mx-auto mb-4 p-4 border-2 border-black",
         (container) => {
+            console.log("tags: ", tags);
             container.querySelector("#name").textContent = firstName + " " + lastName;
             container.querySelector("#rating").textContent = rating.overall;
             createAvatar(firstName, container);
+            //tags
+            let tagHtml = "";
+            for (let i = 0; i < tags.length; i++) {
+                console.log(tags[i]);
+                tagHtml += "<span class=\"px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full\"> ";
+                tagHtml += tags[i];
+                tagHtml += "  </span>";
+            }
+            container.querySelector("#tags").innerHTML = tagHtml;
+
         }
     );
 }

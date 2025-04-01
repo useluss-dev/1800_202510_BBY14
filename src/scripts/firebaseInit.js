@@ -4,7 +4,6 @@ import { createAvatar } from "./profile";
 
 auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 auth.onAuthStateChanged((user) => {
-    // console.log("user ", user);
     if (user) {
         createAvatar(user.email, null, "profileIcon1"); //top
         createAvatar(user.email, null, "profileIcon2"); //bottom

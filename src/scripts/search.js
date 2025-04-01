@@ -10,6 +10,15 @@ export function createLandlordCard({ firstName, lastName, rating, tags }) {
             container.querySelector("#name").textContent = firstName + " " + lastName;
             container.querySelector("#rating").textContent = rating.overall;
             createAvatar(firstName, container);
+            //tags
+            let tagHtml = "";
+            for (let i = 0; i < tags.length; i++) {
+                tagHtml += "<span class=\"px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full\"> ";
+                tagHtml += tags[i];
+                tagHtml += "  </span>";
+            }
+            container.querySelector("#tags").innerHTML = tagHtml;
+
         }
     );
 }

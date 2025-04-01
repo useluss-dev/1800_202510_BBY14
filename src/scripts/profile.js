@@ -45,13 +45,18 @@ export async function getReviewData(id) {
     }
 }
 
-export function createAvatar(name, container) {
-    const avatarPlaceholder = container.querySelector("#avatar-placeholder");
+export function createAvatar(name, container, divName) {
+    let avatarPlaceholder;
     const initial = name.trim().charAt(0).toUpperCase();
-
+    if (!divName) {
+        avatarPlaceholder = container.querySelector("#avatar-placeholder");
+    } else {
+        avatarPlaceholder = document.querySelector("#" + divName);
+        avatarPlaceholder.innerHTML = "";
+        const newDiv = document.createElement("div");
+        newDiv.className = "w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center text-white text-[1em]";
+        avatarPlaceholder.replaceWith(newDiv);
+        newDiv.textContent = initial;
+    }
     avatarPlaceholder.textContent = initial;
-    avatarPlaceholder.style.color = "white";
-    avatarPlaceholder.style.display = "flex";
-    avatarPlaceholder.style.alignItems = "center";
-    avatarPlaceholder.style.justifyContent = "center";
 }

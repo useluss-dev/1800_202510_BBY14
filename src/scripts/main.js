@@ -39,5 +39,8 @@ page("/profile", () =>
     })
 );
 
+
+
+
 // Start the router
 page();

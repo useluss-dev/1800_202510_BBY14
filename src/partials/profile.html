@@ -1,17 +1,11 @@
 <!-- Avatar placeholder TODO: UPDATE TO HANDLE REAL AVATAR -->
 <section class="p-5 flex flex-col items-center justify-center min-h-screen">
-    <div
-        id="avatar-placeholder"
-        class="select-none cursor-default text-9xl w-64 h-64 rounded-full bg-gray-400"
-    ></div>
-    <h2 id="profile-name" class="mt-4 pb-5">Guest</h2>
+    <div id="avatar-placeholder"
+        class="w-64 h-64 rounded-full bg-gray-400 flex items-center justify-center text-white text-[10em]"></div>
+    <h2 id="profile-name" class="mt-4">Guest</h2>
 
-    <button
-        type="button"
-        id="btnLogout"
-        onclick="logout()"
-        class="p-2 border-2 hover:bg-black hover:text-white hover:border-black focus:outline-2 focus:outline-black transition-colors duration-200"
-    >
+    <button type="button" id="btnLogout" onclick="logout()"
+        class="py-2.5 px-5 mt-4 me-2 mb-2 text-base font-medium text-gray-900 focus:outline-none bg-white border-2 border-black hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
         Logout
     </button>
 </section>

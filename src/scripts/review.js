@@ -96,6 +96,8 @@ getLandlordDocSnapshot()
         form.addEventListener("submit", (event) => {
             event.preventDefault();
 
+            const landlordID = new URLSearchParams(window.location.search).get("landlord-id");
+            const landlordCollection = db.collection("landlords");
             const reviewCollection = db.collection("reviews");
             const reviewFormData = new FormData(form);
             const urlParameters = new URLSearchParams(window.location.search);
@@ -106,11 +108,22 @@ getLandlordDocSnapshot()
             };
 
             reviewFormData.forEach((value, key) => {
-                reviewData[key] = value;
+                if (value.match("^[0-9]+$")) {
+                    reviewData[key] = parseInt(value);
+                } else {
+                    reviewData[key] = value;
+                }
             });
 
             reviewCollection.add(reviewData).then((value) => {
-                window.location.replace(`/submitted?review-id=${value.id}`);
+                landlordCollection
+                    .doc(landlordID)
+                    .update({
+                        reviews: value.id,
+                    })
+                    .then(() => {
+                        window.location.replace(`/submitted?review-id=${value.id}`);
+                    });
             });
         });
     })

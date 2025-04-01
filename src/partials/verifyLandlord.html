@@ -1,0 +1,43 @@
+<section class="w-full max-w-xl mt-16 mx-auto px-main flex flex-col gap-12">
+    <!--  -->
+
+    <h1>Add <span id="landlordName">Landlord</span>?</h1>
+
+    <!-- Landlord's Information -->
+    <table>
+        <tbody class="border-2 divide-y-2">
+            <tr class="flex">
+                <th class="w-full max-w-44 border-r-2 text-left p-2">Facebook Link</th>
+                <td class="w-full p-2 flex flex-col" id="facebookLink"></td>
+            </tr>
+            <tr class="flex">
+                <th class="w-full max-w-44 border-r-2 text-left p-2">Email Address(es)</th>
+                <td class="w-full p-2 flex flex-col" id="emailAddresses"></td>
+            </tr>
+            <tr class="flex">
+                <th class="w-full max-w-44 border-r-2 text-left p-2">Phone Number(s)</th>
+                <td class="w-full p-2 flex flex-col" id="phoneNumbers"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="flex border-2 divide-x-2">
+        <button
+            type="button"
+            id="editLandlord"
+            class="w-full p-2 hover:bg-black hover:text-white hover:border-black transition"
+        >
+            Edit Landlord
+        </button>
+
+        <button
+            type="button"
+            id="reviewLandlord"
+            class="w-full p-2 hover:bg-black hover:text-white hover:border-black transition"
+        >
+            Add & Review Landlord
+        </button>
+    </div>
+</section>
+
+<script type="module" src="/src/scripts/verifyLandlord.js"></script>

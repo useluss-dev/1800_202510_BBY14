@@ -115,7 +115,7 @@ getLandlordDocSnapshot()
         });
     })
     .catch((error) => {
-        console.log(error);
+        console.error(error);
         document.getElementById("landlord-null").classList.remove("hidden");
         document.getElementById("landlord-exists").classList.add("hidden");
     });

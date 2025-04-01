@@ -34,6 +34,8 @@ page("/profile", () =>
                 container.querySelector("#profile-name").textContent = email;
                 loadProfileReviewCards(user);
                 createAvatar(email, container);
+            } else {
+                loadContent("/src/partials/login.html", executeScripts);
             }
         });
     })

@@ -5,8 +5,8 @@ import { db, auth } from "./firebaseAPI_BBY14";
 //auth.signOut(); //temporaray
 async function setAuthPersistence() {
     try {
+        //Same account across all tabs, persists after browser restart
         await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-        console.log("Login persistence set to 'LOCAL'"); //Same account across all tabs, persists after browser restart
     } catch (error) {
         console.error("Error setting login persistence:", error);
     }
@@ -50,12 +50,6 @@ var uiConfig = {
             // The Firestore rules must allow the user to write.
             //------------------------------------------------------------------------------------------
             var user = authResult.user; // get the user object from the Firebase authentication database
-            if (authResult.additionalUserInfo.isNewUser) {
-                //if new user
-                console.log("new user");
-            } else {
-                console.log("old user");
-            }
             return false;
         },
         uiShown: function () {
@@ -76,26 +70,18 @@ var uiConfig = {
 
 async function handleUserAuthentication(user) {
     if (user) {
-        console.log("User authenticated uid:", user.uid, "email: ", user.email);
-
         try {
             const doc = await db.collection("users").doc(user.uid).get();
             if (!doc.exists) {
-                console.log("Firestore does not contain user data. Adding new record...");
                 await db.collection("users").doc(user.uid).set({
                     email: user.email,
                     reviews: [],
                 });
-                console.log("Firestore test write successful");
-            } else {
-                console.log("User data already exists in Firestore.");
             }
             window.location.assign("/profile");
         } catch (error) {
             console.error("Firestore error:", error);
         }
-    } else {
-        console.log("No user is signed in.");
     }
 }
 

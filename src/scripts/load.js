@@ -67,18 +67,15 @@ export async function loadLandlordCards() {
     try {
         const response = await db.collection("landlords").get();
         const landlords = response.docs.map((doc) => doc.data());
-        console.log("landlords original: ", landlords); // TODO: Remove debug print
 
         const filtered = searchLandlords(landlords);
         sortLandlords(filtered);
-        console.log("filtered: ", filtered); // TODO: Remove debug print
 
         const container = document.querySelector("#card-container");
         container.innerHTML = filtered.length > 0 ? "" : "No landlords found.";
 
         Promise.all(filtered.map((landlord) => createLandlordCard(landlord))).then(
             (landlordCards) => {
-                console.log(landlordCards);
                 landlordCards.forEach((card) => container.appendChild(card));
             }
         );

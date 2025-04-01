@@ -16,9 +16,5 @@ if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
 export const app = firebase.app();
-console.log("firebaseAPI: ", app);
-
 export const db = firebase.firestore();
-console.log("db: ", db);
-
 export const auth = firebase.auth();

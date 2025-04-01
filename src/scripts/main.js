@@ -12,40 +12,31 @@ import { createAvatar } from "./profile.js";
 // Define routes
 page("/", () =>
     loadContent("/src/partials/home.html", () => {
-        loadStaticComponent("/src/components/search-bar.html", "#logo");
+        loadStaticComponent("/src/components/search-bar.html", "#searchBar");
     })
 );
 page("/login", () => loadContent("/src/partials/login.html", executeScripts));
 page("/search", () =>
     loadContent("/src/partials/search.html", () => {
-        loadStaticComponent("/src/components/search-bar.html", "#search-bar");
+        loadStaticComponent("/src/components/search-bar.html", "#searchBar");
         loadLandlordCards();
     })
 );
-page("/review*", () => loadContent("/src/partials/review.html", executeScripts));
-page("/begin-review*", () => loadContent("/src/partials/begin-review.html", executeScripts));
-page("/verify-landlord*", () => loadContent("/src/partials/verify-landlord.html", executeScripts));
-page("/profile", () => loadContent("/src/partials/profile.html", async (container) => {
-    auth.onAuthStateChanged((user) => {
-        console.log("user ::", user);
-        if (user) {
-            const email = user.email;
-            console.log("container :", container);
-            container.querySelector("#profile-name").textContent = email;
-            loadProfileReviewCards(user);
-            createAvatar(email, container);
-
-            // Create Profile image
-            // const avatarPlaceholder = document.getElementById("avatarPlaceholder");
-            // const initial = email.trim().charAt(0).toUpperCase();
-            // avatarPlaceholder.textContent = initial;
-
-            // loadProfileReviewCards(user);
-        } else {
-            loadContent("/src/partials/login.html", executeScripts);
-        }
-    });
-})
+page("/review*", () => loadContent("/src/partials/reviewLandlord.html", executeScripts));
+page("/add-landlord*", () => loadContent("/src/partials/addLandlord.html", executeScripts));
+page("/verify-landlord*", () => loadContent("/src/partials/verifyLandlord.html", executeScripts));
+page("/landlord*", () => loadContent("/src/partials/landlord.html", executeScripts));
+page("/profile", () =>
+    loadContent("/src/partials/profile.html", async (container) => {
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                const email = user.email;
+                container.querySelector("#profile-name").textContent = email;
+                loadProfileReviewCards(user);
+                createAvatar(email, container);
+            }
+        });
+    })
 );
 
 

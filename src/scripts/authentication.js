@@ -28,8 +28,22 @@ loginForm.addEventListener("submit", async (e) => {
 
         await handleUserAuthentication(user);
     } catch (error) {
-        errorMessage.textContent = "Login failed: " + error.message;
+        if (error.code == "auth/user-not-found") {
+            console.log("here");
+            try {
+                const userCredential = await firebase
+                    .auth()
+                    .createUserWithEmailAndPassword(email, password);
+                await handleUserAuthentication(userCredential.user);
+            } catch (error) {
+                errorMessage.textContent = "Regestration failed: " + error.message;
+            }
+        } else {
+            errorMessage.textContent = "Login failed: " + error.message;
+        }
     }
+
+    await setTimeout();
 });
 
 // Initialize the FirebaseUI Widget using Firebase.

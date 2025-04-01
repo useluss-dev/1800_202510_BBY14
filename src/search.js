@@ -1,5 +1,6 @@
 import { parseLandlordName } from "./helper";
 import { loadComponent } from "./load";
+import { createAvatar } from "./profile";
 
 export function createLandlordCard({ firstName, lastName, rating, tags }) {
     return loadComponent(
@@ -8,6 +9,7 @@ export function createLandlordCard({ firstName, lastName, rating, tags }) {
         (container) => {
             container.querySelector("#name").textContent = firstName + " " + lastName;
             container.querySelector("#rating").textContent = rating.overall;
+            createAvatar(firstName, container);
         }
     );
 }

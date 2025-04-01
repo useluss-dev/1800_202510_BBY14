@@ -7,6 +7,7 @@ import {
     loadProfileReviewCards,
 } from "./load.js";
 import { auth } from "./firebaseAPI_BBY14.js";
+import { createAvatar } from "./profile.js";
 
 // Define routes
 page("/", () =>
@@ -29,20 +30,21 @@ page("/profile", () =>
     loadContent("/src/partials/profile.html", async (container) => {
         auth.onAuthStateChanged((user) => {
             if (user) {
-                const name = user.email;
-                container.querySelector("#profile-name").textContent = name;
+                const email = user.email;
+                container.querySelector("#profile-name").textContent = email;
                 loadProfileReviewCards(user);
+                createAvatar(email, container);
 
                 //Create Profile image
-                const avatarPlaceholder = document.getElementById("avatarPlaceholder");
-                const initial = name.trim().charAt(0).toUpperCase();
+                // const avatarPlaceholder = document.getElementById("avatarPlaceholder");
+                // const initial = name.trim().charAt(0).toUpperCase();
 
-                avatarPlaceholder.textContent = initial;
-                avatarPlaceholder.style.color = "white";
-                avatarPlaceholder.style.display = "flex";
-                avatarPlaceholder.style.alignItems = "center";
-                avatarPlaceholder.style.justifyContent = "center";
-                avatarPlaceholder.style.fontSize = "10em";
+                // avatarPlaceholder.textContent = initial;
+                // avatarPlaceholder.style.color = "white";
+                // avatarPlaceholder.style.display = "flex";
+                // avatarPlaceholder.style.alignItems = "center";
+                // avatarPlaceholder.style.justifyContent = "center";
+                // avatarPlaceholder.style.fontSize = "10em";
             }
         });
     })

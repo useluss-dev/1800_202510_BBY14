@@ -1,5 +1,14 @@
-<div class="flex-col pb-4">
-    <h2 id="name" class="text-base font-semibold"></h2>
+<div class="flex-col pb-4" data-review-id="">
+    <div class="flex items-center justify-between">
+        <h2 id="name" class="text-base font-semibold"></h2>
+        <button
+            type="submit"
+            class="p-2 border-2 text-red-500 border-black hover:bg-red-500 hover:text-white hover:border-black focus:outline-black transition-colors duration-200"
+            onclick="deleteReview(this)"
+        >
+            Delete Review
+        </button>
+    </div>
     <div class="flex items-center pb-1 text-sm text-gray-700">
         <img class="inline-block h-[1em] w-auto pr-2" src="/assets/StarIconYellow.svg" />
         <span id="rating"></span>

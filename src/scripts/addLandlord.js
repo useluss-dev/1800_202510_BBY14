@@ -1,4 +1,3 @@
-import firebase from "firebase";
 import { app, db } from "./firebaseAPI_BBY14";
 
 /** @type {HTMLFormElement} */
@@ -134,10 +133,10 @@ function modifyNoIdentifierErrorVisibility(identifierExists) {
 
 function applyFieldsFromQuery() {
     for (const [key, value] of urlParameters) {
-        if (key == "firstName" || key == "lastName" || key == "facebookLink") {
+        if (key == "firstName" || key == "lastName" || key == "facebookLink" || key == "email") {
             addLandlordForm.elements[key].value = value;
         }
-        if (key.startsWith("email")) appendFieldWithExistingValue("email", value);
+        // if (key.startsWith("email")) appendFieldWithExistingValue("email", value);
         else if (key.startsWith("phone")) appendFieldWithExistingValue("phone", value);
     }
 }
@@ -185,7 +184,7 @@ addLandlordForm.addEventListener("submit", (event) => {
             allowEmpty = false;
         } else if (key == "facebookLink") {
             valid = value.match(
-                /^(https?:\/\/)?(www\.)?facebook\.com\/(profile\.php\?id=\d+|[a-zA-Z0-9.]+)\/?$/
+                /^(https?:\/\/)?(www\.)?facebook\.com\/marketplace\/profile\/\d+\/?$/
             );
             if (!identifierExists) identifierExists = value.length > 0;
         } else if (key.startsWith("email")) {

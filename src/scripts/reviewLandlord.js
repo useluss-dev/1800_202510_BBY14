@@ -9,6 +9,8 @@ const landlordId = urlParameters.get("landlord");
 const reviewSection = document.getElementById("landlordExists");
 const nullSection = document.getElementById("landlordNull");
 
+const dbReview = db.collection("reviews");
+
 /** @type {HTMLFormElement} */
 const form = document.forms.review;
 
@@ -208,7 +210,7 @@ function showNullSection() {
     nullSection.classList.remove("hidden");
 }
 
-function hideAllInvalidElements() {}
+function hideAllInvalidElements() { }
 
 /**
  * @param {firebase.firestore.DocumentData} landlordData
@@ -268,14 +270,30 @@ function isReviewFormValid() {
 form.addEventListener("submit", (event) => {
     event.preventDefault();
 
+    const formData = new FormData(form);
+    // for (const [key, value] of formData.entries()) {
+    //     console.log(`${key}: ${value}`);
+    // }
     if (!isReviewFormValid()) {
         document.getElementById("requiredError").classList.remove("opacity-0");
         return;
     }
 
     // Submit review placed here
+    const reviewData = {
+        behavior: formData.get("behavior"),
+        rules: formData.get("rules"),
+        quality: formData.get("quality"),
+        rent: formData.get("rent"),
+        title: formData.get("title"),
+        content: formData.get("content")
+    };
 
-    dbLandlord.doc(landlordId).set();
+    console.log("Review Data to Submit:", reviewData);
+
+    dbReview.doc(landlordId).set(reviewData);
+
+    window.location.href = `/landlord/${landlordId}`;
 });
 
 setupReview();

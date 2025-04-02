@@ -62,6 +62,30 @@ page("/landlord/:id", (ctx) => {
                 container.querySelector("#ratingRent").textContent =
                     data.rating.listingRent || "0.0";
 
+                //reviews
+                const reviewSnapshot = await db.collection("reviews").where("landlordId", "==", landlordId)
+                    .get();
+                if (reviewSnapshot.empty) {
+                    // reviewContainer.innerHTML = "<p>No reviews yet.</p>";
+                } else {
+                    reviewSnapshot.forEach((reviewDoc) => {
+                        const review = reviewDoc.data();
+                        console.log("review : ", review);
+                        const div = document.createElement("div");
+                        div.className = "review-card";
+                        div.innerHTML = `
+                            <h4>${review.title || "No title"}</h4>
+                            <p>${review.content || "No content"}</p>
+                            <p><strong>Behavior:</strong> ${review.ratings.behavior ?? "N/A"}</p>
+                            <p><strong>Listing Quality:</strong> ${review.ratings.listingQuality ?? "N/A"}</p>
+                            <p><strong>Listing Rent:</strong> ${review.ratings.listingRent ?? "N/A"}</p>
+                            <p><strong>Rules:</strong> ${review.ratings.rules ?? "N/A"}</p>
+                            <p><strong>Overall:</strong> ${review.ratings.overall ?? "N/A"}</p>
+                        `;
+                        reviewContainer.appendChild(div);
+                    });
+                }
+
                 // Optionally update other elements like contact links
                 // container.querySelector("#facebookProfileLink a").href = data.facebookURL;
                 // container.querySelector("#emailAddressEntries a").href = `mailto:${data.email}`;

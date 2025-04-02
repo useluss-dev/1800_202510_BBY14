@@ -211,8 +211,6 @@ function showNullSection() {
     nullSection.classList.remove("hidden");
 }
 
-function hideAllInvalidElements() {}
-
 /**
  * @param {firebase.firestore.DocumentData} landlordData
  */
@@ -259,7 +257,6 @@ function isReviewFormValid() {
                 break;
 
             case "content":
-            case "tags":
             case "title":
                 if (value.length == 0) return false;
                 break;
@@ -291,7 +288,7 @@ form.addEventListener("submit", (event) => {
         ratingSum += ratings[key];
     }
 
-    // Set overal to rating average
+    // Set overall to rating average
     ratings.overall = ratingSum / 4;
     console.log(ratings);
 
@@ -303,10 +300,6 @@ form.addEventListener("submit", (event) => {
         createdAt: firebase.firestore.Timestamp.now(),
         title: formData.get("title"),
         content: formData.get("content"),
-        ratings: ratings,
-        tags: trimmedTags,
-        landlordId: landlordId,
-        ratings: ratings,
     };
 
     // Submit review

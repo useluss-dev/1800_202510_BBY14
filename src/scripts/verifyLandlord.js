@@ -1,9 +1,5 @@
 import { app, db } from "./firebaseAPI_BBY14";
 
-const dbLandlord = db.collection("landlords");
-const urlParameters = new URLSearchParams(window.location.search);
-const landlordData = getLandlordData(urlParameters);
-
 const defaultStyle = {
     a: "text-teal-500 underline line-clamp-1",
 };
@@ -91,6 +87,12 @@ function getMarketplaceId(marketplaceLink) {
     return marketplaceId;
 }
 
+// Variables //
+
+const dbLandlord = db.collection("landlords");
+const urlParameters = new URLSearchParams(window.location.search);
+const landlordData = getLandlordData(urlParameters);
+
 // Event Listeners //
 
 document.getElementById("editLandlord").addEventListener("click", (event) => {
@@ -103,7 +105,6 @@ document.getElementById("reviewLandlord").addEventListener("click", (event) => {
             firstName: landlordData.firstName,
             lastName: landlordData.lastName,
             email: landlordData.email,
-            phoneNumbers: landlordData.phone,
             marketplaceId: getMarketplaceId(landlordData.facebookLink),
             rating: {
                 behavior: 1,

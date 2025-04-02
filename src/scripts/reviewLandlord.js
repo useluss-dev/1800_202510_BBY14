@@ -281,8 +281,6 @@ form.addEventListener("submit", (event) => {
     }
 
     // Format review form data
-
-    // Submit review
     const reviewData = {
         behavior: formData.get("behavior"),
         rules: formData.get("rules"),
@@ -292,8 +290,7 @@ form.addEventListener("submit", (event) => {
         content: formData.get("content")
     };
 
-    console.log("Review Data to Submit:", reviewData);
-
+    // Submit review
     dbReview.doc(landlordId).set(reviewData);
 
     window.location.href = `/landlord/${landlordId}`;

@@ -210,8 +210,6 @@ function showNullSection() {
     nullSection.classList.remove("hidden");
 }
 
-function hideAllInvalidElements() { }
-
 /**
  * @param {firebase.firestore.DocumentData} landlordData
  */
@@ -258,7 +256,6 @@ function isReviewFormValid() {
                 break;
 
             case "content":
-            case "tags":
             case "title":
                 if (value.length == 0) return false;
                 break;
@@ -287,7 +284,7 @@ form.addEventListener("submit", (event) => {
         quality: formData.get("quality"),
         rent: formData.get("rent"),
         title: formData.get("title"),
-        content: formData.get("content")
+        content: formData.get("content"),
     };
 
     // Submit review

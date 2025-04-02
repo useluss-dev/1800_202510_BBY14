@@ -3,6 +3,7 @@ import { app, db } from "./firebaseAPI_BBY14";
 
 const urlParameters = new URLSearchParams(window.location.search);
 
+const dbUser = db.collection("users");
 const dbLandlord = db.collection("landlords");
 const landlordId = urlParameters.get("landlord");
 
@@ -269,28 +270,68 @@ form.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const formData = new FormData(form);
-    // for (const [key, value] of formData.entries()) {
-    //     console.log(`${key}: ${value}`);
-    // }
     if (!isReviewFormValid()) {
         document.getElementById("requiredError").classList.remove("opacity-0");
         return;
     }
 
     // Format review form data
+    const ratings = {
+        behavior: parseInt(formData.get("behavior"), 10),
+        rules: parseInt(formData.get("rules"), 10),
+        quality: parseInt(formData.get("quality"), 10),
+        rent: parseInt(formData.get("rent"), 10),
+    };
+
+    let ratingSum = 0;
+    for (let key in ratings) {
+        ratingSum += ratings[key];
+    }
+
+    // Set overall to rating average
+    ratings.overall = ratingSum / 4;
+    console.log(ratings);
+
+    const tags = formData.get("tags").split(",");
+    const trimmedTags = tags.map((tag) => tag.trim());
+    console.log(trimmedTags);
+
     const reviewData = {
-        behavior: formData.get("behavior"),
-        rules: formData.get("rules"),
-        quality: formData.get("quality"),
-        rent: formData.get("rent"),
+        createdAt: firebase.firestore.Timestamp.now(),
         title: formData.get("title"),
         content: formData.get("content"),
     };
 
     // Submit review
-    dbReview.doc(landlordId).set(reviewData);
+    const reviewRef = dbReview
+        .add(reviewData)
+        .then((reviewRef) => {
+            const reviewId = reviewRef.id;
 
-    window.location.href = `/landlord/${landlordId}`;
+            // References for landlord and user documents
+            const landlordRef = dbLandlord.doc(landlordId);
+            const currentUser = firebase.auth().currentUser;
+            const userRef = dbUser.doc(currentUser.uid);
+
+            // Update landlord and user docs by adding the reviewId to their 'reviews' array
+            const updateLandlord = landlordRef.update({
+                reviews: firebase.firestore.FieldValue.arrayUnion(reviewId),
+            });
+
+            const updateUser = userRef.update({
+                reviews: firebase.firestore.FieldValue.arrayUnion(reviewId),
+            });
+
+            // Wait for both updates to complete
+            return Promise.all([updateLandlord, updateUser]);
+        })
+        .then(() => {
+            console.log("Review ID added to both landlord and user documents.");
+            window.location.href = `/landlord/${landlordId}`;
+        })
+        .catch((error) => {
+            console.error("Error adding review or updating documents:", error);
+        });
 });
 
 setupReview();

@@ -1,8 +1,10 @@
 import firebase from "firebase";
 import { app, db } from "./firebaseAPI_BBY14";
 
-const dbLandlord = db.collection("landlords");
 const urlParameters = new URLSearchParams(window.location.search);
+
+const dbLandlord = db.collection("landlords");
+const landlordId = urlParameters.get("landlord");
 
 const reviewSection = document.getElementById("landlordExists");
 const nullSection = document.getElementById("landlordNull");
@@ -220,8 +222,6 @@ function displayLandlordData(landlordData) {
 }
 
 function setupReview() {
-    const landlordId = urlParameters.get("landlord");
-
     if (landlordId) {
         dbLandlord
             .doc(landlordId)
@@ -241,35 +241,41 @@ function setupReview() {
     showNullSection();
 }
 
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
+function isReviewFormValid() {
     const formData = new FormData(form);
-
-    let valid = true;
 
     for (const entry of formData) {
         const [key, value] = entry;
 
-        if (valid)
-            switch (key) {
-                case "behavior":
-                case "rules":
-                case "quality":
-                case "rent":
-                    valid = value > 0;
-                    break;
+        switch (key) {
+            case "behavior":
+            case "rules":
+            case "quality":
+            case "rent":
+                if (value == 0) return false;
+                break;
 
-                case "title":
-                case "content":
-                    valid = value.length > 0;
-                    break;
-            }
+            case "title":
+            case "content":
+                if (value.length == 0) return false;
+                break;
+        }
     }
 
-    if (!valid) {
+    return true;
+}
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (!isReviewFormValid()) {
         document.getElementById("requiredError").classList.remove("opacity-0");
+        return;
     }
+
+    // Submit review placed here
+
+    dbLandlord.doc(landlordId).set();
 });
 
 setupReview();

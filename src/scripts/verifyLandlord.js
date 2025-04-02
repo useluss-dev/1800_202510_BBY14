@@ -65,18 +65,15 @@ function displayLandlordData(landlordData) {
     const name = document.getElementById("landlordName");
     const facebookLink = document.getElementById("facebookLink");
     const email = document.getElementById("emailAddresses");
-    const phone = document.getElementById("phoneNumbers");
 
     name.textContent = landlordData.firstName + " " + landlordData.lastName;
     console.log(landlordData.email);
     addLinksToElement(facebookLink, landlordData.facebookLink);
     addSchemeLinksToElement("mailto:", email, landlordData.email);
-    addSchemeLinksToElement("tel:+1", phone, ...landlordData.phone);
 
-    [facebookLink, email, phone].forEach((element) => {
+    [facebookLink, email].forEach((element) => {
         if (element.childElementCount == 0) element.parentElement.remove();
     });
-    console.log("here");
 }
 
 /**

@@ -1,4 +1,3 @@
-import firebase from "firebase";
 import { app, db } from "./firebaseAPI_BBY14";
 
 const dbLandlord = db.collection("landlords");
@@ -85,11 +84,13 @@ function displayLandlordData(landlordData) {
  * @param {string} facebookLink
  * @return {{marketplace: string, profile: string}}
  */
-function getFacebookIdsFromLink(facebookLink) {
-    const facebookLinkUrl = facebookLink ? new URL(facebookLink) : null;
-    const facebookIds = { marketplace: "", profile: "" };
+function getMarketplaceId(marketplaceLink) {
+    const marketplaceURL = marketplaceLink ? new URL(marketplaceLink) : null;
+    const parts = marketplaceURL.pathname.split("/");
+    console.log(parts);
 
-    return facebookIds;
+    const marketplaceId = parts[3];
+    return marketplaceId;
 }
 
 // Event Listeners //
@@ -105,7 +106,7 @@ document.getElementById("reviewLandlord").addEventListener("click", (event) => {
             lastName: landlordData.lastName,
             emailAddresses: landlordData.email,
             phoneNumbers: landlordData.phone,
-            facebookIds: getFacebookIdsFromLink(landlordData.facebookLink),
+            marketplaceId: getMarketplaceId(landlordData.facebookLink),
             rating: {
                 behavior: 1,
                 listingAmenities: 1,

@@ -133,10 +133,10 @@ function modifyNoIdentifierErrorVisibility(identifierExists) {
 
 function applyFieldsFromQuery() {
     for (const [key, value] of urlParameters) {
-        if (key == "firstName" || key == "lastName" || key == "facebookLink") {
+        if (key == "firstName" || key == "lastName" || key == "facebookLink" || key == "email") {
             addLandlordForm.elements[key].value = value;
         }
-        if (key.startsWith("email")) appendFieldWithExistingValue("email", value);
+        // if (key.startsWith("email")) appendFieldWithExistingValue("email", value);
         else if (key.startsWith("phone")) appendFieldWithExistingValue("phone", value);
     }
 }

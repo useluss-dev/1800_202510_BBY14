@@ -17,11 +17,9 @@ function getLandlordData(urlParameters) {
     const landlordData = {};
 
     for (const [key, value] of urlParameters) {
-        if (key == "firstName" || key == "lastName" || key == "facebookLink") {
+        if (key == "firstName" || key == "lastName" || key == "facebookLink" || key == "email") {
             landlordData[key] = value;
-        } else if (key.startsWith("email")) {
-            if (landlordData.email == undefined) landlordData.email = [];
-            if (value.length != 0) landlordData.email.push(value);
+            console.log(landlordData);
         } else if (key.startsWith("phone")) {
             if (landlordData.phone == undefined) landlordData.phone = [];
             if (value.length != 0) landlordData.phone.push(value);
@@ -104,7 +102,7 @@ document.getElementById("reviewLandlord").addEventListener("click", (event) => {
         .add({
             firstName: landlordData.firstName,
             lastName: landlordData.lastName,
-            emailAddresses: landlordData.email,
+            email: landlordData.email,
             phoneNumbers: landlordData.phone,
             marketplaceId: getMarketplaceId(landlordData.facebookLink),
             rating: {

@@ -5,7 +5,7 @@
 <section id="landlordExists" class="w-full max-w-xl px-main mt-16 mx-auto">
     <h1 class="mb-12">Review <span id="firstName">First</span> <span id="lastName">Last</span></h1>
 
-    <form name="review" action="/submitted" method="get">
+    <form name="review" action="/submitted" method="get" class="mb-2">
         <!-- Landlord Behavior -->
         <fieldset class="mb-8">
             <legend class="mb-1 text-lg text-gray-500 font-bold uppercase">
@@ -35,7 +35,7 @@
             </legend>
             <p class="mb-2 text-sm text-gray-500">
                 If the property is clean, has adequate utilities, and amenities that benefit you,
-                give it a higher rating.
+                give them a higher rating.
             </p>
             <div id="qualityField"></div>
         </fieldset>
@@ -46,7 +46,7 @@
                 Rent Price <span class="text-red-500">*</span>
             </legend>
             <p class="mb-2 text-sm text-gray-500">
-                If the rent is cheap, or it makes sense, give it a higher rating.
+                If the rent is cheap, or it makes sense, give them a higher rating.
             </p>
             <div id="rentField"></div>
         </fieldset>
@@ -82,6 +82,10 @@
             Submit Review
         </button>
     </form>
+
+    <p id="requiredError" class="opacity-0 text-red-500 transition">
+        Required fields (*) must be filled out!
+    </p>
 </section>
 
 <script type="module" src="/src/scripts/reviewLandlord.js"></script>

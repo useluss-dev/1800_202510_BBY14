@@ -30,6 +30,7 @@ const defaultSrc = {
 };
 
 /**
+ * Creates the necessary elements for a clear button on star inputs.
  * @param {HTMLDivElement} fieldDiv
  * @returns {StarClear}
  */
@@ -43,6 +44,7 @@ function createStarClear(fieldDiv) {
 }
 
 /**
+ * Creates the necessary elements for a singular star input.
  * @param {HTMLDivElement} starDiv
  * @returns {Star}
  */
@@ -56,6 +58,8 @@ function createStarInput(starDiv) {
 }
 
 /**
+ * Sets up the clear button with necessary attributes. It also provides
+ * a setupCallback for changes on styling of these elements.
  * @param {string} purpose
  * @param {HTMLDivElement} fieldDiv
  * @param {(starClear: StarClear) => void} setupCallback
@@ -78,6 +82,8 @@ function setupStarClear(purpose, fieldDiv, setupCallback) {
 }
 
 /**
+ * Sets up the star inputs with necessary attributes. It also provides
+ * a setupCallback for changes on styling of these elements.
  * @param {string} purpose
  * @param {HTMLDivElement} starDiv
  * @param {(star: Star) => void} setupCallback
@@ -99,8 +105,10 @@ function setupStarInputs(purpose, starDiv, setupCallback) {
 }
 
 /**
+ * Sets up the whole star input system.
  * @param {string} purpose
- * @param {boolean} optional
+ * @param {boolean} optional If true, it sets up a clear button for
+ *                           optional rating inputs.
  * @param {{ [key: string]: string | null }} styles
  */
 function setupStarField(purpose, optional, styles = {}) {
@@ -156,6 +164,8 @@ function setupStarField(purpose, optional, styles = {}) {
 }
 
 /**
+ * Modifies the styling/look of the star input and clear button elements, depending
+ * on the set input value.
  * @param {string} purpose
  * @param {string | number} chosenValue
  */
@@ -196,11 +206,35 @@ function showNullSection() {
     nullSection.classList.remove("hidden");
 }
 
+function hideAllInvalidElements() {}
+
+/**
+ * @param {firebase.firestore.DocumentData} landlordData
+ */
+function displayLandlordData(landlordData) {
+    const firstName = document.getElementById("firstName");
+    const lastName = document.getElementById("lastName");
+
+    firstName.textContent = landlordData.firstName;
+    lastName.textContent = landlordData.lastName;
+}
+
 function setupReview() {
     const landlordId = urlParameters.get("landlord");
 
     if (landlordId) {
-        showReviewSection();
+        dbLandlord
+            .doc(landlordId)
+            .get()
+            .then((doc) => {
+                if (doc.exists) {
+                    displayLandlordData(doc.data());
+                    showReviewSection();
+                } else showNullSection();
+            })
+            .catch((error) => {
+                showNullSection();
+            });
         return;
     }
 
@@ -209,6 +243,33 @@ function setupReview() {
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
+
+    const formData = new FormData(form);
+
+    let valid = true;
+
+    for (const entry of formData) {
+        const [key, value] = entry;
+
+        if (valid)
+            switch (key) {
+                case "behavior":
+                case "rules":
+                case "quality":
+                case "rent":
+                    valid = value > 0;
+                    break;
+
+                case "title":
+                case "content":
+                    valid = value.length > 0;
+                    break;
+            }
+    }
+
+    if (!valid) {
+        document.getElementById("requiredError").classList.remove("opacity-0");
+    }
 });
 
 setupReview();

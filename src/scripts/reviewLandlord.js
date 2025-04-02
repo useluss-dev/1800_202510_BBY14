@@ -255,8 +255,9 @@ function isReviewFormValid() {
                 if (value == 0) return false;
                 break;
 
-            case "title":
             case "content":
+            case "tags":
+            case "title":
                 if (value.length == 0) return false;
                 break;
         }
@@ -273,7 +274,9 @@ form.addEventListener("submit", (event) => {
         return;
     }
 
-    // Submit review placed here
+    // Format review form data
+
+    // Submit review
 
     dbLandlord.doc(landlordId).set();
 });

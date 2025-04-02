@@ -102,9 +102,8 @@ function modifyErrorVisibility(...invalid) {
     const invalidName = document.getElementById("invalidName").classList;
     const invalidFacebook = document.getElementById("invalidFacebook").classList;
     const invalidEmail = document.getElementById("invalidEmail").classList;
-    const invalidPhone = document.getElementById("invalidPhone").classList;
 
-    [invalidName, invalidFacebook, invalidEmail, invalidPhone].forEach((tokenList) => {
+    [invalidName, invalidFacebook, invalidEmail].forEach((tokenList) => {
         tokenList.add("hidden");
     });
 
@@ -112,7 +111,6 @@ function modifyErrorVisibility(...invalid) {
         if (key == "firstName" || key == "lastName") invalidName.remove("hidden");
         else if (key == "facebookLink") invalidFacebook.remove("hidden");
         else if (key.startsWith("email")) invalidEmail.remove("hidden");
-        else if (key.startsWith("phone")) invalidPhone.remove("hidden");
     });
 }
 
@@ -133,10 +131,10 @@ function modifyNoIdentifierErrorVisibility(identifierExists) {
 
 function applyFieldsFromQuery() {
     for (const [key, value] of urlParameters) {
-        if (key == "firstName" || key == "lastName" || key == "facebookLink") {
+        if (key == "firstName" || key == "lastName" || key == "facebookLink" || key == "email") {
             addLandlordForm.elements[key].value = value;
         }
-        if (key.startsWith("email")) appendFieldWithExistingValue("email", value);
+        // if (key.startsWith("email")) appendFieldWithExistingValue("email", value);
         else if (key.startsWith("phone")) appendFieldWithExistingValue("phone", value);
     }
 }
@@ -161,10 +159,6 @@ function setFieldAddEventListener(purpose, placeholder) {
 
 // Event Listeners
 
-setFieldAddEventListener("email");
-modifyFieldStyle("email");
-setFieldAddEventListener("phone");
-modifyFieldStyle("phone");
 applyFieldsFromQuery();
 
 addLandlordForm.addEventListener("submit", (event) => {
@@ -187,11 +181,8 @@ addLandlordForm.addEventListener("submit", (event) => {
                 /^(https?:\/\/)?(www\.)?facebook\.com\/marketplace\/profile\/\d+\/?$/
             );
             if (!identifierExists) identifierExists = value.length > 0;
-        } else if (key.startsWith("email")) {
+        } else if (key == "email") {
             valid = value.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
-            if (!identifierExists) identifierExists = value.length > 0;
-        } else if (key.startsWith("phone")) {
-            valid = value.match(/^(\+1\s?)?(\(?\d{3}\)?[\s\-]?)?\d{3}[\s\-]?\d{4}$/);
             if (!identifierExists) identifierExists = value.length > 0;
         }
 

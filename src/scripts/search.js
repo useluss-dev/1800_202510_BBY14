@@ -2,7 +2,7 @@ import { parseLandlordName } from "./helper";
 import { loadComponent } from "./load";
 import { createAvatar } from "./profile";
 
-export function createLandlordCard({ firstName, lastName, rating, tags }) {
+export function createLandlordCard({ id, firstName, lastName, rating, tags }) {
     return loadComponent(
         "/src/components/landlord-card.html",
         "w-full not-last:mb-6 p-4 border-2 border-black",
@@ -13,12 +13,19 @@ export function createLandlordCard({ firstName, lastName, rating, tags }) {
             //tags
             let tagHtml = "";
             for (let i = 0; i < tags.length; i++) {
-                tagHtml += "<span class=\"px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full\"> ";
+                tagHtml +=
+                    '<span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full"> ';
                 tagHtml += tags[i];
                 tagHtml += "  </span>";
             }
             container.querySelector("#tags").innerHTML = tagHtml;
 
+            // Make the entire card clickable by adding a click event listener
+            container.style.cursor = "pointer";
+            container.addEventListener("click", () => {
+                // Redirect to the landlord page using the document id
+                window.location.href = `/landlord/${id}`;
+            });
         }
     );
 }

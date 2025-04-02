@@ -66,7 +66,7 @@ export async function loadComponent(componentPath, containerClass, updateCallbac
 export async function loadLandlordCards() {
     try {
         const response = await db.collection("landlords").get();
-        const landlords = response.docs.map((doc) => doc.data());
+        const landlords = response.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
         const filtered = searchLandlords(landlords);
         sortLandlords(filtered);

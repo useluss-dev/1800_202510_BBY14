@@ -41,35 +41,30 @@
 
         <fieldset class="mb-4">
             <legend>Email Address <span class="text-red-500">**</span></legend>
-            <div id="emailFieldsExtensible">
-                <input
-                    type="text"
-                    name="email"
-                    placeholder="Email address"
-                    class="w-full p-2 focus:outline-0"
-                />
-            </div>
-            <button id="emailAdd" type="button">+</button>
+            <input
+                type="text"
+                name="email"
+                placeholder="Email address"
+                class="w-full p-2 border-2 focus:outline-0"
+            />
             <p class="hidden text-red-500" id="invalidEmail">
                 Invalid email address(es)! Format must be person@domain.com
             </p>
         </fieldset>
 
-        <fieldset class="mb-4">
+        <!-- <fieldset class="mb-4">
             <legend>Phone Number(s) <span class="text-red-500">**</span></legend>
-            <div id="phoneFieldsExtensible">
-                <input
-                    type="text"
-                    name="phoneField0"
-                    placeholder="Phone Number"
-                    class="w-full p-2 focus:outline-0"
-                />
-            </div>
+            <input
+                type="text"
+                name="phoneField0"
+                placeholder="Phone Number"
+                class="w-full p-2 focus:outline-0"
+            />
             <button id="phoneAdd" type="button">+</button>
             <p class="hidden text-red-500" id="invalidPhone">
                 Invalid phone number(s)! Must be a Canadian/US phone number
             </p>
-        </fieldset>
+        </fieldset> -->
 
         <p id="noIdentifierError" class="mb-4 text-gray-500 text-sm transition-all">
             ** At least one of these fields must be filled out

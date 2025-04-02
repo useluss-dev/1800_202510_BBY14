@@ -257,8 +257,9 @@ function isReviewFormValid() {
                 if (value == 0) return false;
                 break;
 
-            case "title":
             case "content":
+            case "tags":
+            case "title":
                 if (value.length == 0) return false;
                 break;
         }
@@ -279,7 +280,9 @@ form.addEventListener("submit", (event) => {
         return;
     }
 
-    // Submit review placed here
+    // Format review form data
+
+    // Submit review
     const reviewData = {
         behavior: formData.get("behavior"),
         rules: formData.get("rules"),

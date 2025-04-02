@@ -19,7 +19,6 @@ function getLandlordData(urlParameters) {
     for (const [key, value] of urlParameters) {
         if (key == "firstName" || key == "lastName" || key == "facebookLink" || key == "email") {
             landlordData[key] = value;
-            console.log(landlordData);
         } else if (key.startsWith("phone")) {
             if (landlordData.phone == undefined) landlordData.phone = [];
             if (value.length != 0) landlordData.phone.push(value);
@@ -69,13 +68,15 @@ function displayLandlordData(landlordData) {
     const phone = document.getElementById("phoneNumbers");
 
     name.textContent = landlordData.firstName + " " + landlordData.lastName;
+    console.log(landlordData.email);
     addLinksToElement(facebookLink, landlordData.facebookLink);
-    addSchemeLinksToElement("mailto:", email, ...landlordData.email);
+    addSchemeLinksToElement("mailto:", email, landlordData.email);
     addSchemeLinksToElement("tel:+1", phone, ...landlordData.phone);
 
     [facebookLink, email, phone].forEach((element) => {
         if (element.childElementCount == 0) element.parentElement.remove();
     });
+    console.log("here");
 }
 
 /**
@@ -84,9 +85,11 @@ function displayLandlordData(landlordData) {
  */
 function getMarketplaceId(marketplaceLink) {
     const marketplaceURL = marketplaceLink ? new URL(marketplaceLink) : null;
-    const parts = marketplaceURL.pathname.split("/");
-    console.log(parts);
+    if (marketplaceURL == null) {
+        return "";
+    }
 
+    const parts = marketplaceURL.pathname.split("/");
     const marketplaceId = parts[3];
     return marketplaceId;
 }

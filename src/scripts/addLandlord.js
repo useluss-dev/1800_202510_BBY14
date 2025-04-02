@@ -134,8 +134,6 @@ function applyFieldsFromQuery() {
         if (key == "firstName" || key == "lastName" || key == "facebookLink" || key == "email") {
             addLandlordForm.elements[key].value = value;
         }
-        // if (key.startsWith("email")) appendFieldWithExistingValue("email", value);
-        else if (key.startsWith("phone")) appendFieldWithExistingValue("phone", value);
     }
 }
 

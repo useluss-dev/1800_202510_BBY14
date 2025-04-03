@@ -53,13 +53,11 @@
 
         <!-- Tags -->
         <fieldset class="mb-8">
-            <legend class="mb-1 text-lg text-gray-500 font-bold uppercase">
-                Tags <span class="text-red-500">*</span>
-            </legend>
+            <legend class="mb-1 text-lg text-gray-500 font-bold uppercase">Tags</legend>
             <p class="mb-2 text-sm text-gray-500">
                 Provide relevant 1-2 word descriptors for this landlord. Separate with commas.
             </p>
-            <input type="text" id="tags" class="p-2 border-2 w-full" placeholder="Tags" />
+            <input type="text" name="tags" class="p-2 border-2 w-full" placeholder="Tags" />
         </fieldset>
 
         <!-- Title -->
@@ -67,8 +65,12 @@
             <legend class="mb-1 text-lg text-gray-500 font-bold uppercase">
                 Title <span class="text-red-500">*</span>
             </legend>
-            <input type="text" name="title" class="p-2 w-full border-2"
-                placeholder="Give a short description of your review." />
+            <input
+                type="text"
+                name="title"
+                class="p-2 w-full border-2"
+                placeholder="Give a short description of your review."
+            />
         </fieldset>
 
         <!-- Written Review -->
@@ -76,11 +78,18 @@
             <legend class="mb-1 text-lg text-gray-500 font-bold uppercase">
                 Written Review <span class="text-red-500">*</span>
             </legend>
-            <textarea name="content" id="" class="p-2 border-2 w-full min-h-48 resize-y"
-                placeholder="Write your review here."></textarea>
+            <textarea
+                name="content"
+                id=""
+                class="p-2 border-2 w-full min-h-48 resize-y"
+                placeholder="Write your review here."
+            ></textarea>
         </fieldset>
 
-        <button class="w-full p-2 border-2 hover:border-black hover:bg-black hover:text-white transition" type="submit">
+        <button
+            class="w-full p-2 border-2 hover:border-black hover:bg-black hover:text-white transition"
+            type="submit"
+        >
             Submit Review
         </button>
     </form>

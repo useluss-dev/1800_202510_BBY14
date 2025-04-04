@@ -53,17 +53,18 @@ page("/landlord/:id", (ctx) => {
                 container.querySelector("#firstName").textContent = data.firstName || "N/A";
                 container.querySelector("#lastName").textContent = data.lastName || "N/A";
                 container.querySelector("#ratingOverall").textContent =
-                    data.rating.overall || "0.0";
+                    data.ratings.overall || "0.0";
                 container.querySelector("#ratingBehavior").textContent =
-                    data.rating.behavior || "0.0";
-                container.querySelector("#ratingRules").textContent = data.rating.rules || "0.0";
+                    data.ratings.behavior || "0.0";
+                container.querySelector("#ratingRules").textContent = data.ratings.rules || "0.0";
                 container.querySelector("#ratingQuality").textContent =
-                    data.rating.listingQuality || "0.0";
-                container.querySelector("#ratingRent").textContent =
-                    data.rating.listingRent || "0.0";
+                    data.ratings.quality || "0.0";
+                container.querySelector("#ratingRent").textContent = data.ratings.rent || "0.0";
 
                 //reviews
-                const reviewSnapshot = await db.collection("reviews").where("landlordId", "==", landlordId)
+                const reviewSnapshot = await db
+                    .collection("reviews")
+                    .where("landlordId", "==", landlordId)
                     .get();
                 if (reviewSnapshot.empty) {
                     // reviewContainer.innerHTML = "<p>No reviews yet.</p>";
@@ -77,19 +78,18 @@ page("/landlord/:id", (ctx) => {
                             <h4>${review.title || "No title"}</h4>
                             <p>${review.content || "No content"}</p>
                             <p><strong>Behavior:</strong> ${review.ratings.behavior ?? "N/A"}</p>
-                            <p><strong>Listing Quality:</strong> ${review.ratings.listingQuality ?? "N/A"}</p>
-                            <p><strong>Listing Rent:</strong> ${review.ratings.listingRent ?? "N/A"}</p>
+                            <p><strong>Listing Quality:</strong> ${
+                                review.ratings.listingQuality ?? "N/A"
+                            }</p>
+                            <p><strong>Listing Rent:</strong> ${
+                                review.ratings.listingRent ?? "N/A"
+                            }</p>
                             <p><strong>Rules:</strong> ${review.ratings.rules ?? "N/A"}</p>
                             <p><strong>Overall:</strong> ${review.ratings.overall ?? "N/A"}</p>
                         `;
-                        reviewContainer.appendChild(div);
+                        // reviewContainer.appendChild(div);
                     });
                 }
-
-                // Optionally update other elements like contact links
-                // container.querySelector("#facebookProfileLink a").href = data.facebookURL;
-                // container.querySelector("#emailAddressEntries a").href = `mailto:${data.email}`;
-                // container.querySelector("#phoneNumberEntries a").href = `tel:${data.phone}`;
             } else {
                 // If the document does not exist, show a not found message
                 container.querySelector("#landlordNull").classList.remove("hidden");
@@ -100,7 +100,6 @@ page("/landlord/:id", (ctx) => {
         }
     });
 });
-
 page("/profile", () =>
     loadContent("/src/partials/profile.html", async (container) => {
         auth.onAuthStateChanged((user) => {

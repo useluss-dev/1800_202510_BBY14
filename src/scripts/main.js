@@ -8,6 +8,7 @@ import {
 } from "./load.js";
 import { db, auth } from "./firebaseAPI_BBY14.js";
 import { createAvatar } from "./profile.js";
+import { createReviewCardLandlord } from "./landlord.js";
 
 // Define routes
 page("/", () =>
@@ -27,6 +28,7 @@ page("/add-landlord*", () => loadContent("/src/partials/addLandlord.html", execu
 page("/verify-landlord*", () => loadContent("/src/partials/verifyLandlord.html", executeScripts));
 page("/landlord/:id", (ctx) => {
     loadContent("/src/partials/landlord.html", async (container) => {
+        executeScripts(container);
         const landlordId = ctx.params.id;
         // Now fetch the Firestore document using the ID
         try {
@@ -68,8 +70,16 @@ page("/landlord/:id", (ctx) => {
                 if (reviewSnapshot.empty) {
                     // reviewContainer.innerHTML = "<p>No reviews yet.</p>";
                 } else {
+                    const reviewsSection = document.getElementById("reviews");
                     reviewSnapshot.forEach((reviewDoc) => {
                         const review = reviewDoc.data();
+                        console.log("reviewDoc : ", reviewDoc);
+                        console.log("review : ", review);
+                        review.landlordName = (data.firstName || "N/A") + " " + (data.lastName || "N/A");
+                        createReviewCardLandlord(review).then((reviewElement) => {
+                            console.log("reviewElement", reviewElement)
+                            container.appendChild(reviewElement);
+                        });
                         console.log("review : ", review);
                         const div = document.createElement("div");
                         div.className = "review-card";
@@ -82,7 +92,9 @@ page("/landlord/:id", (ctx) => {
                             <p><strong>Rules:</strong> ${review.ratings.rules ?? "N/A"}</p>
                             <p><strong>Overall:</strong> ${review.ratings.overall ?? "N/A"}</p>
                         `;
-                        reviewContainer.appendChild(div);
+
+                        // reviewContainer.appendChild(div);
+                        // reviewsSection.appendChild(div);
                     });
                 }
 

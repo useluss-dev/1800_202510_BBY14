@@ -300,6 +300,9 @@ form.addEventListener("submit", (event) => {
         createdAt: firebase.firestore.Timestamp.now(),
         title: formData.get("title"),
         content: formData.get("content"),
+        tags: trimmedTags,
+        ratings: ratings,
+        landlordId: landlordId,
     };
 
     // Submit review
@@ -323,7 +326,38 @@ form.addEventListener("submit", (event) => {
             });
 
             // Wait for both updates to complete
-            return Promise.all([updateLandlord, updateUser]);
+            return Promise.all([updateLandlord, updateUser]).then(() => reviewId);
+        })
+        .then((reviewId) => {
+            return dbReview.where("landlordId", "==", landlordId).get();
+        })
+        .then((querySnapshot) => {
+            let totalBehavior = 0;
+            let totalQuality = 0;
+            let totalRules = 0;
+            let totalRent = 0;
+            const reviewCount = querySnapshot.size;
+
+            querySnapshot.forEach((doc) => {
+                const ratings = doc.data().ratings;
+                totalBehavior += ratings.behavior;
+                totalQuality += ratings.quality;
+                totalRules += ratings.rules;
+                totalRent += ratings.rent;
+            });
+
+            const averagedRatings = {
+                behavior: totalBehavior / reviewCount,
+                quality: totalQuality / reviewCount,
+                rules: totalRules / reviewCount,
+                rent: totalRent / reviewCount,
+                overall:
+                    (totalBehavior + totalQuality + totalRent + totalRules) / (4 * reviewCount),
+            };
+
+            dbLandlord.doc(landlordId).update({
+                ratings: averagedRatings,
+            });
         })
         .then(() => {
             console.log("Review ID added to both landlord and user documents.");

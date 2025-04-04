@@ -2,13 +2,13 @@ import { parseLandlordName } from "./helper";
 import { loadComponent } from "./load";
 import { createAvatar } from "./profile";
 
-export function createLandlordCard({ id, firstName, lastName, rating, tags }) {
+export function createLandlordCard({ id, firstName, lastName, ratings, tags }) {
     return loadComponent(
         "/src/components/landlord-card.html",
         "w-full not-last:mb-6 p-4 border-2 border-black",
         (container) => {
             container.querySelector("#name").textContent = firstName + " " + lastName;
-            container.querySelector("#rating").textContent = rating.overall;
+            container.querySelector("#rating").textContent = ratings.overall;
             createAvatar(firstName, container);
             //tags
             let tagHtml = "";
@@ -32,7 +32,7 @@ export function createLandlordCard({ id, firstName, lastName, rating, tags }) {
 
 export function sortLandlords(landlords) {
     // Sort array based on rating (in descending order)
-    landlords.sort((a, b) => parseFloat(b.rating.overall) - parseFloat(a.rating.overall));
+    landlords.sort((a, b) => parseFloat(b.ratings.overall) - parseFloat(a.ratings.overall));
 }
 
 export function searchLandlords(landlords) {

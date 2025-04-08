@@ -27,6 +27,26 @@ page("/review*", () => loadContent("/src/partials/reviewLandlord.html", executeS
 page("/add-landlord*", () => loadContent("/src/partials/addLandlord.html", executeScripts));
 page("/edit-landlord*", () => loadContent("/src/partials/editLandlord.html", executeScripts));
 page("/verify-landlord*", () => loadContent("/src/partials/verifyLandlord.html", executeScripts));
+// page("/update-landlord*", () => loadContent("/src/partials/updateLandlord.html", executeScripts));
+page("/update-landlord*", async (ctx) => {
+    const urlParameters = new URLSearchParams(window.location.search);
+    const landlordId = urlParameters.get('landlordId');
+
+    try {
+        await db.collection("landlords").doc(landlordId).update({
+            firstName: urlParameters.get('firstName'),
+            lastName: urlParameters.get('lastName'),
+            facebookLink: urlParameters.get('facebookLink'),
+            email: urlParameters.get('email'),
+        });
+
+    } catch (error) {
+        console.error("Error editing landlord: ", error);
+        alert("Failed to edit landlord.");
+    }
+
+    window.location.href = `/landlord/${landlordId}`;
+});
 page("/landlord/:id", (ctx) => {
     loadContent("/src/partials/landlord.html", async (container) => {
         executeScripts(container);

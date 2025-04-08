@@ -6,7 +6,8 @@
         RateMyLandlord will warn you for duplicates if they exist.
     </p>
 
-    <form name="editLandlord" action="/verify-landlord" method="get">
+    <form name="editLandlord" action="/update-landlord" method="get">
+        <input type="hidden" name="landlordId" value="" id="landlordIdField" />
         <fieldset class="mb-4">
             <legend>Name <span class="text-red-500">*</span></legend>
             <div class="border-2 divide-x-2 flex">
@@ -52,9 +53,9 @@
         </p>
 
         <button type="submit" class="w-full p-2 border-2 hover:bg-black hover:text-white hover:border-black transition">
-            Add Landlord
+            Save Landlord
         </button>
     </form>
 </section>
 
-<script type="module" src="/src/scripts/addLandlord.js"></script>
+<script type="module" src="/src/scripts/editLandlord.js"></script>

@@ -23,10 +23,10 @@ async function goToEditPage() {
                 lastName: landlordData.lastName || "",
                 email: landlordData.email || "",
                 facebookLink: landlordData.facebookLink || "",
-                mode: "edit"
+                landlordId: landlordId
             });
 
-            window.location.replace("/add-landlord?" + urlParameters.toString());
+            window.location.replace("/edit-landlord?" + urlParameters.toString());
         } else {
             console.log("No landlord found");
         }

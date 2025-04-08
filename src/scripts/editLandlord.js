@@ -2,7 +2,7 @@ import { app, db } from "./firebaseAPI_BBY14";
 import { onLogInCheck } from "./userLoggedIn";
 
 /** @type {HTMLFormElement} */
-const addLandlordForm = document.forms.addLandlord;
+const editLandlordForm = document.forms.editLandlord;
 
 const urlParameters = new URLSearchParams(window.location.search);
 const defaultStyle = {
@@ -132,7 +132,7 @@ function modifyNoIdentifierErrorVisibility(identifierExists) {
 function applyFieldsFromQuery() {
     for (const [key, value] of urlParameters) {
         if (key == "firstName" || key == "lastName" || key == "facebookLink" || key == "email") {
-            addLandlordForm.elements[key].value = value;
+            editLandlordForm.elements[key].value = value;
         }
     }
 }
@@ -161,10 +161,10 @@ onLogInCheck(
     (user) => {
         applyFieldsFromQuery();
 
-        addLandlordForm.addEventListener("submit", (event) => {
+        editLandlordForm.addEventListener("submit", (event) => {
             event.preventDefault();
 
-            const landlordData = new FormData(addLandlordForm);
+            const landlordData = new FormData(editLandlordForm);
             const invalidKeys = [];
 
             let identifierExists = false;
@@ -197,7 +197,8 @@ onLogInCheck(
             modifyNoIdentifierErrorVisibility(identifierExists);
 
             if (invalidKeys.length == 0 && identifierExists) {
-                addLandlordForm.submit();
+                document.getElementById('landlordIdField').value = urlParameters.get('landlordId');
+                editLandlordForm.submit();
             }
         });
     },

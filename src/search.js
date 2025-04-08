@@ -4,7 +4,7 @@ import { createAvatar } from "./profile";
 
 export function createLandlordCard({ id, firstName, lastName, ratings, tags }) {
     return loadComponent(
-        "/src/components/landlord-card.html",
+        "/components/landlord-card.html",
         "w-full not-last:mb-6 p-4 border-2 border-black",
         (container) => {
             container.querySelector("#name").textContent = firstName + " " + lastName;

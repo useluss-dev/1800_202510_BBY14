@@ -3,7 +3,7 @@ import { db } from "./firebaseAPI_BBY14";
 import { getReviewData, createReviewCard } from "./profile";
 
 // Helper function to load HTML partials
-export function loadContent(partialPath, callback) {
+export async function loadContent(partialPath, callback) {
     fetch(partialPath)
         .then((response) => {
             if (!response.ok) throw new Error("Network response was not ok");
@@ -109,28 +109,4 @@ export async function loadProfileReviewCards(user) {
     } catch (error) {
         console.error("Error fetching the user document: ", error);
     }
-}
-
-// Callback for `loadContent` and `loadComponent`
-// Execute scripts in the content or component
-export function executeScripts(container) {
-    // Get all the scripts from given container (injected file).
-    const scripts = container.querySelectorAll("script");
-
-    scripts.forEach((oldScript) => {
-        const newScript = document.createElement("script"); // Create a new script
-        if (oldScript.type) {
-            // Give the new script the same type
-            newScript.type = oldScript.type;
-        }
-
-        if (oldScript.src) {
-            // Give the new script the same src
-            newScript.src = oldScript.src;
-        } else {
-            newScript.textContent = oldScript.textContent; // Give the new script the same text content
-        }
-
-        document.body.appendChild(newScript); // Append script to the index.html
-    });
 }

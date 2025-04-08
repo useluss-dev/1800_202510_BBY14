@@ -9,7 +9,6 @@ const landlordId = pathParts[2];
 
 const dbReview = db.collection("dbReview");
 
-
 async function goToEditPage() {
     try {
         const landlordDocRef = db.collection("landlords").doc(landlordId);
@@ -23,7 +22,7 @@ async function goToEditPage() {
                 lastName: landlordData.lastName || "",
                 email: landlordData.email || "",
                 facebookLink: landlordData.facebookLink || "",
-                landlordId: landlordId
+                landlordId: landlordId,
             });
 
             window.location.replace("/edit-landlord?" + urlParameters.toString());
@@ -53,9 +52,16 @@ async function goToWritePage() {
 
 window.goToWritePage = goToWritePage;
 
-export async function createReviewCardLandlord({ landlordName, landlordId, ratings, title, content, createdAt }) {
+export async function createReviewCardLandlord({
+    landlordName,
+    landlordId,
+    ratings,
+    title,
+    content,
+    createdAt,
+}) {
     return loadComponent(
-        "/src/components/review-card.html",
+        "/components/review-card.html",
         "w-[700px] p-4 border-2 border-black mx-auto mb-6",
         (container) => {
             // container.dataset.reviewId = id;
@@ -71,6 +77,5 @@ export async function createReviewCardLandlord({ landlordName, landlordId, ratin
         }
     );
 }
-
 
 // window.location.replace("/review?landlord=" + dbLandlord);

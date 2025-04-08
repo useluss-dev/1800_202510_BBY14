@@ -52,6 +52,9 @@ page("/landlord/:id", (ctx) => {
                         "facebook.com/marketplace/profile/" + data.marketplaceId;
                 }
 
+                // Set the Review Landlord hyperlink to /review?landlord={Landlord's ID}
+                container.querySelector("#reviewButton").href = "/review?landlord=" + doc.id;
+
                 // Update your HTML elements with dynamic data
                 container.querySelector("#firstName").textContent = data.firstName || "N/A";
                 container.querySelector("#lastName").textContent = data.lastName || "N/A";

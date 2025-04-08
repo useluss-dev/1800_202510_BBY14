@@ -2,7 +2,6 @@ import firebase from "firebase/app";
 import * as firebaseui from "firebaseui";
 import { db, auth } from "./firebaseAPI_BBY14";
 
-//auth.signOut(); //temporaray
 async function setAuthPersistence() {
     try {
         //Same account across all tabs, persists after browser restart
@@ -36,7 +35,7 @@ loginForm.addEventListener("submit", async (e) => {
                     .createUserWithEmailAndPassword(email, password);
                 await handleUserAuthentication(userCredential.user);
             } catch (error) {
-                errorMessage.textContent = "Regestration failed: " + error.message;
+                errorMessage.textContent = "Registration failed: " + error.message;
             }
         } else {
             errorMessage.textContent = "Login failed: " + error.message;

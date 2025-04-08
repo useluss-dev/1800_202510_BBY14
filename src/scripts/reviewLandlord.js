@@ -1,5 +1,6 @@
 import firebase from "firebase";
 import { app, db } from "./firebaseAPI_BBY14";
+import { onLogInCheck } from "./userLoggedIn";
 
 const urlParameters = new URLSearchParams(window.location.search);
 
@@ -368,9 +369,15 @@ form.addEventListener("submit", (event) => {
         });
 });
 
-setupReview();
-
-setupStarField("behavior", true);
-setupStarField("rules", true);
-setupStarField("quality", true);
-setupStarField("rent", true);
+onLogInCheck(
+    (user) => {
+        setupReview();
+        setupStarField("behavior", true);
+        setupStarField("rules", true);
+        setupStarField("quality", true);
+        setupStarField("rent", true);
+    },
+    () => {
+        window.location.href = "/login";
+    }
+);

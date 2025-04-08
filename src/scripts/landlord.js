@@ -23,6 +23,7 @@ async function goToEditPage() {
                 lastName: landlordData.lastName || "",
                 email: landlordData.email || "",
                 facebookLink: landlordData.facebookLink || "",
+                mode: "edit"
             });
 
             window.location.replace("/add-landlord?" + urlParameters.toString());

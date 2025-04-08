@@ -25,6 +25,7 @@ page("/search", () =>
 );
 page("/review*", () => loadContent("/src/partials/reviewLandlord.html", executeScripts));
 page("/add-landlord*", () => loadContent("/src/partials/addLandlord.html", executeScripts));
+page("/edit-landlord*", () => loadContent("/src/partials/editLandlord.html", executeScripts));
 page("/verify-landlord*", () => loadContent("/src/partials/verifyLandlord.html", executeScripts));
 page("/landlord/:id", (ctx) => {
     loadContent("/src/partials/landlord.html", async (container) => {

@@ -1,4 +1,5 @@
 import { app, db } from "./firebaseAPI_BBY14";
+import { onLogInCheck } from "./userLoggedIn";
 
 /** @type {HTMLFormElement} */
 const addLandlordForm = document.forms.addLandlord;
@@ -157,44 +158,51 @@ function setFieldAddEventListener(purpose, placeholder) {
 
 // Event Listeners
 
-applyFieldsFromQuery();
+onLogInCheck(
+    (user) => {
+        applyFieldsFromQuery();
 
-addLandlordForm.addEventListener("submit", (event) => {
-    event.preventDefault();
+        addLandlordForm.addEventListener("submit", (event) => {
+            event.preventDefault();
 
-    const landlordData = new FormData(addLandlordForm);
-    const invalidKeys = [];
+            const landlordData = new FormData(addLandlordForm);
+            const invalidKeys = [];
 
-    let identifierExists = false;
+            let identifierExists = false;
 
-    for (const [key, value] of landlordData) {
-        let valid = true;
-        let allowEmpty = true;
+            for (const [key, value] of landlordData) {
+                let valid = true;
+                let allowEmpty = true;
 
-        if (key == "firstName" || key == "lastName") {
-            valid = value.match(/^[a-zA-Z-]+$/);
-            allowEmpty = false;
-        } else if (key == "facebookLink") {
-            valid = value.match(
-                /^(https?:\/\/)?(www\.)?facebook\.com\/marketplace\/profile\/\d+\/?$/
-            );
-            if (!identifierExists) identifierExists = value.length > 0;
-        } else if (key == "email") {
-            valid = value.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
-            if (!identifierExists) identifierExists = value.length > 0;
-        }
+                if (key == "firstName" || key == "lastName") {
+                    valid = value.match(/^[a-zA-Z-]+$/);
+                    allowEmpty = false;
+                } else if (key == "facebookLink") {
+                    valid = value.match(
+                        /^(https?:\/\/)?(www\.)?facebook\.com\/marketplace\/profile\/\d+\/?$/
+                    );
+                    if (!identifierExists) identifierExists = value.length > 0;
+                } else if (key == "email") {
+                    valid = value.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
+                    if (!identifierExists) identifierExists = value.length > 0;
+                }
 
-        if (!valid && !allowEmpty) {
-            invalidKeys.push(key);
-        } else if (!valid && allowEmpty && value.length > 0) {
-            invalidKeys.push(key);
-        }
+                if (!valid && !allowEmpty) {
+                    invalidKeys.push(key);
+                } else if (!valid && allowEmpty && value.length > 0) {
+                    invalidKeys.push(key);
+                }
+            }
+
+            modifyErrorVisibility(...invalidKeys);
+            modifyNoIdentifierErrorVisibility(identifierExists);
+
+            if (invalidKeys.length == 0 && identifierExists) {
+                addLandlordForm.submit();
+            }
+        });
+    },
+    () => {
+        window.location.href = "/login";
     }
-
-    modifyErrorVisibility(...invalidKeys);
-    modifyNoIdentifierErrorVisibility(identifierExists);
-
-    if (invalidKeys.length == 0 && identifierExists) {
-        addLandlordForm.submit();
-    }
-});
+);

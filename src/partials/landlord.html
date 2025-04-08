@@ -27,13 +27,14 @@
     <!-- Action Buttons -->
     <nav id="landlordButtons" class="w-full flex gap-2">
         <!-- Edit Landlord -->
-        <a href="" id="editButton" class="w-full p-2 border-2 flex items-center justify-center gap-2">
+        <a onclick="goToEditPage()" id="editButton" class="w-full p-2 border-2 flex items-center justify-center gap-2">
             <img src="/assets/Account.svg" alt="" class="h-6" />
             <span>Edit Landlord</span>
         </a>
 
         <!-- Review Landlord -->
-        <a id="reviewButton" class="w-full p-2 border-2 flex items-center justify-center gap-2" href="">
+        <a onclick="goToWritePage()" id="reviewButton"
+            class="w-full p-2 border-2 flex items-center justify-center gap-2" href="">
             <img src="/assets/rml-review.svg" alt="" class="h-6" />
             <span>Write Review</span>
         </a>
@@ -111,6 +112,12 @@
     </table>
 
     <!-- Facebook Link -->
+
+
+    <!-- Content divider -->
+    <div class="w-full px-4">
+        <hr class="border-t-4 border-black my-4" />
+    </div>
 
     <!-- Reviews -->
     <section id="reviews" class="w-full flex flex-col gap-8"></section>

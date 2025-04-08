@@ -74,14 +74,10 @@ page("/landlord/:id", (ctx) => {
                     const reviewsSection = document.getElementById("reviews");
                     reviewSnapshot.forEach((reviewDoc) => {
                         const review = reviewDoc.data();
-                        console.log("reviewDoc : ", reviewDoc);
-                        console.log("review : ", review);
                         review.landlordName = (data.firstName || "N/A") + " " + (data.lastName || "N/A");
                         createReviewCardLandlord(review).then((reviewElement) => {
-                            console.log("reviewElement", reviewElement)
                             container.appendChild(reviewElement);
                         });
-                        console.log("review : ", review);
                         const div = document.createElement("div");
                         div.className = "review-card";
                         div.innerHTML = `

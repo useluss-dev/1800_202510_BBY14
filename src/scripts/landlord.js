@@ -9,23 +9,53 @@ const landlordId = pathParts[2];
 
 const dbReview = db.collection("dbReview");
 
-console.log("dbLandlord ", dbLandlord);
-console.log("landlordId ", landlordId);
-console.log("dbReview ", dbReview);
 
+async function goToEditPage() {
+    try {
+        const landlordDocRef = db.collection("landlords").doc(landlordId);
+        const landlordDocSnap = await landlordDocRef.get();
+
+        if (landlordDocSnap.exists) {
+            const landlordData = landlordDocSnap.data();
+
+            const urlParameters = new URLSearchParams({
+                firstName: landlordData.firstName || "",
+                lastName: landlordData.lastName || "",
+                email: landlordData.email || "",
+                facebookLink: landlordData.facebookLink || "",
+            });
+
+            window.location.replace("/add-landlord?" + urlParameters.toString());
+        } else {
+            console.log("No landlord found");
+        }
+    } catch (error) {
+        console.error("Error fetching landlord info:", error);
+    }
+}
+window.goToEditPage = goToEditPage;
+
+async function goToWritePage() {
+    try {
+        const landlordDocRef = db.collection("landlords").doc(landlordId);
+        const landlordDocSnap = await landlordDocRef.get();
+
+        if (landlordDocSnap.exists) {
+            window.location.replace("/review?landlord=" + landlordDocSnap.id);
+        } else {
+            console.log("No landlord found");
+        }
+    } catch (error) {
+        console.error("Error fetching landlord info:", error);
+    }
+}
+
+window.goToWritePage = goToWritePage;
 
 export async function createReviewCardLandlord({ landlordName, landlordId, ratings, title, content, createdAt }) {
-    console.log("===========================");
-    console.log(landlordId)
-    console.log(ratings)
-    console.log(title)
-    console.log(content)
-    console.log(createdAt)
-    console.log(landlordName)
-    console.log("===========================");
     return loadComponent(
         "/src/components/review-card.html",
-        "flex-none w-full sm:max-w-3xl p-4 border-2 border-black",
+        "w-[700px] p-4 border-2 border-black mx-auto mb-6",
         (container) => {
             // container.dataset.reviewId = id;
             const deleteButton = container.querySelector(".deleteBtn");

@@ -7,9 +7,6 @@ auth.onAuthStateChanged((user) => {
     if (user) {
         createAvatar(user.email, null, "profileIcon1"); //top
         createAvatar(user.email, null, "profileIcon2"); //bottom
-        document.getElementById("navLogout").style.display = "block";
-    } else {
-        document.getElementById("navLogout").style.display = "none";
     }
 });
 

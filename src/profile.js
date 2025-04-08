@@ -8,7 +8,7 @@ import { loadComponent } from "./load";
 
 export async function createReviewCard({ id, name, rating, title, content, date }) {
     return loadComponent(
-        "/src/components/review-card.html",
+        "/components/review-card.html",
         "flex-none w-full sm:max-w-3xl p-4 border-2 border-black",
         (container) => {
             container.dataset.reviewId = id;

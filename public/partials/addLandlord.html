@@ -1,18 +1,27 @@
 <section class="w-full max-w-xl mt-16 mx-auto px-main flex flex-col gap-12">
-    <h1>Edit Landlord</h1>
+    <h1>Add Landlord</h1>
 
     <p>
         Fill out your landlord's basic information, such as their name, and contact information.
         RateMyLandlord will warn you for duplicates if they exist.
     </p>
 
-    <form name="editLandlord" action="/update-landlord" method="get">
-        <input type="hidden" name="landlordId" value="" id="landlordIdField" />
+    <form name="addLandlord" action="/verify-landlord" method="get">
         <fieldset class="mb-4">
             <legend>Name <span class="text-red-500">*</span></legend>
             <div class="border-2 divide-x-2 flex">
-                <input type="text" name="firstName" placeholder="First name*" class="w-full p-2 focus:outline-0" />
-                <input type="text" name="lastName" placeholder="Last name*" class="w-full p-2 focus:outline-0" />
+                <input
+                    type="text"
+                    name="firstName"
+                    placeholder="First name*"
+                    class="w-full p-2 focus:outline-0"
+                />
+                <input
+                    type="text"
+                    name="lastName"
+                    placeholder="Last name*"
+                    class="w-full p-2 focus:outline-0"
+                />
             </div>
             <p class="hidden text-red-500" id="invalidName">
                 Invalid name! Allowed characters: A-Z, a-z, (-)
@@ -21,14 +30,23 @@
 
         <fieldset class="mb-4">
             <legend>Facebook Profile Link <span class="text-red-500">**</span></legend>
-            <input type="text" name="facebookLink" placeholder="Copy & paste here"
-                class="w-full p-2 border-2 focus:outline-0" />
+            <input
+                type="text"
+                name="facebookLink"
+                placeholder="Copy & paste here"
+                class="w-full p-2 border-2 focus:outline-0"
+            />
             <p class="hidden text-red-500" id="invalidFacebook">Invalid Facebook Link!</p>
         </fieldset>
 
         <fieldset class="mb-4">
             <legend>Email Address <span class="text-red-500">**</span></legend>
-            <input type="text" name="email" placeholder="Email address" class="w-full p-2 border-2 focus:outline-0" />
+            <input
+                type="text"
+                name="email"
+                placeholder="Email address"
+                class="w-full p-2 border-2 focus:outline-0"
+            />
             <p class="hidden text-red-500" id="invalidEmail">
                 Invalid email address(es)! Format must be person@domain.com
             </p>
@@ -52,10 +70,11 @@
             ** At least one of these fields must be filled out
         </p>
 
-        <button type="submit" class="w-full p-2 border-2 hover:bg-black hover:text-white hover:border-black transition">
-            Save Landlord
+        <button
+            type="submit"
+            class="w-full p-2 border-2 hover:bg-black hover:text-white hover:border-black transition"
+        >
+            Add Landlord
         </button>
     </form>
 </section>
-
-<script type="module" src="/src/scripts/editLandlord.js"></script>

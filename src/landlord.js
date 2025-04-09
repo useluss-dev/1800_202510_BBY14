@@ -62,7 +62,7 @@ export async function createReviewCardLandlord({
 }) {
     return loadComponent(
         "/components/review-card.html",
-        "w-[700px] p-4 border-2 border-black mx-auto mb-6",
+        "p-4 border-2 border-black mx-auto mb-6",
         (container) => {
             // container.dataset.reviewId = id;
             const deleteButton = container.querySelector(".deleteBtn");

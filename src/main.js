@@ -122,7 +122,7 @@ page("/landlord/:id", (ctx) => {
                         review.landlordName =
                             (data.firstName || "N/A") + " " + (data.lastName || "N/A");
                         createReviewCardLandlord(review).then((reviewElement) => {
-                            container.appendChild(reviewElement);
+                            container.querySelector("#reviews").appendChild(reviewElement);
                         });
                         const div = document.createElement("div");
                         div.className = "review-card";

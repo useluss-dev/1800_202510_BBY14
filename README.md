@@ -116,7 +116,7 @@ Developed for the COMP 1800 course, applying User-Centred Design practices, agil
 
 ## Acknowledgments
 
--   Icons all made by hand by sam.
+-   All icons and art in the app were created by Sam.
 
 ---
 
@@ -124,20 +124,16 @@ Developed for the COMP 1800 course, applying User-Centred Design practices, agil
 
 ### Limitations
 
-Example:
-
--   Currently, the app only supports city-based weather searches.
--   Limited to basic weather parameters like temperature, humidity, and conditions.
--   The user interface can be further enhanced for accessibility.
+-   Currently the app doesn't have features to sort by a location so it's only really going to work for people in the lower mainland.
+-   Currently you can only search by landlord name no filtering for things like ratings high to low or ratings low to high.
+-   We don't have any features to handle things like bots, trolls, etc.
 
 ### Future Work
 
-Example:
-
--   Add support for location-based weather detection using GPS.
--   Implement additional weather parameters like wind speed and UV index.
--   Create a dark mode for better usability in low-light conditions.
--   Integrate user accounts for saving favorite locations.
+-   Create a dark mode.
+-   Add more to the landlord pages such as presenting thier 5 most used tags on their page.
+-   Add a robust tag system with tags to choose from instead of just text input.
+-   Add a search filter to filter by a bunch of things like ratings high to low, low to high, city, distance range, etc.
 
 ---
 

@@ -1,12 +1,12 @@
 <section class="flex items-center justify-center min-h-screen bg-white mt-4">
     <div class="bg-white p-10 w-full max-w-md border-2 border-black mt-4">
-        <h1 class="text-3xl font-bold mb-6 text-center text-black">Login</h1>
+        <h1 class="text-3xl font-bold mb-6 text-center text-black">Sign Up</h1>
 
-        <form id="login-form" class="space-y-4">
+        <form id="signup-form" class="space-y-4">
             <input
                 type="email"
                 id="email"
-                placeholder="email"
+                placeholder="Email"
                 class="w-full bg-gray-100 border border-gray-400 p-3 focus:outline-none focus:ring-2 focus:ring-black"
                 required
             />
@@ -14,7 +14,15 @@
             <input
                 type="password"
                 id="password"
-                placeholder="password"
+                placeholder="Password"
+                class="w-full bg-gray-100 border border-gray-400 p-3 focus:outline-none focus:ring-2 focus:ring-black"
+                required
+            />
+
+            <input
+                type="password"
+                id="confirm-password"
+                placeholder="Confirm Password"
                 class="w-full bg-gray-100 border border-gray-400 p-3 focus:outline-none focus:ring-2 focus:ring-black"
                 required
             />
@@ -23,23 +31,15 @@
                 type="submit"
                 class="w-full p-2 border-2 hover:bg-black hover:text-white hover:border-black focus:outline-2 focus:outline-black transition-colors duration-200"
             >
-                Login
+                Create Account
             </button>
         </form>
 
         <p id="error-message" class="text-red-500 mt-4 text-sm text-center"></p>
 
-        <!-- Forgot Password Link -->
-        <p class="mt-2 text-center text-sm">
-            <a href="/forgot-password" class="text-black underline hover:text-gray-700">
-                Forgot your password?
-            </a>
-        </p>
-
-        <!-- Sign Up Link -->
         <p class="mt-4 text-center text-sm text-black">
-            Don't have an account?
-            <a href="/signup" class="underline hover:text-gray-700">Sign Up</a>
+            Already have an account?
+            <a href="/login" class="underline hover:text-gray-700">Sign In</a>
         </p>
     </div>
 </section>

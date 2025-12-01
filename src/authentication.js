@@ -22,24 +22,10 @@ loginForm.addEventListener("submit", async (e) => {
     const password = document.getElementById("password").value.trim();
 
     try {
-        const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
-        const user = userCredential.user;
-
-        await handleUserAuthentication(user);
+        const userCredential = await auth.signInWithEmailAndPassword(email, password);
+        await handleUserAuthentication(userCredential.user);
     } catch (error) {
-        if (error.code == "auth/user-not-found") {
-            console.log("here");
-            try {
-                const userCredential = await firebase
-                    .auth()
-                    .createUserWithEmailAndPassword(email, password);
-                await handleUserAuthentication(userCredential.user);
-            } catch (error) {
-                errorMessage.textContent = "Registration failed: " + error.message;
-            }
-        } else {
-            errorMessage.textContent = "Login failed: " + error.message;
-        }
+        errorMessage.textContent = "Login failed: " + error.message;
     }
 });
 

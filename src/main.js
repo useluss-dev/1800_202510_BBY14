@@ -20,6 +20,17 @@ page("/login", () =>
         await import("./authentication.js");
     })
 );
+page("/signup", () =>
+    loadContent("/partials/signup.html", async () => {
+        await import("./signup.js"); // load your signup logic
+    })
+);
+page("/forgot-password", () =>
+    loadContent("/partials/forgotpassword.html", async () => {
+        const module = await import("./forgotPassword.js");
+        module.initForgotPassword();  // run AFTER the HTML exists
+    })
+);
 page("/search", () =>
     loadContent("/partials/search.html", () => {
         loadStaticComponent("/components/search-bar.html", "#searchBar");

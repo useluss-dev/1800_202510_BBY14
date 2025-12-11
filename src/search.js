@@ -48,3 +48,11 @@ export function searchLandlords(landlords) {
     }
     return landlords;
 }
+
+export function restoreSearchInput() {
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get("query") || "";
+
+    const input = document.getElementById('input[name="query"]');
+    if (input) input.value = query;
+}

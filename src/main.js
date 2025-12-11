@@ -8,6 +8,7 @@ import {
 import { db, auth } from "./firebaseAPI_BBY14.js";
 import { createAvatar } from "./profile.js";
 import { createReviewCardLandlord } from "./landlord.js";
+import { restoreSearchInput } from "./search.js";
 
 // Define routes
 page("/", () =>
@@ -33,7 +34,13 @@ page("/forgot-password", () =>
 );
 page("/search", () =>
     loadContent("/partials/search.html", () => {
-        loadStaticComponent("/components/search-bar.html", "#searchBar");
+        loadStaticComponent("/components/search-bar.html", "#searchBar", () => {
+            const params = new URLSearchParams(window.location.search);
+            const query = params.get("query") || "";
+
+            const input = document.querySelector('input[name="query"]');
+            if (input) input.value = query;
+        });
         loadLandlordCards();
     })
 );
